@@ -57,6 +57,7 @@ class TokenHisteoryAdapter(
         val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
         formatter.timeZone = timeZone
         return formatter.format(this)
+
     }
     class ViewHolder(view: View, context: Context) : RecyclerView.ViewHolder(view) {
 
