@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.getyoteam.budamind.activity.ShareQuoteActivity">
+
+    <RelativeLayout
+            android:background="@color/color_blue"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+        <ImageView android:layout_width="wrap_content"
+                   android:id="@+id/ivHeaderLeft"
+                   android:padding="@dimen/_5sdp"
+                   android:layout_marginStart="@dimen/_5sdp"
+                   android:layout_centerVertical="true"
+                   android:layout_height="wrap_content"
+                   app:srcCompat="@drawable/ic_close_white"/>
+        <TextView
+                android:id="@+id/tvHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/str_share"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/_18sdp"
+                android:fontFamily="@font/nunitosans_bold"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/rlBitmap"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_height="@dimen/_280sdp">
+        <ImageView
+                android:id="@+id/ivBanner"
+                android:background="@color/color_blue"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_height="@dimen/_280sdp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_280sdp"
+            android:background="#33BBBBBB" />
+
+        <TextView
+            android:id="@+id/tvQuote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/nunitosans_regular"
+            android:gravity="center"
+            android:text="What we observe is not nature itself, but nature exposed to our method of questioning."
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/_20sdp" />
+
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:srcCompat="@drawable/logo_splash" />
+    </RelativeLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvShareNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:backgroundTint="@color/colorPrimary"
+            android:background="@drawable/ic_share_now_gradient"
+            android:fontFamily="@font/nunitosans_bold"
+            android:gravity="center"
+            android:padding="@dimen/_7sdp"
+            android:text="@string/str_share_quote"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_16sdp"
+            android:visibility="visible" />
+    </RelativeLayout>
+</LinearLayout>

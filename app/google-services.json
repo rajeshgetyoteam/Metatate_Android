@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "713740050390",
+    "firebase_url": "https://clarity-244006.firebaseio.com",
+    "project_id": "clarity-244006",
+    "storage_bucket": "clarity-244006.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713740050390:android:5122fe47ef08053f8f8e77",
+        "android_client_info": {
+          "package_name": "com.getyoteam.budamind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713740050390-svqn7802cuc882jjherg105ffthciac5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFtY_HQibTWGmPNNjiZu9YpBYGSPDIl2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713740050390-d81argm9kgggec2le10i7ha7b6tbpdio.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "713740050390-35pemvcbjjr9k2ag7j32brnful07j4c4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "getyoteam.Clarity"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

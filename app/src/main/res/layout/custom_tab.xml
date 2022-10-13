@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@android:id/text1"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/_18sdp"
+        android:fontFamily="@font/nunitosans_semibold"
+        android:textColor="@color/color_black"
+        android:gravity="center"
+        android:layout_height="match_parent"
+/>

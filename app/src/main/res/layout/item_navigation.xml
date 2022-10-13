@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/navigation_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/_5sdp"
+        android:background="?android:attr/windowBackground">
+    <SeekBar
+            android:id="@+id/song_progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:maxHeight="@dimen/_1sdp"
+            android:minHeight="@dimen/_1sdp"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/_minus7sdp"
+            android:layout_marginEnd="@dimen/_minus7sdp"
+            android:focusable="true"/>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/song_info_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:maxLines="1"
+                android:layout_marginTop="@dimen/_minus5sdp"
+                android:textColor="@color/color_black"
+                android:fontFamily="@font/nunitosans_bold"
+                android:textSize="@dimen/_16sdp"
+                tools:text="Song title"/>
+
+        <TextView
+                android:id="@+id/song_info_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_info_title"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/nunitosans_semibold"
+                android:textSize="@dimen/_12sdp"
+                tools:text="Song artist"/>
+
+        <ImageView
+                android:id="@+id/play_pause_btn"
+                android:layout_alignParentRight="true"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/_25sdp"
+                android:padding="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:srcCompat="@drawable/ic_play_black"/>
+
+        <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_alignParentRight="true"
+                android:visibility="invisible"
+                android:indeterminate="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/color_perot"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/_1sdp"
+                android:layout_height="@dimen/_35sdp"/>
+
+    </RelativeLayout>
+    <TextView
+            android:id="@+id/song_progress_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/song_info_controls"
+            android:layout_alignTop="@+id/song_progressbar"
+            android:layout_alignBottom="@+id/song_progressbar"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:maxLines="1"
+            tools:text="00:00"/>
+
+
+    <TextView
+            android:id="@+id/song_progress_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_below="@+id/song_info_controls"
+            android:layout_alignTop="@+id/song_progressbar"
+            android:layout_alignBottom="@+id/song_progressbar"
+            android:layout_alignParentRight="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            tools:text="00:00"/>
+    <View android:layout_width="match_parent"
+          android:layout_marginTop="@dimen/_5sdp"
+          android:layout_height="1dp"
+          android:background="@color/color_icon_light"/>
+
+</LinearLayout>

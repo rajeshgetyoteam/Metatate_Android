@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.getyoteam.budamind.activity.VerifyedOTPActivity">
+
+
+    <ScrollView
+        android:id="@+id/scrollOtp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_white"
+            android:gravity="center"
+            android:paddingBottom="@dimen/_150sdp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:padding="@dimen/_5sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:id="@+id/ivBack"
+                    app:srcCompat="@drawable/ic_back"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_40sdp">
+
+                </ImageView>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_130sdp"
+                app:srcCompat="@drawable/logo_splash" />
+
+            <TextView
+                android:id="@+id/tvWelcomeClarity"
+                style="@style/TextBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="center"
+                android:text="Welcome to \nMetatate"
+                android:textColor="@color/app_pink_color"
+                android:textSize="@dimen/_25sdp" />
+
+            <TextView
+                style="@style/TextRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Mindfulness is Metatate "
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_11sdp" />
+
+
+            <TextView
+                android:id="@+id/tvSimpleText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                style="@style/TextRegular"
+                android:gravity="center"
+                android:text="Please enter the 4 digit verification code sent on your registered email address"
+                android:textColor="#777777"
+                android:textSize="@dimen/_14sdp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/_2sdp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/etOne"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        style="@style/TextMiduam"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/_15sdp" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/_2sdp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/etTwo"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        style="@style/TextMiduam"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/_15sdp" />
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/_2sdp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+                    <EditText
+                        android:id="@+id/etThree"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        style="@style/TextMiduam"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/_15sdp" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/_2sdp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/etFour"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        style="@style/TextMiduam"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/_15sdp" />
+                </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Didn't receive verification code?"
+                android:textColor="#000000"
+                android:textSize="@dimen/_10sdp" />
+
+            <TextView
+                android:id="@+id/tvResend"
+                style="@style/TextBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center"
+                android:text="Resend Code"
+                android:textColor="#FE5554"
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="@dimen/_200sdp"
+            android:id="@+id/v1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_0sdp"></TextView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:background="@drawable/selected_state"
+        android:gravity="center_vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvSubmit"
+            style="@style/TextMiduam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:drawablePadding="@dimen/_10sdp"
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/_17sdp" />
+
+        <ProgressBar
+            android:id="@+id/progressBarSubmit"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:indeterminateDrawable="@drawable/progress"
+            android:paddingEnd="@dimen/_20sdp"
+            android:visibility="invisible" />
+    </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+</RelativeLayout>

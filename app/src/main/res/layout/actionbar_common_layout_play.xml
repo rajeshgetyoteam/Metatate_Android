@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize">
+    <ImageView android:layout_width="@dimen/_20sdp"
+               android:id="@+id/ivHeaderLeft"
+               android:src="@android:drawable/presence_audio_busy"
+               android:layout_centerVertical="true"
+               android:visibility="visible"
+               android:layout_marginLeft="@dimen/_10sdp"
+               android:layout_height="@dimen/_20sdp"/>
+    <TextView android:layout_width="wrap_content"
+              android:id="@+id/tvHeader"
+              android:textStyle="bold"
+              android:textSize="@dimen/_15sdp"
+              android:layout_centerInParent="true"
+              android:layout_height="wrap_content"/>
+    <ImageView
+            android:id="@+id/ivHeaderRight"
+            android:layout_width="@dimen/_20sdp"
+            android:visibility="visible"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_close_black"
+            android:layout_height="@dimen/_20sdp"/>
+    <com.white.progressview.CircleProgressView
+            android:id="@+id/circleProgressNormal"
+            android:progress="0"
+            app:progressNormalSize="4dp"
+            app:progressReachColor="#FFFFFF"
+            app:progressNormalColor="#80FFFFFF"
+            app:progressReachSize="4dp"
+            app:progressStyle="Normal"
+            app:progressTextVisible="false"
+            app:radius="@dimen/_8sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_download"
+            android:layout_height="@dimen/_20sdp"/>
+    <com.white.progressview.CircleProgressView
+            android:id="@+id/circleProgressNormalDark"
+            android:progress="0"
+            app:progressNormalSize="4dp"
+            app:progressReachColor="#e74b4a"
+            app:progressNormalColor="#404041"
+            app:progressReachSize="4dp"
+            app:progressStyle="Normal"
+            app:progressTextVisible="false"
+            app:radius="@dimen/_8sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            android:layout_height="@dimen/_20sdp"/>
+
+</RelativeLayout>

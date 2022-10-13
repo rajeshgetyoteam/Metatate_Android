@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    tools:context="com.getyoteam.budamind.activity.WelcomeActivity">
+
+<!--    <ScrollView-->
+
+<!--        android:overScrollMode="never"-->
+<!--        android:scrollbars="none"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="fill_parent"-->
+<!--        android:background="@color/color_white"-->
+<!--        android:fillViewport="true"-->
+<!--&gt;-->
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:id="@+id/layLogo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_marginTop="@dimen/_40sdp"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_130sdp"
+                app:srcCompat="@drawable/logo_splash" />
+
+            <TextView
+                android:id="@+id/tvWelcomeClarity"
+                style="@style/TextBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="center"
+                android:text="Welcome to \nMetatate"
+                android:textColor="@color/app_pink_color"
+                android:textSize="@dimen/_25sdp" />
+
+            <TextView
+                style="@style/TextRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Mindfulness is Metatate "
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_11sdp" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvSimpleText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting
+industry since 1950."
+                android:textColor="#333333"
+                android:textSize="@dimen/_15sdp" />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:layout_marginBottom="@dimen/_160sdp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting
+industry since 1950."
+                android:textColor="#333333"
+                android:textSize="@dimen/_15sdp" />
+
+
+
+
+        </LinearLayout>
+<!--    </ScrollView>-->
+
+    <TextView
+
+        android:layout_below="@+id/layLogo"
+        android:id="@+id/btnGetStarted"
+        style="@style/TextMiduam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/selected_state"
+        android:gravity="center"
+        android:padding="@dimen/_10sdp"
+        android:text="@string/str_get_started"
+        android:textAllCaps="false"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/_17sdp"
+        android:visibility="visible" />
+</LinearLayout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/ic_background_cardview_lesson_vertical_2"
+        android:layout_height="match_parent"
+        tools:context=".activity.SubScribedActivity">
+    <TextView android:layout_width="match_parent"
+              android:textSize="@dimen/_20sdp"
+              android:textColor="@color/color_text_color"
+              android:gravity="center"
+              android:text="@string/str_your_subscription_is_active"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/nunitosans_bold"/>
+
+    <TextView android:layout_width="match_parent"
+              android:textSize="@dimen/_18sdp"
+              android:textColor="@color/ic_blue_gray_500"
+              android:gravity="center"
+              android:layout_marginTop="@dimen/_20sdp"
+              android:text="@string/str_subscription_type"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/"/>
+    <TextView android:layout_width="match_parent"
+              android:id="@+id/tvSubscriptionPlan"
+              android:textSize="@dimen/_18sdp"
+              android:textColor="@color/color_text_color"
+              android:gravity="center"
+              android:text="Monthly"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/nunitosans_regular"/>
+
+    <TextView android:layout_width="match_parent"
+              android:textSize="@dimen/_18sdp"
+              android:textColor="@color/ic_blue_gray_500"
+              android:gravity="center"
+              android:layout_marginTop="@dimen/_20sdp"
+              android:text="@string/str_subscription_date"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/nunitosans_regular"/>
+    <TextView android:layout_width="match_parent"
+              android:id="@+id/tvSubscriptionPlanStartDate"
+              android:textSize="@dimen/_18sdp"
+              android:textColor="@color/color_text_color"
+              android:gravity="center"
+              android:text="11 March 2019"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/nunitosans_regular"/>
+
+    <TextView android:layout_width="match_parent"
+              android:textSize="@dimen/_18sdp"
+              android:textColor="@color/ic_blue_gray_500"
+              android:gravity="center"
+              android:layout_marginTop="@dimen/_20sdp"
+              android:text="@string/str_next_renewal"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/nunitosans_regular"/>
+    <TextView android:layout_width="match_parent"
+              android:id="@+id/tvSubscriptionPlanEndDate"
+              android:textSize="@dimen/_18sdp"
+              android:textColor="@color/color_text_color"
+              android:gravity="center"
+              android:text="11 April 2019"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/nunitosans_regular"/>
+
+    <TextView android:layout_width="match_parent"
+              android:id="@+id/tvManageSubscription"
+              android:textSize="@dimen/_14sdp"
+              android:background="@drawable/ic_button_background_gray_subscribed"
+              android:textColor="@color/color_text_color_light"
+              android:gravity="center"
+              android:padding="@dimen/_5sdp"
+              android:layout_marginTop="@dimen/_50sdp"
+              android:layout_marginStart="@dimen/_15sdp"
+              android:layout_marginEnd="@dimen/_15sdp"
+              android:text="@string/str_manage_or_delete_your_subscription_by_clinking_here"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/nunitosans_regular"/>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:layout_marginStart="@dimen/_20sdp"
+          android:layout_marginEnd="@dimen/_20sdp"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:layout_marginBottom="@dimen/_20sdp"
+          android:background="@color/color_text_color_light"/>
+
+    <TextView android:layout_width="match_parent"
+              android:textSize="@dimen/_20sdp"
+              android:textColor="@color/color_text_color"
+              android:gravity="center"
+              android:text="Need To Change This"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/nunitosans_bold"/>
+
+    <TextView android:layout_width="match_parent"
+              android:textSize="@dimen/_14sdp"
+              android:textColor="@color/ic_blue_gray_500"
+              android:gravity="center"
+              android:text="PhoneChange: 0123456789"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/nunitosans_regular"/>
+
+    <TextView android:layout_width="match_parent"
+              android:textSize="@dimen/_14sdp"
+              android:textColor="@color/ic_blue_gray_500"
+              android:gravity="center"
+              android:text="@string/str_email_info"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/nunitosans_regular"/>
+</LinearLayout>

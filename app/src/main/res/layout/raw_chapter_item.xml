@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:orientation="vertical">
+    <ImageView
+            android:id="@+id/ivChapterIcon"
+            app:srcCompat="@drawable/ic_play_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <TextView
+            android:textSize="@dimen/_16sdp"
+            android:id="@+id/tvChapterNumber"
+            android:textColor="@color/color_red"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:text="10"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/nunitosans_semibold"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"/>
+</LinearLayout>

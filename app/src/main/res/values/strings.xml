@@ -1,0 +1,624 @@
+<resources>
+    <string name="app_name">Metatate</string>
+
+    <string name="broadcast_seekbar_update">broadcast_seekbar_update</string>
+    <string name="broadcast_seekbar_value">broadcast_seekbar_value</string>
+    <string name="broadcast_update_ui">broadcast_update_ui</string>
+    <string name="broadcast_new_media_id">broadcast_new_media_id</string>
+
+    <string name="share_msg">Get the Metatate and take yourself where you belongs in this life. Allow us to help you changing your life forever through Metatate.</string>
+
+    <!--Facebook ID-->
+    <!--    <string name="facebook_app_id">349878115510250</string>-->
+    <string name="facebook_app_id">425471002147672</string>
+    <string name="fb_login_protocol_scheme">fb425471002147672</string>
+
+    <!--    <string name="base_url">http://clarity-meditation.eu-central-1.elasticbeanstalk.com/api/</string>-->
+    <!--    <string name="base_url">http://157.230.107.195:8080/ClarityApp/api/</string>-->
+    <string name="base_url">http://budamind.ca-central-1.elasticbeanstalk.com/api/</string>
+    <string name="str_yearly">Yearly</string>
+    <string name="str_monthly">Monthly</string>
+    <string name="str_manage_or_delete_your_subscription_by_clinking_here">Manage or Delete your subscription\nby clinking
+    </string>
+    <string name="str_welcome_to_clarity">Welcome to \nCLARITY</string>
+    <string name="str_get_started">GET STARTED</string>
+    <string name="str_choose_your_goals">Choose Your Goals</string>
+    <string name="str_take_a_deep_breath_and_think_about_nwhat_is_bothering_you_at_the_moment">Take a deep breath and
+        think about \nwhat is bothering you at the moment.
+    </string>
+    <string name="str_reduce_stress">Reduce Stress</string>
+    <string name="str_better_sleep">Better Sleep</string>
+    <string name="str_improve_focus">Improve Focus</string>
+    <string name="str_learn_to_meditate">Learn To Meditate</string>
+    <string name="str_develop_gratitute">Develop Gratitude</string>
+    <string name="str_reduce_anxiety">Reduce Anxiety</string>
+    <string name="str_increase_happiness">Increase Happiness</string>
+    <string name="str_build_self_esteem">Develop Self-Esteem</string>
+    <string name="str_continue">CONTINUE</string>
+    <string name="str_subscribe_now">SUBSCRIBE NOW</string>
+    <string name="str_terms_condition">
+        <u><![CDATA[Terms & Conditions]]></u>
+    </string>
+    <string name="str_by_using_clarity_you_agree_to_our1">By continuing, you are indicating that you </string>
+    <string name="str_by_using_clarity_you_agree_to_our">accept our <b><u>Terms Of Service</u></b> and</string>
+    <string name="str_by_using_privacy"><b><u> Privacy Policy</u></b>.</string>
+    <string name="str_not_account"><u>Don\'t Have Account? <b><font color="#2F5B44">Sign Up</font></b></u></string>
+    <string name="str_alredy_account"><u>Alredy  Have Account? <b><font color="#2F5B44">Sign In</font></b></u></string>
+    <string name="str_sign_in">&#160;Sign In</string>
+    <string name="str_have_an_account">Have an account ?&#160;</string>
+    <string name="str_continue_with_email">Continue with Email</string>
+    <string name="str_continue_with_google">Continue with Google</string>
+    <string name="str_continue_with_facebook">Continue with Facebook</string>
+    <string name="str_facebook">facebook</string>
+    <string name="str_google">gmail</string>
+    <string name="str_something_went_wrong">Something went wrong</string>
+    <string name="str_check_internet_connection">Check internet connection</string>
+    <string name="str_first_name">First Name</string>
+    <string name="str_last_name">Last Name</string>
+    <string name="str_email_address">Email Address</string>
+    <string name="str_password">Password</string>
+    <string name="str_re_enter_password">Re-enter Password</string>
+    <string name="str_sign_up">&#160;Sign Up</string>
+    <string name="str_or">or</string>
+    <string name="str_don_t_have_account">Don\'t have account ?</string>
+    <string name="str_reset_your_password">Reset Your Password?</string>
+    <string name="str_forgot_password">Forgot Password?</string>
+    <string name="str_forgot_password_without_que">Forgot Password</string>
+    <string name="str_monthly_plan">MONTHLY PLAN</string>
+    <string name="str_4_99">$60.99</string>
+    <string name="str_per_month">per year*</string>
+    <string name="str_free_trail">after FREE\n7-DAY trial</string>
+    <string name="str_per_year">per year*</string>
+    <string name="str_yearly_plan">YEARLY PLAN</string>
+    <string name="str_try_7_days_for_free">Try 7 Days for Free</string>
+    <string name="str_subscribe_clarity">Unlock Metatate</string>
+    <string name="str_home">Home</string>
+    <string name="str_library">Library</string>
+    <string name="str_task">Tasks</string>
+    <string name="str_sound">Sounds</string>
+    <string name="str_profile">Profile</string>
+    <string name="str_private_key"><u>Show Private Key</u></string>
+    <string name="separator">/</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_ready_to_begin">Ready to begin?</string>
+    <string name="str_success">success</string>
+    <string name="str_login_successfully">Login Successfully</string>
+    <string name="str_otp_sent">OTP Sent Successfully</string>
+    <string name="str_enter_valid_email">Enter valid email</string>
+    <string name="str_email">email</string>
+    <string name="str_enter_password">Please enter password</string>
+    <string name="str_enter_old_password">Please enter old password</string>
+    <string name="str_enter_first_name">Enter first name</string>
+    <string name="str_enter_last_name">Enter last name</string>
+    <string name="str_possword_does_not_match">Password doesn\'t match</string>
+    <string name="str_longest_nsteak">Longest\nStreak</string>
+    <string name="str_total_sessions">Total\nSessions</string>
+    <string name="str_mindfulness_minutes">Metatate \nMinutes"</string>
+    <string name="str_share_your_status">Share Your Status</string>
+    <string name="str_unlock_clarity_premium">Unlock Metatate Premium</string>
+    <string name="str_downloads">Downloads</string>
+    <string name="str_mindfulness_reminders">Metatate Reminder</string>
+    <string name="str_push_notification">Push Notification</string>
+    <string name="str_change_password">Change Password</string>
+    <string name="str_terms_of_use">Terms Of Use</string>
+    <string name="str_privacy_of_use">Privacy Policy</string>
+    <string name="str_logout">Logout</string>
+    <string name="str_moments_are_short_guided_meditation_that_will_nhelp_you_during_day_to_day_activities">
+        "\"Moments are short guided meditation that will\nhelp you during day to day activities.\""
+    </string>
+    <string name="str_choosing_a_soothing_music_to_unwind_and_ease_into_life">"\"Choosing a soothing music to unwind and
+        ease into life.\""
+    </string>
+    <string name="str_corse">Courses</string>
+    <string name="str_moment">Moments</string>
+    <string name="str_loading">Loading...</string>
+    <string name="str_try_your_first_course">Try Your First Course</string>
+    <string name="str_download_all_session">Download All Session</string>
+    <string name="str_reset_password">Reset Password</string>
+    <string name="str_set_new_password">Set New Password</string>
+    <string name="testing">Learn from yesterday, live for today, hope for tomorrow. The important thing is not to stop
+        questioning.
+    </string>
+    <string name="str_meditation_for_you">Recommended For You</string>
+    <string name="str_daily_features">Daily Meditation</string>
+    <string name="str_daily_task">Daily Tasks</string>
+    <string name="str_minutes_meditated">Minutes Meditated</string>
+    <string name="str_current_streak">Current Streak</string>
+    <string name="str_save">Save</string>
+    <string name="download_path">/data/data/</string>
+    <string name="str_delete_a_file">Delete a file.</string>
+    <string name="str_yes">Yes</string>
+    <string name="str_delete_all_file">Delete all files</string>
+    <string name="str_unlock_the_clarity_library">Unlock The Metatate Library</string>
+    <string name="str_improve_sleep_enhance_focus_and_boost_nyour_quality_of_life_by_practicing_mindfulness_daily">
+        Improve sleep, enhance focus, and boost\nyour quality of life by practicing\nMetatate daily.
+    </string>
+    <string name="str_set_your_reminder_time">Set your reminder time</string>
+    <string name="str_mindfulness_reminder">Metatate Reminders</string>
+    <string name="str_get_reminder">Get Reminder</string>
+    <string name="notification">Metatate Reminder</string>
+    <string name="str_stop">STOP</string>
+    <string name="title_activity_notification">NotificationActivity</string>
+    <string name="str_reminder">Reminder</string>
+    <string name="str__moment">Moment</string>
+    <string name="str_notifications">Notifications</string>
+    <string name="str_receive">Receive Metatate</string>
+    <string name="str_share">Share</string>
+    <string name="str_share_quote">Share Quote</string>
+    <string name="str_course">Course</string>
+
+    <string name="str_your_subscription_is_active">Your Subscription is active</string>
+    <string name="str_subscription_type">Subscription type:</string>
+    <string name="str_subscription_date">Subscription Date:</string>
+    <string name="str_next_renewal">Next Renewal:</string>
+    <string name="str_email_info">Email: info@clarity.com</string>
+    <string name="str_invalid_token">invalid_token</string>
+    <string name="str_old_password">Old Password</string>
+    <string name="str_new_password">New Password</string>
+    <string name="str_password_changed">Password changed</string>
+    <string name="str_meditate_with_clarity_to_relax_and_improve_your_physical_and_mental_performance">Meditate with
+        Metatate to relax and improve your physical and mental performance
+    </string>
+    <string name="str_100_guided_meditations_for_everything_from_improving_focus_and_performance_relieving_anxiety_and_stress_and_getting_better_sleep">
+        100+ guided meditations for everything from improving focus and performance, relieving anxiety and stress, and
+        getting better sleep
+    </string>
+    <string name="str_exclusive_soundtracks_for_focus_relaxation_and_sleep">Exclusive soundtracks for Focus, Relaxation,
+        and Sleep
+    </string>
+    <string name="str_add_mindfulness_and_refocus_in_even_the_most_packed_days_with_our_mini_meditations">Add
+        mindfulness and refocus in even the most packed days with our mini meditations
+    </string>
+    <string name="str_clarity_otp">Metatate OTP</string>
+    <string name="str_password_recovery">Password Recovery</string>
+    <string name="str_cancel_anytime_billed_annually">*Cancel anytime. Billed annually</string>
+    <string name="str_by_continuing_you_accept_our">By continuing you accept our</string>
+    <string name="str_8_00_am">8:00 AM</string>
+    <string name="str_repeat_course">Repeat Course</string>
+    <string name="str_begin_course">Begin Course</string>
+    <string name="str_please_enter_the_otp_number_below_which_you_have_received_through_email">Please enter the OTP
+        number below\nwhich you have received\nthrough email.
+    </string>
+    <string name="str_please_accept_tems">Please accept terms and condition.</string>
+    <string name="str_please_enter_first_name">Please enter your first name</string>
+    <string name="str_please_enter_last_name">Please enter your last name</string>
+    <string name="enter_your_email_id_so_that_we_can_send_you_notp_to_recover_your_password">Enter your email id so that
+        we can send you\nOTP to recover your password
+    </string>
+    <string name="str_continue_course">Continue Course</string>
+    <string name="str__moments">Moments</string>
+    <string name="str_sounds">Sounds</string>
+    <string name="str_courses">Courses</string>
+    <string name="str_next_session">NEXT SESSION</string>
+    <string name="label_previous">Previous</string>
+    <string name="label_next">Next</string>
+    <string name="label_pause">Pause</string>
+    <string name="label_play">Play</string>
+    <string name="label_note"><b>Note: </b>Make sure to add Binance Smart Chain Receive Address</string>
+    <string name="str_keep_going">Keep going!</string>
+
+    <!--    <string name="str_terms_of_use1"><![CDATA[<html>-->
+    <!--<head>-->
+    <!--<title></title>-->
+    <!--</head>-->
+    <!--<body>-->
+
+    <!--	<div class="entry-content">-->
+
+    <!--<p>Basic Terms<br> You must be at least 13 years old to use the Service (16 years old if in EU due to GDPR)<br> You are responsible for any activity that occurs through your account and you agree you will not sell, transfer, license or assign your account, followers, username, or any account rights. With the exception of people or businesses that are expressly authorized to create accounts on behalf of their employers or clients, Clarity Meditations prohibits the creation of and you agree that you will not create an account for anyone other than yourself. You also represent that all information you provide or provided to Clarity Meditations upon registration and at all other times will be true, accurate, current and complete and you agree to update your information as necessary to maintain its truth and accuracy.<br> You agree that you will not solicit, collect or use the login credentials of other Clarity Meditations users.<br> You are responsible for keeping your password secret and secure.<br> You must not defame, stalk, bully, abuse, harass, threaten, impersonate or intimidate people or entities and you must not post private or confidential information via the Service, including, without limitation, your or any other person’s credit card information, social security or alternate national identity numbers, non-public phone numbers or non-public email addresses.<br> You may not use the Service for any illegal or unauthorized purpose. You agree to comply with all laws, rules and regulations (for example, federal, state, local and provincial) applicable to your use of the Service and your Content (defined below), including but not limited to, copyright laws.<br> You are solely responsible for your conduct and any data, text, files, information, usernames, images, graphics, photos, profiles, audio and video clips, sounds, musical works, works of authorship, applications, links and other content or materials (collectively, “Content”) that you submit, post or display on or via the Service.<br> You must not change, modify, adapt or alter the Service or change, modify or alter another website so as to falsely imply that it is associated with the Service or Clarity Meditations.<br> You must not access Clarity Meditations’s private API by means other than those permitted by Clarity Meditations.<br> You must not create or submit unwanted email, comments, likes or other forms of commercial or harassing communications (a/k/a “spam”) to any Clarity Meditations users.<br> You must not interfere or disrupt the Service or servers or networks connected to the Service, including by transmitting any worms, viruses, spyware, malware or any other code of a destructive or disruptive nature. You may not inject content or code or otherwise alter or interfere with the way any Clarity Meditations page is rendered or displayed in a user’s browser or device.<br> You must not create accounts with the Service through unauthorized means, including but not limited to, by using an automated device, script, bot, spider, crawler or scraper.<br> You must not attempt to restrict another user from using or enjoying the Service and you must not encourage or facilitate violations of these Terms of Use or any other Clarity Meditations terms.<br> Violation of these Terms of Use may, in Clarity Meditations’s sole discretion, result in termination of your Clarity Meditations account. You understand and agree that Clarity Meditations cannot and will not be responsible for the Content posted on the Service and you use the Service at your own risk. If you violate the letter or spirit of these Terms of Use, or otherwise create risk or possible legal exposure for Clarity Meditations, we can stop providing all or part of the Service to you.</p>-->
+
+
+    <!--<p>General Conditions<br> We reserve the right to modify or terminate the Service or your access to the Service for any reason, without notice, at any time, and without liability to you. You can deactivate your Clarity Meditations account by using our deactivation services. If we terminate your access to the Service or you use the form detailed above to deactivate your account, your photos, comments, likes, friendships, and all other data will no longer be accessible through your account (e.g., users will not be able to navigate to your username and view your photos), but those materials and data may persist and appear within the Service (e.g., if your Content has been reshared by others).<br> Upon termination, all licenses and other rights granted to you in these Terms of Use will immediately cease.<br> We reserve the right, in our sole discretion, to change these Terms of Use (“Updated Terms”) from time to time. Unless we make a change for legal or administrative reasons, we will provide reasonable advance notice before the Updated Terms become effective. You agree that we may notify you of the Updated Terms by posting them on the Service, and that your use of the Service after the effective date of the Updated Terms (or engaging in such other conduct as we may reasonably specify) constitutes your agreement to the Updated Terms. Therefore, you should review these Terms of Use and any Updated Terms before using the Service. The Updated Terms will be effective as of the time of posting, or such later date as may be specified in the Updated Terms, and will apply to your use of the Service from that point forward. These Terms of Use will govern any disputes arising before the effective date of the Updated Terms.<br> We reserve the right to refuse access to the Service to anyone for any reason at any time.<br> We may, but have no obligation to, remove, edit, block, and/or monitor Content or accounts containing Content that we determine in our sole discretion violates these Terms of Use.<br> You are solely responsible for your interaction with other users of the Service, whether online or offline. You agree that Clarity Meditations is not responsible or liable for the conduct of any user. Clarity Meditations reserves the right, but has no obligation, to monitor or become involved in disputes between you and other users. Exercise common sense and your best judgment when interacting with others, including when you submit or post Content or any personal or other information.<br> There may be links from the Service, or from communications you receive from the Service, to third-party websites or features. There may also be links to third-party web sites or features in images or comments within the Service. The Service also includes third-party content that we do not control, maintain or endorse. Functionality on the Service may also permit interactions between the Service and a third-party web site or feature, including applications that connect the Service or your profile on the Service with a third-party web site or feature. For example, the Service may include a feature that enables you to share Content from the Service or your Content with a third party, which may be publicly posted on that third party’s service or application. Using this functionality typically requires you to login to your account on the third-party service and you do so at your own risk. Clarity Meditations does not control any of these third-party web services or any of their content. You expressly acknowledge and agree that Clarity Meditations is in no way responsible or liable for any such third-party services or features. YOUR CORRESPONDENCE AND BUSINESS DEALINGS WITH THIRD PARTIES FOUND THROUGH THE SERVICE ARE SOLELY BETWEEN YOU AND THE THIRD PARTY. You may choose, at your sole and absolute discretion and risk, to use applications that connect the Service or your profile on the Service with a third-party service (each, an “Application”) and such Application may interact with, connect to or gather and/or pull information from and to your Service profile. By using such Applications, you acknowledge and agree to the following: (i) if you use an Application to share information, you are consenting to information about your profile on the Service being shared; (ii) your use of an Application may cause personally identifying information to be publicly disclosed and/or associated with you, even if Clarity Meditations has not itself provided such information; and (iii) your use of an Application is at your own option and risk, and you will hold the Clarity Meditations Parties (defined below) harmless for activity related to the Application.<br> You agree that you are responsible for all data charges you incur through use of the Service.<br> We prohibit crawling, scraping, caching or otherwise accessing any content on the Service via automated means.<br> Rights<br> You retain your rights to any Content you submit, post or display on or through the Services.<br> In the future, some of the Service may be supported by advertising revenue and may display advertisements and promotions, and you hereby agree that Clarity Meditations may place such advertising and promotions on the Service or on, about, or in conjunction with your Content. The manner, mode and extent of such advertising and promotions are subject to change.<br> The Service contains content owned or licensed by Clarity Meditations (“Clarity Meditations Content”). Clarity Meditations Content is protected by copyright, trademark, patent, trade secret and other laws, and, as between you and Clarity Meditations, Clarity Meditations owns and retains all rights in the Clarity Meditations Content and the Service. You will not remove, alter or conceal any copyright, trademark, service mark or other proprietary rights notices incorporated in or accompanying the Clarity Meditations Content and you will not reproduce, modify, adapt, prepare derivative works based on, perform, display, publish, distribute, transmit, broadcast, sell, license or otherwise exploit the Clarity Meditations Content.<br> The Clarity Meditations name and logo are trademarks of Clarity Meditations, and may not be copied, imitated or used, in whole or in part, without the prior written permission of Clarity Meditations. In addition, all page headers, custom graphics, button icons and scripts are service marks, trademarks and/or trade dress of Clarity Meditations, and may not be copied, imitated or used, in whole or in part, without prior written permission from Clarity Meditations.<br> Although it is Clarity Meditations’s intention for the Service to be available as much as possible, there will be occasions when the Service may be interrupted, including, without limitation, for scheduled maintenance or upgrades, for emergency repairs, or due to failure of telecommunications links and/or equipment. Also, Clarity Meditations reserves the right to remove any Content from the Service for any reason, without prior notice. Content removed from the Service may continue to be stored by Clarity Meditations, including, without limitation, in order to comply with certain legal obligations, but may not be retrievable without a valid court order. Clarity Meditations is not a backup service and you agree that you will not rely on the Service for the purposes of Content backup or storage. Clarity Meditations will not be liable to you for any modification, suspension, or discontinuation of the Services, or the loss of any Content. You also acknowledge that the Internet may be subject to breaches of security and that the submission of Content or other information may not be secure.<br> You agree that Clarity Meditations is not responsible for, and does not endorse, Content posted within the Service. Clarity Meditations does not have any obligation to prescreen, monitor, edit, or remove any Content. If your Content violates these Terms of Use, you may bear legal responsibility for that Content.<br> Except as otherwise described in the Service’s Privacy Policy, as between you and Clarity Meditations, any Content will be non-confidential and non-proprietary and we will not be liable for any use or disclosure of Content. You acknowledge and agree that your relationship with Clarity Meditations is not a confidential, fiduciary, or other type of special relationship, and that your decision to submit any Content does not place Clarity Meditations in a position that is any different from the position held by members of the general public, including with regard to your Content. None of your Content will be subject to any obligation of confidence on the part of Clarity Meditations, and Clarity Meditations will not be liable for any use or disclosure of any Content you provide.<br> Reporting Copyright and Other IP Violations<br> We respect other people’s rights, and expect you to do the same.<br> We provide you with tools to help you protect your intellectual property rights.<br> If you repeatedly infringe other people’s intellectual property rights, we will disable your account when appropriate.<br> Disclaimer of Warranties<br> THE SERVICE, INCLUDING, WITHOUT LIMITATION, Clarity Meditations CONTENT, IS PROVIDED ON AN “AS IS”, “AS AVAILABLE” AND “WITH ALL FAULTS” BASIS. TO THE FULLEST EXTENT PERMISSIBLE BY LAW, NEITHER Clarity Meditations NOR ITS PARENT COMPANY NOR ANY OF THEIR EMPLOYEES, MANAGERS, OFFICERS OR AGENTS (COLLECTIVELY, THE “Clarity Meditations PARTIES”) MAKE ANY REPRESENTATIONS OR WARRANTIES OR ENDORSEMENTS OF ANY KIND WHATSOEVER, EXPRESS OR IMPLIED, AS TO: (A) THE SERVICE; (B) THE Clarity Meditations CONTENT; (C) USER CONTENT; OR (D) SECURITY ASSOCIATED WITH THE TRANSMISSION OF INFORMATION TO Clarity Meditations OR VIA THE SERVICE. IN ADDITION, THE Clarity Meditations PARTIES HEREBY DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, TITLE, CUSTOM, TRADE, QUIET ENJOYMENT, SYSTEM INTEGRATION AND FREEDOM FROM COMPUTER VIRUS.</p>-->
+
+
+    <!--<p>THE Clarity Meditations PARTIES DO NOT REPRESENT OR WARRANT THAT THE SERVICE WILL BE ERROR-FREE OR UNINTERRUPTED; THAT DEFECTS WILL BE CORRECTED; OR THAT THE SERVICE OR THE SERVER THAT MAKES THE SERVICE AVAILABLE IS FREE FROM ANY HARMFUL COMPONENTS, INCLUDING, WITHOUT LIMITATION, VIRUSES. THE Clarity Meditations PARTIES DO NOT MAKE ANY REPRESENTATIONS OR WARRANTIES THAT THE INFORMATION (INCLUDING ANY INSTRUCTIONS) ON THE SERVICE IS ACCURATE, COMPLETE, OR USEFUL. YOU ACKNOWLEDGE THAT YOUR USE OF THE SERVICE IS AT YOUR SOLE RISK. THE Clarity Meditations PARTIES DO NOT WARRANT THAT YOUR USE OF THE SERVICE IS LAWFUL IN ANY PARTICULAR JURISDICTION, AND THE Clarity Meditations PARTIES SPECIFICALLY DISCLAIM SUCH WARRANTIES. SOME JURISDICTIONS LIMIT OR DO NOT ALLOW THE DISCLAIMER OF IMPLIED OR OTHER WARRANTIES SO THE ABOVE DISCLAIMER MAY NOT APPLY TO YOU TO THE EXTENT SUCH JURISDICTION’S LAW IS APPLICABLE TO YOU AND THESE TERMS OF USE.</p>-->
+
+
+    <!--<p>BY ACCESSING OR USING THE SERVICE YOU REPRESENT AND WARRANT THAT YOUR ACTIVITIES ARE LAWFUL IN EVERY JURISDICTION WHERE YOU ACCESS OR USE THE SERVICE.</p>-->
+
+
+    <!--<p>THE Clarity Meditations PARTIES DO NOT ENDORSE CONTENT AND SPECIFICALLY DISCLAIM ANY RESPONSIBILITY OR LIABILITY TO ANY PERSON OR ENTITY FOR ANY LOSS, DAMAGE (WHETHER ACTUAL, CONSEQUENTIAL, PUNITIVE OR OTHERWISE), INJURY, CLAIM, LIABILITY OR OTHER CAUSE OF ANY KIND OR CHARACTER BASED UPON OR RESULTING FROM ANY CONTENT.</p>-->
+
+
+    <!--<p>Limitation of Liability; Waiver<br>-->
+    <!--UNDER NO CIRCUMSTANCES WILL THE Clarity Meditations PARTIES BE LIABLE TO YOU FOR ANY LOSS OR DAMAGES OF ANY KIND (INCLUDING, WITHOUT LIMITATION, FOR ANY DIRECT, INDIRECT, ECONOMIC, EXEMPLARY, SPECIAL, PUNITIVE, INCIDENTAL OR CONSEQUENTIAL LOSSES OR DAMAGES) THAT ARE DIRECTLY OR INDIRECTLY RELATED TO: (A) THE SERVICE; (B) THE Clarity Meditations CONTENT; (C) USER CONTENT; (D) YOUR USE OF, INABILITY TO USE, OR THE PERFORMANCE OF THE SERVICE; (E) ANY ACTION TAKEN IN CONNECTION WITH AN INVESTIGATION BY THE Clarity Meditations PARTIES OR LAW ENFORCEMENT AUTHORITIES REGARDING YOUR OR ANY OTHER PARTY’S USE OF THE SERVICE; (F) ANY ACTION TAKEN IN CONNECTION WITH COPYRIGHT OR OTHER INTELLECTUAL PROPERTY OWNERS; (G) ANY ERRORS OR OMISSIONS IN THE SERVICE’S OPERATION; OR (H) ANY DAMAGE TO ANY USER’S COMPUTER, MOBILE DEVICE, OR OTHER EQUIPMENT OR TECHNOLOGY INCLUDING, WITHOUT LIMITATION, DAMAGE FROM ANY SECURITY BREACH OR FROM ANY VIRUS, BUGS, TAMPERING, FRAUD, ERROR, OMISSION, INTERRUPTION, DEFECT, DELAY IN OPERATION OR TRANSMISSION, COMPUTER LINE OR NETWORK FAILURE OR ANY OTHER TECHNICAL OR OTHER MALFUNCTION, INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOST PROFITS, LOSS OF GOODWILL, LOSS OF DATA, WORK STOPPAGE, ACCURACY OF RESULTS, OR COMPUTER FAILURE OR MALFUNCTION, EVEN IF FORESEEABLE OR EVEN IF THE Clarity Meditations PARTIES HAVE BEEN ADVISED OF OR SHOULD HAVE KNOWN OF THE POSSIBILITY OF SUCH DAMAGES, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE, STRICT LIABILITY OR TORT (INCLUDING, WITHOUT LIMITATION, WHETHER CAUSED IN WHOLE OR IN PART BY NEGLIGENCE, ACTS OF GOD, TELECOMMUNICATIONS FAILURE, OR THEFT OR DESTRUCTION OF THE SERVICE). IN NO EVENT WILL THE Clarity Meditations PARTIES BE LIABLE TO YOU OR ANYONE ELSE FOR LOSS, DAMAGE OR INJURY, Clarity Meditations, WITHOUT LIMITATION, DEATH OR PERSONAL INJURY. SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU. IN NO EVENT WILL THE Clarity Meditations PARTIES TOTAL LIABILITY TO YOU FOR ALL DAMAGES, LOSSES OR CAUSES OR ACTION EXCEED ONE HUNDRED UNITED STATES DOLLARS ($100.00).</p>-->
+
+
+    <!--<p>YOU AGREE THAT IN THE EVENT YOU INCUR ANY DAMAGES, LOSSES OR INJURIES THAT ARISE OUT OF Clarity Meditations’S ACTS OR OMISSIONS, THE DAMAGES, IF ANY, CAUSED TO YOU ARE NOT IRREPARABLE OR SUFFICIENT TO ENTITLE YOU TO AN INJUNCTION PREVENTING ANY EXPLOITATION OF ANY WEB SITE, SERVICE, PROPERTY, PRODUCT OR OTHER CONTENT OWNED OR CONTROLLED BY THE Clarity Meditations PARTIES, AND YOU WILL HAVE NO RIGHTS TO ENJOIN OR RESTRAIN THE DEVELOPMENT, PRODUCTION, DISTRIBUTION, ADVERTISING, EXHIBITION OR EXPLOITATION OF ANY WEBSITE, PROPERTY, PRODUCT, SERVICE, OR OTHER CONTENT OWNED OR CONTROLLED BY THE Clarity Meditations PARTIES.</p>-->
+
+
+    <!--<p>BY ACCESSING THE SERVICE, YOU UNDERSTAND THAT YOU MAY BE WAIVING RIGHTS WITH RESPECT TO CLAIMS THAT ARE AT THIS TIME UNKNOWN OR UNSUSPECTED, AND IN ACCORDANCE WITH SUCH WAIVER, YOU ACKNOWLEDGE THAT YOU HAVE READ AND UNDERSTAND, AND HEREBY EXPRESSLY WAIVE, THE BENEFITS OF SECTION 1542 OF THE CIVIL CODE OF CALIFORNIA, AND ANY SIMILAR LAW OF ANY STATE OR TERRITORY, WHICH PROVIDES AS FOLLOWS: “A GENERAL RELEASE DOES NOT EXTEND TO CLAIMS WHICH THE CREDITOR DOES NOT KNOW OR SUSPECT TO EXIST IN HIS FAVOR AT THE TIME OF EXECUTING THE RELEASE, WHICH IF KNOWN BY HIM MUST HAVE MATERIALLY AFFECTED HIS SETTLEMENT WITH THE DEBTOR.”</p>-->
+
+
+    <!--<p>Clarity Meditations IS NOT RESPONSIBLE FOR THE ACTIONS, CONTENT, INFORMATION, OR DATA OF THIRD PARTIES, AND YOU RELEASE US, OUR DIRECTORS, OFFICERS, EMPLOYEES, AND AGENTS FROM ANY CLAIMS AND DAMAGES, KNOWN AND UNKNOWN, ARISING OUT OF OR IN ANY WAY CONNECTED WITH ANY CLAIM YOU HAVE AGAINST ANY SUCH THIRD PARTIES.</p>-->
+
+
+    <!--<p>Indemnification<br>-->
+    <!--You (and also any third party for whom you operate an account or activity on the Service) agree to defend (at Clarity Meditations’s request), indemnify and hold the Clarity Meditations Parties harmless from and against any claims, liabilities, damages, losses, and expenses, including without limitation, reasonable attorney’s fees and costs, arising out of or in any way connected with any of the following (including as a result of your direct activities on the Service or those conducted on your behalf): (i) your Content or your access to or use of the Service; (ii) your breach or alleged breach of these Terms of Use; (iii) your violation of any third-party right, including without limitation, any intellectual property right, publicity, confidentiality, property or privacy right; (iv) your violation of any laws, rules, regulations, codes, statutes, ordinances or orders of any governmental and quasi-governmental authorities, including, without limitation, all regulatory, administrative and legislative authorities; or (v) any misrepresentation made by you. You will cooperate as fully required by Clarity Meditations in the defense of any claim. Clarity Meditations reserves the right to assume the exclusive defense and control of any matter subject to indemnification by you, and you will not in any event settle any claim without the prior written consent of Clarity Meditations.</p>-->
+
+
+    <!--<p>Arbitration<br>-->
+    <!--Except if you opt-out or for disputes relating to: (1) your or Clarity Meditations’s intellectual property (such as trademarks, trade dress, domain names, trade secrets, copyrights and patents); (2) violations of the API Terms; or (3) violations of provisions 13 or 15 of the Basic Terms, above (“Excluded Disputes”), you agree that all disputes between you and Clarity Meditations (whether or not such dispute involves a third party) with regard to your relationship with Clarity Meditations, including without limitation disputes related to these Terms of Use, your use of the Service, and/or rights of privacy and/or publicity, will be resolved by binding, individual arbitration under the American Arbitration Association’s rules for arbitration of consumer-related disputes and you and Clarity Meditations hereby expressly waive trial by jury. As an alternative, you may bring your claim in your local “small claims” court, if permitted by that small claims court’s rules. You may bring claims only on your own behalf. Neither you nor Clarity Meditations will participate in a class action or class-wide arbitration for any claims covered by this agreement. You also agree not to participate in claims brought in a private attorney general or representative capacity, or consolidated claims involving another person’s account, if Clarity Meditations is a party to the proceeding. This dispute resolution provision will be governed by the Federal Arbitration Act. In the event the American Arbitration Association is unwilling or unable to set a hearing date within one hundred and sixty (160) days of filing the case, then either Clarity Meditations or you can elect to have the arbitration administered instead by the Judicial Arbitration and Mediation Services. Judgment on the award rendered by the arbitrator may be entered in any court having competent jurisdiction. Any provision of applicable law notwithstanding, the arbitrator will not have authority to award damages, remedies or awards that conflict with these Terms of Use.</p>-->
+
+
+    <!--<p>You may opt out of this agreement to arbitrate. If you do so, neither you nor Clarity Meditations can require the other to participate in an arbitration proceeding. To opt out, you must notify Clarity Meditations in writing within 30 days of the date that you first became subject to this arbitration provision. You must email sayhello.Clarity metatateapp@gmail.com and a clear statement that you want to opt out of this arbitration agreement.</p>-->
+
+
+    <!--<p>If the prohibition against class actions and other claims brought on behalf of third parties contained above is found to be unenforceable, then all of the preceding language in this Arbitration section will be null and void. This arbitration agreement will survive the termination of your relationship with Clarity Meditations.</p>-->
+
+
+    <!--<p>Time Limitation on Claims<br>-->
+    <!--You agree that any claim you may have arising out of or related to your relationship with Clarity Meditations must be filed within one year after such claim arose; otherwise, your claim is permanently barred.</p>-->
+
+
+    <!--<p>Governing Law &amp; Venue<br>-->
+    <!--These Terms of Use are governed by and construed in accordance with the laws of the State of California, without giving effect to any principles of conflicts of law AND WILL SPECIFICALLY NOT BE GOVERNED BY THE UNITED NATIONS CONVENTIONS ON CONTRACTS FOR THE INTERNATIONAL SALE OF GOODS, IF OTHERWISE APPLICABLE. For any action at law or in equity relating to the arbitration provision of these Terms of Use, the Excluded Disputes or if you opt out of the agreement to arbitrate, you agree to resolve any dispute you have with Clarity Meditations exclusively in a state or federal court located in Santa Clara, California, and to submit to the personal jurisdiction of the courts located in Santa Clara County for the purpose of litigating all such disputes.</p>-->
+
+
+    <!--<p>If any provision of these Terms of Use is held to be unlawful, void, or for any reason unenforceable during arbitration or by a court of competent jurisdiction, then that provision will be deemed severable from these Terms of Use and will not affect the validity and enforceability of any remaining provisions. Clarity Meditations’s failure to insist upon or enforce strict performance of any provision of these Terms will not be construed as a waiver of any provision or right. No waiver of any of these Terms will be deemed a further or continuing waiver of such term or condition or any other term or condition. Clarity Meditations reserves the right to change this dispute resolution provision, but any such changes will not apply to disputes arising before the effective date of the amendment. This dispute resolution provision will survive the termination of any or all of your transactions with Clarity Meditations.</p>-->
+
+
+    <!--<p>Entire Agreement<br>-->
+    <!--If you are using the Service on behalf of a legal entity, you represent that you are authorized to enter into an agreement on behalf of that legal entity. These Terms of Use constitute the entire agreement between you and Clarity Meditations and governs your use of the Service, superseding any prior agreements between you and Clarity Meditations. You will not assign the Terms of Use or assign any rights or delegate any obligations hereunder, in whole or in part, whether voluntarily or by operation of law, without the prior written consent of Clarity Meditations. Any purported assignment or delegation by you without the appropriate prior written consent of Clarity Meditations will be null and void. Clarity Meditations may assign these Terms of Use or any rights hereunder without your consent. If any provision of these Terms of Use is found by a court of competent jurisdiction to be invalid or otherwise unenforceable, the parties nevertheless agree that such portion will be deemed severable from these Terms of Use and will not affect the validity and enforceability of the remaining provisions, and the remaining provisions of the Terms of Use remain in full force and effect. Neither the course of conduct between the parties nor trade practice will act to modify the Terms of Use. These Terms of Use do not confer any third-party beneficiary rights.</p>-->
+
+
+    <!--<p>Territorial Restrictions<br>-->
+    <!--The information provided within the Service is not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation or which would subject Clarity Meditations to any registration requirement within such jurisdiction or country. We reserve the right to limit the availability of the Service or any portion of the Service, to any person, geographic area, or jurisdiction, at any time and in our sole discretion, and to limit the quantities of any content, program, product, service or other feature that Clarity Meditations provides.</p>-->
+
+
+    <!--<p>Software related to or made available by the Service may be subject to United States export controls. Thus, no software from the Service may be downloaded, exported or re-exported: (a) into (or to a national or resident of) any country to which the United States has embargoed goods; or (b) to anyone on the U.S. Treasury Department’s list of Specially Designated Nationals or the U.S. Commerce Department’s Table of Deny Orders. By downloading any software related to the Service, you represent and warrant that you are not located in, under the control of, or a national or resident of, any such country or on any such list.</p>-->
+
+
+    <!--<p>The effective date of these Terms of Use is October 11, 2015. These Terms of Use were written in English (US). To the extent any translated version of these Terms of Use conflicts with the English version, the English version controls.</p>-->
+
+    <!--</body>-->
+    <!--</html>]]></string>-->
+
+    <string name="str_terms_of_use2"><![CDATA[<html>
+<head>
+<title></title>
+</head>
+<body>
+
+	<div class="entry-content">
+<p> <font color=\"gray\">Last updated August 31, 2021 </font></p>
+
+<p><font color=\"gray\">Metatate is licensed to You (End-User) byMetatate Meditation, located at175 Varick St,New York,New York10014,United States(hereinafter: Licensor), for use only under the terms of this License Agreement.</font></p>
+
+<p><font color=\"gray\">By downloading the Application from the Apple AppStore, and any update thereto (as permitted by this License Agreement), You indicate that You agree to be bound by all of the terms and conditions of this License Agreement, and that You accept this License Agreement. </font> </p>
+<p><font color=\"gray\">The parties of this License Agreement acknowledge that Apple is not a Party to this License Agreement and is not bound by any provisions or obligations with regard to the Application, such as warranty, liability, maintenance and support thereof.Metatate Meditation, not Apple, is solely responsible for the licensed Application and thecontent thereof. </font></p>
+<p><font color=\"gray\">This License Agreement may not provide for usage rules for the Application that are in conflict with the latest <u>App Store Terms of Service</u> Metatate Meditationacknowledges that it had the opportunity to review said terms and this License Agreement is not conflicting with them.</font> </p>
+<p><font color=\"gray\">All rights not expressly granted to You are reserved.</font></p>
+
+<p><br><font color=\"black\"><b>1.THE APPLICATION  </b></font></p>
+<p><font color=\"gray\">Metatate(hereinafter: Application) is a piece of software created toMeditation App teaching users mindfulness- and customized for Apple mobile devices. It is used tolisten to meditations.  </font></br>
+<p><font color=\"gray\">The Application is not tailored to comply with industry-specific regulations (Health Insurance Portability and Accountability Act (HIPAA), Federal InformationSecurity Management Act (FISMA), etc.), so if your interactions would be subjected to such laws, you may not use this Application. You may not use the Application in a way that would violate the Gramm-Leach-Bliley Act (GLBA).  </font></br>
+
+<p><br><font color=\"black\"><b>2. SCOPE OF LICENSE  </b></font><br>
+<p> <font color=\"gray\">2.1 You are given a non-transferable, non-exclusive, non-sublicensable license to install and use the Licensed Application on any Apple-branded Products that You (End-User) own or control and as permitted by the Usage Rules set forth in this section and the App Store Terms of Service, with the exception that such licensed Application may be accessed and used by other accounts associated with You (End-User, The Purchaser) via Family Sharing or volume purchasing. </font></br>
+<br> <font color=\"gray\">2.2 You may not share or make the Application available to third parties (unless to the degree allowed by the Apple Terms and Conditions, and withMetatate Meditation\'s prior written consent), sell, rent, lend, lease or otherwise redistribute the Application. </font></br>
+<br> <font color=\"gray\">2.3 You may not reverse engineer, translate, disassemble, integrate, decompile, integrate, remove, modify, combine, create derivative works or updates of, adapt, or attempt to derive the source code of the Application, or any part thereof (except withMetatate Meditation\'s prior written consent). </font></br>
+<br> <font color=\"gray\">2.4 You may not copy (excluding when expressly authorized by this license and the Usage Rules) or alter the Application or portions thereof. You may create and store copies only on devices that You own or control for backup keeping under the terms of this license, the App Store Terms of Service, and any other terms and conditions that apply to the device or software used. You may not remove any intellectual property notices. You acknowledge that no unauthorizedthird parties may gain access to these copies at any time. </font></br>
+<br> <font color=\"gray\">2.5 Violations of the obligations mentioned above, as well as the attempt of such infringement, may be subject to prosecution and damages. </font></br>
+<br> <font color=\"gray\">2.6 Licensor reserves the right to modify the terms and conditions of licensing. </font></br>
+<br> <font color=\"gray\"> 2.7 Nothing in this license should be interpreted to restrict third-party terms. When using the Application, You must ensure that You comply with applicable third-party terms and conditions.</font></br>
+
+<p><br><font color=\"black\"><b>3. TECHNICAL REQUIREMENTS  </b></font><br>
+<br> <font color=\"gray\">
+3.1 The Application requires a firmware version1.0.0 or higher. Licensor recommends using the latest version of the firmware.
+<br><br>3.2 Licensor attempts to keep the Application updated so that it complies with modified/new versions of the firmware and new hardware. You are not granted rights to claim such an update.
+<br><br>3.3 You acknowledge that it is Your responsibility to confirm and determine thatthe app end-user device on which You intend to use the Application satisfies the technical specifications mentioned above.
+<br><br>3.4 Licensor reserves the right to modify the technical specifications as it sees appropriate at any time.
+
+</font></br>
+
+<p><br><font color=\"black\"><b>4. MAINTENANCE AND SUPPORT  </b></font><br>
+<br> <font color=\"gray\">4.1 The Licensor is solely responsible for providing any maintenance and support services for this licensed Application. You can reach the Licensor at the email address listed in the App Store Overview for this licensed Application.
+<br><br>4.2Metatate Meditationand the End-User acknowledge that Apple has no obligation whatsoever to furnish any maintenance and support services with respect to the licensed Application. </font></br>
+
+<p><br><font color=\"black\">5. USE OF DATA  </b></font><br>
+<br> <font color=\"gray\">You acknowledge that Licensor will be able to access and adjust Your downloaded licensed Application content and Your personal information, and that Licensor\'s use of such material and information is subject to Your legal agreements with Licensor and Licensor\'s privacy policy:<a href="https://app.termly.io/document/privacy-policy/09c4073f-0cd1-4878-ac4a-ad17ffa54f9d.">https://app.termly.io/document/privacy-policy/09c4073f-0cd1-4878-ac4a-ad17ffa54f9d.</a></font></br>
+
+<p><br><font color=\"black\"><b>6. USER GENERATED CONTRIBUTIONS  </b></font><br>
+<br> <font color=\"gray\">The Application does not offer users to submit or post content. We may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or in the Application, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or othermaterial (collectively, "Contributions"). Contributions may be viewable by other users of the Application and through third-party websites or applications. As such, any Contributions you transmit may be treated in accordance with the Application Privacy Policy. When you create or make available any Contributions, you thereby represent and warrant that:
+<br><br>1. The creation, distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not
+<br>infringe the proprietary rights, including but not limited to the copyright, patent, trademark, trade secret, or moral rights of any third party.
+<br>2. You are the creator and owner of or have the necessary licenses, rights, consents, releases, and permissions to use and to authorize us, the Application, and other users of the Application to use your Contributions in any manner contemplated by the Application and these Terms of Use.
+<br>3. You have the written consent, release, and/or permission of each and every identifiable individual person in your Contributions to use the name or likeness or each and every such identifiable individual person to enable inclusion and useof your Contributions in any manner contemplated by the Application and these Terms of Use.
+<br>4. Your Contributions are not false, inaccurate, or misleading.
+<br>5. Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, mass mailings, or other forms of solicitation.
+<br>6. Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing,libelous, slanderous, or otherwise objectionable (as determined by us).
+<br>7. Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.
+<br>8. Your Contributions are not used to harass or threaten (in the legal sense of those terms) any other person and to promote violence against a specific personor class of people.
+<br>9. Your Contributions do not violate any applicable law, regulation, or rule.
+<br>10. Your Contributions do not violate the privacy or publicity rights of any third party.
+<br>11. Your Contributions do not contain any material that solicits personal information from anyone under the age of 18 or exploits people under the age of18 in a sexual or violent manner.
+<br>12. Your Contributions do not violate any applicable law concerning child pornography, or otherwise intended to protect the health or well-being of minors.
+<br>13. Your Contributions do not include any offensive comments that are connected to race, national origin, gender, sexual preference, or physical handicap.
+<br>14. Your Contributions do not otherwise violate, or link to material that violates, any provision of these Terms of Use, or any applicable law or regulation.
+<br><br>Any use of the Application in violation of the foregoing violates these Terms of Use and may result in, among other things, termination or suspension of your rights to use the Application.</font></br>
+
+
+
+
+<p><br><font color=\"black\"><b>7. CONTRIBUTION LICENSE  </b></font><br>
+<br> <font color=\"gray\">You agree that we may access, store, process, and use any information and personal data that you provide following the terms of the Privacy Policy and yourchoices (including settings).
+<br><br>By submitting suggestions of other feedback regarding the Application, you agree that we can use and share such feedback for any purpose without compensation to you.
+<br><br>We do not assert any ownership over your Contributions. You retain full ownership of all of your Contributions and any intellectual property rights or other proprietary rights associated with your Contributions. We are not liable for any statements or representations in your Contributions provided by you in any area in the Application. You are solely responsible for your Contributions to the Application and you expressly agree to exonerate us from any and all responsibility and to refrain from any legal action against us regarding your Contributions.
+
+</font></br>
+
+<p><br><font color=\"black\"><b>8. LIABILITY  </b></font><br>
+<br> <font color=\"gray\">8.1 Licensor takes no accountability or responsibility for any damages caused due to a breach of duties according to Section 2 of this Agreement. To avoid data loss, You are required to make use of backup functions of the Application tothe extent allowed by applicable third-party terms and conditions of use. You are aware that in case of alterations or manipulations of the Application, You willnot have access to licensed Application.</font></br>
+
+<p><br><font color=\"black\"><b>9. WARRANTY  </b></font><br>
+<br> <font color=\"gray\">
+9.1 Licensor warrants that the Application is free of spyware, trojan horses, viruses, or any other malware at the time of Your download. Licensor warrants that the Application works as described in the user documentation.
+<br><br>9.2 No warranty is provided for the Application that is not executable on the device, that has been unauthorizedly modified, handled inappropriately or culpably, combined or installed with inappropriate hardware or software, used with inappropriate accessories, regardless if by Yourself or by third parties, or if there are any other reasons outside ofMetatate Meditation\'s sphere of influence that affect the executability of the Application.
+<br><br>9.3 You are required to inspect the Application immediately after installing it and notifyMetatate Meditationabout issues discovered without delay by e-mail provided inProduct Claims. The defect report will be taken into consideration and further investigated if it has been mailed within a period ofsixty (60)days after discovery.
+<br><br>9.4 If we confirm that the Application is defective,Metatate Meditationreserves a choice to remedy the situation either by means of solving the defect or substitute delivery.
+<br><br>9.5 In the event of any failure of the Application to conform to any applicable warranty, You may notify the App-Store-Operator, and Your Application purchase price will be refunded to You. To the maximum extent permitted by applicable law, the App-Store-Operator will have no other warranty obligation whatsoever with respect to the App, and any other losses, claims, damages, liabilities, expenses and costs attributable to any negligence to adhere to any warranty.9.6If the user is an entrepreneur, any claim based on faults expires after a statutory period of limitation amounting to twelve (12) months after the Application was made available to the user. The statutory periods of limitation given by law apply for users who are consumers.</font></br>
+
+<p><br><font color=\"black\"><b>10. PRODUCT CLAIMS  </b></font><br>
+<br> <font color=\"gray\">Metatate Meditationand the End-User acknowledge that Metatate Meditation, and not Apple, is responsible for addressing any claims of the End-User or any third party relating to the licensed Application or the End-User\'s possession and/or use of that licensed Application, including, but not limited to:
+<br><br>(i) product liability claims;
+<br><br>(ii) any claim that the licensed Application fails to conform to any applicable legal or regulatory requirement; and
+<br><br>(iii) claims arising under consumer protection, privacy, or similar legislation, including in connection with Your Licensed Application\'s use of the HealthKit and HomeKit.</font></br>
+
+<p><br><font color=\"black\"><b>11. LEGAL COMPLIANCE  </b></font><br>
+<br> <font color=\"gray\">You represent and warrant that You are not located in a country that is subject to a U.S. Government embargo, or that has been designated by the U.S. Government as a "terrorist supporting" country; and that You are not listed on any U.S. Government list of prohibited or restricted parties.</font></br>
+
+<p><br><font color=\"black\"><b>12. CONTACT INFORMATION  </b></font><br>
+<br> <font color=\"gray\">For general inquiries, complaints, questions or claims concerning the licensed Application, please contact:
+<br><br>Hello Developer
+<br>175 Varick St
+<br>New York,NY10014
+<br>United States
+<br>metatateapp@gmail.com</font></br>
+
+<p><br><font color=\"black\"><b>13. TERMINATION  </b></font><br>
+<br> <font color=\"gray\">The license is valid until terminated by Metatate Meditationor by You. Your rights under this license will terminate automatically and without notice from Metatate Meditation if You fail to adhere to any term(s) of this license. Upon License termination, You shall stop all use of the Application, and destroy all copies, full or partial, of the Application.</font></br>
+
+<p><br><font color=\"black\"><b>14. MAINTENANCE AND SUPPORT  </b></font><br>
+<br> <font color=\"gray\">Metatate Meditationrepresents and warrants that Metatate Meditationwill comply with applicable third-party terms of agreement when using licensed Application.
+<br><br>In Accordance with Section 9 of the "Instructions for Minimum Terms of Developer\'s End-User License Agreement," Apple and Apple\'s subsidiaries shall be third-party beneficiaries of this EndUser License Agreement and - upon Your acceptance of the terms and conditions of this licenseagreement, Apple will have the right (and will be deemed to have accepted the right) to enforce this End User License Agreement against You as a third-party beneficiary thereof.</font></br>
+
+<p><br><font color=\"black\"><b>15. MAINTENANCE AND SUPPORT  </b></font><br>
+<br> <font color=\"gray\">Metatate Meditationand the End-User acknowledge that, in the event of any third-party claim that the licensed Application or the End-User\'s possession and use of that licensed Application infringes on the third party\'s intellectual property rights,Metatate Meditation, and not Apple, will be solely responsible for the investigation, defense, settlement and discharge or any such intellectual property infringement claims.</font></br>
+
+<p><br><font color=\"black\"><b>16. MAINTENANCE AND SUPPORT  </b></font><br>
+<br> <font color=\"gray\">This license agreement is governed by the laws ofthe State ofNew Yorkexcluding its conflicts of law rules.</font></br>
+
+<p><br><font color=\"black\"><b>17. MAINTENANCE AND SUPPORT  </b></font><br>
+<br> <font color=\"gray\">17.1If any of the terms of this agreement should be or become invalid, the validity of the remaining provisions shall not be affected. Invalid terms will be replaced by valid ones formulated in a way that will achieve the primary purpose.
+
+<br><br>17.2Collateral agreements, changes and amendments are only valid if laid down in writing. The preceding clause can only be waived in writing.</font></br>
+</body>
+</html>]]></string>
+
+
+    <string name="str_privacy_policy"><![CDATA[<html>
+<head>
+<title></title>
+</head>
+<body>
+
+	<div class="entry-content">
+<p> <font color=\"gray\">Last updated August 31, 2021 </font></p>
+<p> <font color=\"gray\">Thank you for choosing to be part of our community at Metatate Meditation("Company," "we," "us," or "our"). We are committed to protecting your personal information and your right to privacy. If you have any questions orconcerns about this privacy notice or our practices with regard to your personal information, please contact us at metatateapp@gmail.com. </font></p>
+<br> <font color=\"gray\">This privacy notice describes how we might use your information if you:</font><br>
+
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ Download and use our mobile application— Metatate</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ Engage with us in other related ways ― including any sales, marketing, orevents</font><br>
+<br> <font color=\"gray\">In this privacy notice, if we refer to:</font><br>
+<br> <font color=\"gray\">&nbsp;&nbsp;⬤ "App," we are referring to any application of ours that references or links to this policy, including any listed above</font><br>
+<br> <font color=\"gray\">&nbsp;&nbsp;⬤ "Services," we are referring to ourApp,and other related services, including any sales, marketing, or events</font><br>
+<br> <font color=\"gray\">The purpose of this privacy notice is to explain to you in the clearest way possible what information we collect, how we use it, and what rights you have inrelation to it. If there are any terms in this privacy notice that you do not agree with, please discontinue use of our Services immediately.</font><br>
+<br> <font color=\"black\">Please read this privacy notice carefully, as it will help you understand what we do with the information that we collect.</font><br>
+
+
+<p><br><font color=\"black\"><b>TABLE OF CONTENTS  </b></font><br>
+<br> <font color=\"gray\"><u>1. WHAT INFORMATION DO WE COLLECT?</u></font>
+<br> <font color=\"gray\"><u>2. HOW DO WE USE YOUR INFORMATION?</u></font>
+<br> <font color=\"gray\"><u>3. WILL YOUR INFORMATION BE SHARED WITH ANYONE?</u></font>
+<br> <font color=\"gray\"><u>4. HOW LONG DO WE KEEP YOUR INFORMATION?</u></font>
+<br> <font color=\"gray\"><u>5. HOW DO WE KEEP YOUR INFORMATION SAFE?</u></font>
+<br> <font color=\"gray\"><u>6. WHAT ARE YOUR PRIVACY RIGHTS?</u></font>
+<br> <font color=\"gray\"><u>7. CONTROLS FOR DO-NOT-TRACK FEATURES</u></font>
+<br> <font color=\"gray\"><u>8. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</u></font>
+<br> <font color=\"gray\"><u>9. DO WE MAKE UPDATES TO THIS NOTICE?</u></font>
+<br> <font color=\"gray\"><u>10. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</u></font>
+<br> <font color=\"gray\"><u>11. HOW CAN YOU REVIEW, UPDATE OR DELETE THE DATA WE COLLECT FROM YOU?</u></font>
+
+
+<p><br><font color=\"black\"><b>1. WHAT INFORMATION DO WE COLLECT?  </b></font><br>
+<p><br><font color=\"black\"><b>Personal information you disclose to us  </b></font><br>
+<br> <font color=\"gray\"><b>In Short:</b>  We collect personal information that you provide to us.</font><br>
+<br> <font color=\"gray\">We collect personal information that you voluntarily provide to us when you register on the App, express an interest in obtaining information about us or our products and Services, when you participate in activities on the App or otherwise when you contact us. </font><br>
+<br> <font color=\"gray\">The personal information that we collect depends on the context of your interactions with us and the App, the choices you make and the products and features you use. The personal information we collect may include the following: </font><br>
+<br> <font color=\"gray\"><b>Personal Information Provided by You.</b> We collect names; email addresses; and other similar information. </font><br>
+<br> <font color=\"gray\">All personal information that you provide to us must be true, complete and accurate, and you must notify us of any changes to such personal information. </font><br>
+
+<p><br><font color=\"black\"><b>2. HOW DO WE USE YOUR INFORMATION?  </b></font><br>
+<br> <font color=\"gray\"><b>In Short: </b> We process your information for purposes based on legitimate business interests, the fulfillment of our contract with you, compliance with our legal obligations, and/or your consent. </font><br>
+<br> <font color=\"gray\">We use personal information collected via our App for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations. We indicate the specific processing grounds we rely on next to each purpose listed below. </font><br>
+<br> <font color=\"gray\">We use the information we collect or receive: </font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>To facilitate account creation and logon process.</b> If you choose to link your account with us to a third-party account (such as your Google or Facebook account), we use the information you allowed us to collect from those third parties to facilitate account creation and logon process for the performance of the contract.</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>To post testimonials.</b> We post testimonials on our App that may contain personal information. Prior to posting a testimonial, we will obtain your consent to use your name and the content of the testimonial. If you wish to update, or delete your testimonial, please contact us at metatateapp@gmail.com and be sure to include your name, testimonial location, and contact information.</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>Request feedback.</b> We may use your information to request feedback and to contact you about your use of our App.</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>To enable user-to-user communications.</b> We may use your information in order to enable user-to-user communications with each user\'s consent. </font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>To manage user accounts.</b> We may use your information for the purposes of managing our account and keeping it in working order.</font><br>
+
+
+
+<p><br><font color=\"black\"><b>3. WILL YOUR INFORMATION BE SHARED WITH ANYONE?  </b></font><br>
+<br> <font color=\"gray\"><b>In Short: </b> We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations</font><br>
+<br> <font color=\"gray\">We may process or share your data that we hold based on the following legal basis:</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>Consent:</b> We may process your data if you have given us specific consent to use your personal information for a specific purpose.</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>Legitimate Interests:</b> We may process your data when it is reasonably necessary to achieve our legitimate business interests.</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>Performance of a Contract:</b> Where we have entered into a contract with you, we may process your personal information to fulfill the terms of our contract.</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>Legal Obligations:</b> We may disclose your information where we are legally required to do so in order to comply with applicable law, governmental requests, a judicial proceeding, court order, or legal process, such as in response to a court order or a subpoena (including in response to public authorities to meet national security or law enforcement requirements).</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>Vital Interests: </b>We may disclose your information where we believe it is necessary to investigate, prevent, or take action regarding potential violations of our policies, suspected fraud, situations involving potential threats to the safety of any person and illegal activities, or as evidence in litigation in which we are involved.</font><br>
+<br> <font color=\"gray\"> More specifically, we may need to process your data or share your personal information in the following situations:</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ <b>Business Transfers.</b> We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</font><br>
+
+<p><br><font color=\"black\"><b>4. HOW LONG DO WE KEEP YOUR INFORMATION?  </b></font><br>
+<br> <font color=\"gray\"><b>In Short:</b>  We keep your information for as long as necessary to fulfill the purposes outlined in this privacy notice unless otherwise required by law. </font><br>
+<br> <font color=\"gray\">We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy notice, unless a longer retention period is required or permitted by law (such as tax, accounting or other legal requirements). No purpose in this notice will require us keeping your personal information for longer than the period of time in which users have an account with us.</font><br>
+<br> <font color=\"gray\">When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize such information, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible. </font><br>
+<p><br><font color=\"black\"><b>5. HOW DO WE KEEP YOUR INFORMATION SAFE?  </b></font><br>
+<br> <font color=\"gray\"><b>In Short:</b>  We aim to protect your personal information through a system of organizational and technical security measures.</font><br>
+<br> <font color=\"gray\">We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or other unauthorized third parties will not be able to defeat our security, and improperly collect, access, steal, or modify your information. Although we will do our best to protect your personal information, transmission of personal information to and from our App is at your own risk. You should only access the App within a secure environment.
+ </font><br>
+
+<p><br><font color=\"black\"><b>6. WHAT ARE YOUR PRIVACY RIGHTS?  </b></font><br>
+<br> <font color=\"gray\"><b>In Short:</b>  You may review, change, or terminate your account at any time. </font><br>
+<br> <font color=\"gray\">If you are a resident in the EEA or UK and you believe we are unlawfully processing your personal information, you also have the right to complain to your local data protection supervisory authority. You can find their contact details </font><br>
+<font color=\"gray\">here: <a href="https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm.">https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm.</a> </font><br>
+<br> <font color=\"gray\">supervisory authority. You can find their contact details here: <a href="https://www.edoeb.admin.ch/edoeb/en/home.html.">https://www.edoeb.admin.ch/edoeb/en/home.html.</a> </font><br>
+
+<p><br><font color=\"black\"><b>Account Information  </b></font><br>
+<br> <font color=\"gray\">If you would at any time like to review or change the information in your account or terminate your account, you can: </font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ Log in to your account settings and update your user account.</font><br>
+
+<br> <font color=\"gray\">Upon your request to terminate your account, we will deactivate or delete your account and information from our active databases. However, we may retain some information in our files to prevent fraud, troubleshoot problems, assist with any investigations, enforce our Terms of Use and/or comply with applicable legal requirements. </font><br>
+<br> <font color=\"gray\"><b>Opting out of email marketing:</b> You can unsubscribe from our marketing email list at any time by clicking on the unsubscribe link in the emails that we send or by contacting us using the details provided below. You will then be removed from the marketing email list — however, we may still communicate with you, for example to send you service-related emails that are necessary for the administration and use of your account, to respond to service requests, or for other non-marketing purposes. To otherwise opt-out, you may: </font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ Access your account settings and update your preferences.</font><br>
+
+
+<p><br><font color=\"black\"><b>7. CONTROLS FOR DO-NOT-TRACK FEATURES</b></font><br>
+<br> <font color=\"gray\">Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ("DNT") feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage no uniform technology standard for recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this privacy notice.  </font><br>
+
+<p><br><font color=\"black\"><b>8. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</b></font><br>
+<br> <font color=\"gray\"><b>In Short: </b> Yes, if you are a resident of California, you are granted specific rights regarding access to your personal information. </font><br>
+<br> <font color=\"gray\">California Civil Code Section 1798.83, also known as the "Shine The Light" law, permits our users who are California residents to request and obtain from us, once a year and free of charge, information about categories of personal information (if any) we disclosed to third parties for direct marketing purposes and the names and addresses of all third parties with which we shared personal information in the immediately preceding calendar year. If you are a California resident and would like to make such a request, please submit your request in writing to us using the contact information provided below. </font><br>
+<br> <font color=\"gray\">If you are under 18 years of age, reside in California, and have a registered account with the App, you have the right to request removal of unwanted data that you publicly post on the App. To request removal of such data, please contact us using the contact information provided below, and include the email address associated with your account and a statement that you reside in California. We will make sure the data is not publicly displayed on the App, but please be aware that the data may not be completely or comprehensively removed from all our systems (e.g. backups, etc.). </font><br>
+<p><br><font color=\"black\"><b>CCPA Privacy Notice</b></font><br>
+<br> <font color=\"gray\">The California Code of Regulations defines a "resident" as: </font><br>
+<br> <font color=\"gray\">(1) every individual who is in the State of California for other than a temporary or transitory purpose and </font><br>
+ <font color=\"gray\">(2) every individual who is domiciled in the State of California who is outside the State of California for a temporary or transitory purpose </font><br>
+<br> <font color=\"gray\">All other individuals are defined as "non-residents." </font><br>
+<br> <font color=\"gray\">If this definition of "resident" applies to you, we must adhere to certain rights and obligations regarding your personal information. </font><br>
+<br> <font color=\"gray\"><b>What categories of personal information do we collect?</b> </font><br>
+<br> <font color=\"gray\">We have collected the following categories of personal information in the past twelve (12) months: </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">A. Identifiers </font>
+<br> <font color=\"black\"><b>Examples : </b> </font> <font color=\"gray\">Contact details, such as real name, alias, postal address, telephone or mobile contact number, unique personal identifier, online identifier, Internet Protocol address, email address and account name </font><br>
+<font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">NO </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">B. Personal information categories listed in the California Customer Records statute </font>
+<br> <font color=\"black\"><b>Examples : </b> </font> <font color=\"gray\">Name, contact information, education, employment, employment history and financial information </font>
+<br><font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">YES </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">C. Protected classification characteristics under California or federal law </font>
+<br> <font color=\"black\"><b>Examples : </b> </font> <font color=\"gray\">Gender and date of birth </font>
+<br><font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">NO </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">D. Commercial information </font>
+<br> <font color=\"black\"><b>Examples : </b> </font>Gender and date of birth <font color=\"gray\">Transaction information, purchase history, financial details and payment information </font>
+<br><font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">NO </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">E. Biometric information </font>
+<br> <font color=\"black\"><b>Examples : </b> </font> <font color=\"gray\">Fingerprints and voiceprints </font>
+<br><font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">NO </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">F. Internet or other similar network activity </font>
+<br> <font color=\"black\"><b>Examples : </b> </font> <font color=\"gray\">Browsing history, search history, online behavior, interest data, and interactions with our and other websites, applications, systems and advertisements </font>
+<br><font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">NO </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">G. Geolocation data </font>
+<br> <font color=\"black\"><b>Examples : </b> </font> <font color=\"gray\">Device location </font>
+<br><font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">NO </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">H. Audio, electronic, visual, thermal, olfactory, or similar information </font>
+<br> <font color=\"black\"><b>Examples : </b> </font> <font color=\"gray\">Images and audio, video or call recordings created in connection with our business activities </font>
+<br><font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">NO </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">I. Professional or employment-related information </font>
+<br> <font color=\"black\"><b>Examples : </b> </font> <font color=\"gray\">Business contact details in order to provide you our services at a business level, job title as well as work history and professional qualifications if you apply for a job with us </font>
+<br><font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">NO </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">J. Education Information </font>
+<br> <font color=\"black\"><b>Examples : </b> </font> <font color=\"gray\">Student records and directory information </font>
+<br><font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">NO </font><br>
+
+<br> <font color=\"black\"><b>Category : </b> </font> <font color=\"gray\">K. Inferences drawn from other personal information </font>
+<br> <font color=\"black\"><b>Examples : </b> </font> <font color=\"gray\">Inferences drawn from any of the collected personal information listed above to create a profile or summary about, for example, an individual’s preferences and characteristics </font>
+<br><font color=\"black\"><b>Collected : </b> </font> <font color=\"gray\">NO </font><br>
+
+
+
+
+<br> <font color=\"gray\">We may also collect other personal information outside of these categories instances where you interact with us in-person, online, or by phone or mail in the context of: </font><br>
+
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ Receiving help through our customer support channels;</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ Participation in customer surveys or contests; and</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ Facilitation in the delivery of our Services and to respond to your inquiries.</font><br>
+
+
+<p><br><font color=\"black\"><b>How do we use and share your personal information?</b></font><br>
+<br> <font color=\"gray\">More information about our data collection and sharing practices can be found in this privacy notice. </font><br>
+<br> <font color=\"gray\">You may contact us by email at metatateapp@gmail.com, or by referring to the contact details at the bottom of this document. </font><br>
+<br> <font color=\"gray\">If you are using an authorized agent to exercise your right to opt-out we may deny a request if the authorized agent does not submit proof that they have been validly authorized to act on your behalf. </font><br>
+
+
+<p><br><font color=\"black\"><b>Will your information be shared with anyone else?</b></font><br>
+<br> <font color=\"gray\">We may disclose your personal information with our service providers pursuant to a written contract between us and each service provider. Each service provider is a for-profit entity that processes the information on our behalf. </font><br>
+<br> <font color=\"gray\">We may use your personal information for our own business purposes, such as for undertaking internal research for technological development and demonstration. This is not considered to be "selling" of your personal data. </font><br>
+<br> <font color=\"gray\"> Metatate Meditation has not disclosed or sold any personal information to third parties for a business or commercial purpose in the preceding 12 months.  Metatate Meditation will not sell personal information in the future belonging to website visitors, users and other consumers. </font><br>
+
+<p><br><font color=\"black\"><b>Your rights with respect to your personal data</b></font><br>
+<br> <font color=\"gray\"><u>Right to request deletion of the data - Request to delete</u>
+</font><br>
+<br> <font color=\"gray\">You can ask for the deletion of your personal information. If you ask us to delete your personal information, we will respect your request and delete your personal information, subject to certain exceptions provided by law, such as (but not limited to) the exercise by another consumer of his or her right to free speech, our compliance requirements resulting from a legal obligation or any processing that may be required to protect against illegal activities. </font><br>
+<br> <font color=\"gray\"><u> Right to be informed - Request to know</font></u><br>
+<br> <font color=\"gray\">Depending on the circumstances, you have a right to know: </font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ whether we collect and use your personal information;</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ the categories of personal information that we collect;</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ the purposes for which the collected personal information is used;</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ whether we sell your personal information to third parties;</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ the categories of personal information that we sold or disclosed for a business purpose;
+</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ the categories of third parties to whom the personal information was sold or disclosed for a business purpose; and
+</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ the business or commercial purpose for collecting or selling personal information.</font><br>
+
+<br> <font color=\"gray\"> In accordance with applicable law, we are not obligated to provide or delete consumer information that is de-identified in response to a consumer request or to re-identify individual data to verify a consumer request.</font><br>
+<br> <font color=\"gray\"><u> Right to Non-Discrimination for the Exercise of a Consumer\s Privacy Rights</u>
+</font><br>
+<br> <font color=\"gray\">We will not discriminate against you if you exercise your privacy rights. </font><br>
+<br> <font color=\"gray\"><u>Verification process</u>
+</font><br>
+<br> <font color=\"gray\">Upon receiving your request, we will need to verify your identity to determine you are the same person about whom we have the information in our system. These verification efforts require us to ask you to provide information so that we can match it with information you have previously provided us. For instance, depending on the type of request you submit, we may ask you to provide certain information so that we can match the information you provide with the information we already have on file, or we may contact you through a communication method (e.g. phone or email) that you have previously provided to us. We may also use other verification methods as the circumstances dictate. </font><br>
+<br> <font color=\"gray\">We will only use personal information provided in your request to verify your identity or authority to make the request. To the extent possible, we will avoid requesting additional information from you for the purposes of verification. If, however, we cannot verify your identity from the information already maintained by us, we may request that you provide additional information for the purposes of verifying your identity, and for security or fraud-prevention purposes. We will delete such additionally provided information as soon as we finish verifying you.</font><br>
+<br> <font color=\"gray\"><u>Other privacy rights</u></font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ you may object to the processing of your personal data</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ you may request correction of your personal data if it is incorrect or no longer relevant, or ask to restrict the processing of the data</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ you can designate an authorized agent to make a request under the CCPA on your behalf. We may deny a request from an authorized agent that does not submit proof that they have been validly authorized to act on your behalf in accordance with the CCPA.
+</font><br>
+<br> <font color=\"gray\"> &nbsp;&nbsp;⬤ you may request to opt-out from future selling of your personal information to third parties. Upon receiving a request to opt-out, we will act upon the request as soon as feasibly possible, but no later than 15 days from the date of the request submission.</font><br>
+
+<br> <font color=\"gray\">To exercise these rights, you can contact us by email at metatateapp@gmail.com, or by referring to the contact details at the bottom of this document. If you have a complaint about how we handle your data, we would like to hear from you. </font><br>
+
+<p><br><font color=\"black\"><b>9. DO WE MAKE UPDATES TO THIS NOTICE? </b></font><br>
+<br> <font color=\"gray\">In Short:  Yes, we will update this notice as necessary to stay compliant with relevant laws. </font><br>
+<br> <font color=\"gray\">We may update this privacy notice from time to time. The updated version will be indicated by an updated "Revised" date and the updated version will be effective as soon as it is accessible. If we make material changes to this privacy notice, we may notify you either by prominently posting a notice of such changes or by directly sending you a notification. We encourage you to review this privacy notice frequently to be informed of how we are protecting your information.
+ </font><br>
+<p><br><font color=\"black\"><b>10. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?  </b></font><br>
+<br> <font color=\"gray\">If you have questions or comments about this notice, you may email us at metatateapp@gmail.com or by post to: </font><br>
+<br> <font color=\"gray\"> Metatate Meditation<br>
+175 Varick St<br>
+New York, NY 10014<br>
+United States<br>
+ </font><br>
+<p><br><font color=\"black\"><b>11. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?    </b></font><br>
+<br> <font color=\"gray\">Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it in some circumstances. To request to review, update, or delete your personal information, please submit a request form by clicking here. </font><br>
+
+<br> <font color=\"gray\"> </font><br>
+
+
+</body>
+</html>]]></string>
+
+</resources>

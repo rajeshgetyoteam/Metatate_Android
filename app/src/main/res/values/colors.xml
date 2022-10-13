@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#614192</color>
+    <color name="colorPrimaryLight">#9F69DB</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#666666</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_text_gray">#666666</color>
+    <color name="color_text_green">#32BA7C</color>
+    <color name="color_black">#000000</color>
+    <color name="color_card_6bcfb0">#D7D7D7</color>
+    <color name="color_card_ec8c8c">#ec8c8c</color>
+    <color name="color_card_ebb96b">#ebb96b</color>
+    <color name="color_card_d7d7d7">#D7D7D7</color>
+    <color name="color_card_7eb1e2">#7EB1E2</color>
+    <color name="color_blue">#614192</color>
+    <color name="color_tabselected">#2F5B44</color>
+    <color name="color_perot">#88C5A5</color>
+    <color name="color_1D1D1D">#1D1D1D</color>
+    <color name="color_yellow">#614192</color>
+    <color name="color_red">#d54c4c</color>
+    <color name="color_icon_light">#D0D2D3</color>
+    <color name="color_light_gray">#BDBDBD</color>
+    <color name="color_text_color">#212121</color>
+    <color name="color_text_color_light">#757575</color>
+    <color name="color_view_all">#00ADEE</color>
+    <color name="ic_blue_gray_500">#7F8BAE</color>
+
+    <color name="av_color1">#f7b09e</color>
+    <color name="av_color2">#f0979b</color>
+    <color name="av_color3">#e36a97</color>
+    <color name="av_color4">#bc428b</color>
+
+    <color name="av_color_bg">#8f367c</color>
+
+    <array name="av_colors">
+        <item>@color/color_blue</item>
+        <item>@color/av_color2</item>
+        <item>@color/av_color3</item>
+        <item>@color/av_color4</item>
+    </array>
+    <color name="transparent">#00000000</color>
+    <color name="color_card_green">#52B292</color>
+    <color name="color_card_red">#CC6666</color>
+    <color name="color_card_yellow">#B7833E</color>
+    <color name="color_card_blue">#5992C1</color>
+    <color name="app_pink_color">#CF1E93</color>
+    <color name="app_pink_color_light">#80FF5B5A</color>
+    <color name="app_yellow_color">#FEC954</color>
+    <color name="app_yellow_color_light">#80FEC954</color>
+    <color name="color_ffc854">#FFC854</color>
+    <color name="color_292929">#292929</color>
+    <color name="color_F3EFF6">#F3EFF6</color>
+
+    <!--new-->
+    <color name="color_614192">#614192</color>
+    <color name="color_6E81AO">#6E81A0</color>
+
+</resources>

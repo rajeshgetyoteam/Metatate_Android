@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="?attr/actionBarSize">
+    <ImageView android:layout_width="wrap_content"
+               android:id="@+id/ivHeaderLeft"
+               android:layout_height="wrap_content"
+               android:layout_centerVertical="true"
+               android:padding="@dimen/_5sdp"
+               android:layout_marginStart="@dimen/_10sdp"
+               app:srcCompat="@drawable/ic_back_black"/>
+
+    <TextView
+        android:id="@+id/tvHeader"
+        style="@style/TextRegular"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/color_white"
+        android:gravity="center"
+        android:text="Sign Up"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/_18sdp" />
+</RelativeLayout>

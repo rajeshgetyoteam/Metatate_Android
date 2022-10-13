@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/drawable/gradiang_bg.xml" value="0.2203125" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/drawable/ic_back.xml" value="0.2169230769230769" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/drawable/ic_delete_.xml" value="0.20833333333333334" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/drawable/progress_white_drawable.xml" value="0.18" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/drawable/seek_thumb.xml" value="0.2169230769230769" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_chapter.xml" value="0.5" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_choose_your_goal.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_download.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_exoplayer_player.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_main_exo_test.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_notification.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_play.xml" value="0.16" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_receive.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_reminder.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_sign_in.xml" value="0.22" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_sign_up.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_terms_of_use.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_update_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_verified_otp.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_wallet.xml" value="0.2" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/activity_wallet_history.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/custom_playback_control_minimal.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/fragment_home.xml" value="0.153125" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/fragment_sound.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/fragment_task.xml" value="0.153125" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/raw_course_item.xml" value="0.18611111111111112" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/raw_token_history.xml" value="0.20416666666666666" />
+        <entry key="..\:/Raj Work/Buda_Mind/app/src/main/res/layout/raw_wallete.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/black_border_top.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/card_edge.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/card_edge_gray.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/card_edge_subscribe.xml" value="0.145" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/circle_shape_blue.xml" value="0.109" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/circle_shape_green.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/circle_shape_red.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/circle_shape_yellow.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/earn.xml" value="0.1615" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/edittext_border.xml" value="0.145" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/gradiang_bg.xml" value="0.109" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/gradient_color.xml" value="0.1235" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/gradient_progress.xml" value="0.111" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_alarm.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_alarm_clock.xml" value="0.1555" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_animation_blue.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_animation_green.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_animation_yellow.xml" value="0.15" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_back.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_back_black.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_back_white.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_backword.xml" value="0.145" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_baseline_delete.xml" value="0.202" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_button_background.xml" value="0.1" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_button_claim.xml" value="0.109" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_card_ec8c8c_edge.xml" value="0.126" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_check.xml" value="0.126" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_checked.xml" value="0.126" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_checkmark.xml" value="0.126" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_close_black.xml" value="0.126" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_close_white.xml" value="0.126" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_close_white_small.xml" value="0.126" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_delete_.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_develop_gratitue.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_download.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_edit.xml" value="0.1285" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_forward.xml" value="0.145" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_lock.xml" value="0.1695" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_lock_black.xml" value="0.1695" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_lock_round.xml" value="0.1695" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_lock_round_black.xml" value="0.1695" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_lock_round_green.xml" value="0.1695" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_logo_5.xml" value="0.1095" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_logout.xml" value="0.115" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_music_library.xml" value="0.1845" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_pause_white.xml" value="0.145" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_play_white.xml" value="0.145" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_reminder.xml" value="0.145" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/ic_share_old.xml" value="0.146" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/noti_icon.xml" value="0.181" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/progress.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/progress_blue_drawable.xml" value="0.178" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/progress_green_drawable.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/progress_red_drawable.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/progress_white_drawable.xml" value="0.145" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/progress_yellow_drawable.xml" value="0.143" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/round_corner_bg.xml" value="0.1" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/round_corner_border.xml" value="0.1" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/round_gray_corner_bg.xml" value="0.109" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/round_wgite_corner_bg.xml" value="0.133" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/roundr_bg_balance.xml" value="0.1" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/selected_state.xml" value="0.1685" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/selector_navigation.xml" value="0.114" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/selector_navigation_text.xml" value="0.1" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/drawable/shadow_bg_circale.xml" value="0.159" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/actionbar_dark_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/actionbar_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_change_password.xml" value="0.2" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_chapter.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_choose_your_goal.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_download.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_exoplayer_player.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_import_wallate.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_login_with_social.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_main_exo_test.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_notification.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_play.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_play_course.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_quotes.xml" value="0.13541666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_reminder.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_share_quote.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_sign_up.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_sign_up_new.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_splash.xml" value="0.1590909090909091" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_sub_scribed.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_subscribe.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_terms_of_use.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_update_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_verified_otp.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_wallet.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_wallet_history.xml" value="0.2" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/activity_welcome.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/dialog_congratulation_view.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/dialog_purchase_view.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/dialog_withdraw_view.xml" value="0.33" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/fragment_library.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/fragment_moments.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/fragment_sound.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/fragment_task.xml" value="0.22" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/layout_play_function.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/raw_common_items.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/raw_common_items_course.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/raw_course_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/raw_home_task.xml" value="0.25" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/raw_moment_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/raw_quotes.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/raw_sound_item.xml" value="0.18" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/raw_task.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/raw_token_history.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/raw_wallete.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/layout/shadow_bg.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/menu/navigation.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1545" />
+        <entry key="..\:/Rajesh Work 2022/Budamind_Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1545" />
+        <entry key="app/src/main/res/layout/activity_login_with_social.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/activity_receive.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/activity_wallet_history.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/raw_token_history.xml" value="0.14583333333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.20416666666666666" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

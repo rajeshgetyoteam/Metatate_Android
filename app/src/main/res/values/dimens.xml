@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="bubble_size">25dp</dimen>
+    <dimen name="wave_height">10dp</dimen>
+    <dimen name="footer_height">170dp</dimen>
+    <dimen name="actionBarSize">100dp</dimen>
+    <dimen name="mediaControllerSize">50dp</dimen>
+</resources>

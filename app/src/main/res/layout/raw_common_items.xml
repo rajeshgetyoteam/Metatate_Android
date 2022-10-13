@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_2sdp"
+    android:layout_marginBottom="@dimen/_2sdp"
+    android:layout_marginEnd="@dimen/_7sdp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="@dimen/_10sdp">
+
+    <LinearLayout
+        android:layout_width="@dimen/_125sdp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/color_black"
+            android:layout_height="@dimen/_80sdp">
+
+            <ImageView
+                android:id="@+id/ivCommonItem"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp" />
+
+
+            <TextView
+                android:text="3 Min"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:id="@+id/tvCommonItemTime"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/ic_home_min_card_white"
+                android:textColor="@color/color_black"
+                android:layout_width="wrap_content"
+                style="@style/TextRegular"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/layCoin"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/ic_home_min_card_white"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:gravity="center">
+
+                <ImageView
+
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    app:srcCompat="@drawable/logo_splash">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    style="@style/TextRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:gravity="center|start"
+                    android:text="null"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/_10sdp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:id="@+id/ivLock"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                app:srcCompat="@drawable/lock" />
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:id="@+id/tvCommonItemName"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:paddingEnd="@dimen/_20sdp"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/_3sdp"
+                style="@style/TextMiduam"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/_12sdp"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:text="3 min 23 sec"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:id="@+id/tvCommonItemDescreption"
+                android:textColor="@color/color_text_gray"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_weight="0.9"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

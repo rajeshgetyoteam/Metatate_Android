@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    tools:context="com.getyoteam.budamind.activity.SubscribeActivity">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/actionbar_layout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header"
+        android:gravity="center"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_flower" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:fontFamily="@font/nunitosans_regular"
+                    android:text="@string/str_100_guided_meditations_for_everything_from_improving_focus_and_performance_relieving_anxiety_and_stress_and_getting_better_sleep"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_flower" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:fontFamily="@font/nunitosans_regular"
+                    android:text="@string/str_exclusive_soundtracks_for_focus_relaxation_and_sleep"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_flower" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:fontFamily="@font/nunitosans_regular"
+                    android:text="@string/str_add_mindfulness_and_refocus_in_even_the_most_packed_days_with_our_mini_meditations"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="0dp">
+
+                        <LinearLayout
+                            android:id="@+id/llYearlyPlan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="0.2dp"
+                            android:background="@drawable/card_edge_subscribe"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvYearlyPlan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:fontFamily="@font/nunitosans_regular"
+                                android:text="@string/str_yearly_plan"
+                                android:textColor="@color/color_white"
+                                android:textSize="@dimen/_14sdp" />
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_25sdp"
+
+                                    android:layout_height="@dimen/_25sdp"
+                                    app:srcCompat="@drawable/logo_splash" />
+                                <TextView
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:id="@+id/tv_499"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nunitosans_bold"
+                                    android:text="12"
+                                    android:textColor="@color/color_white"
+                                    android:textSize="@dimen/_21sdp" />
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:id="@+id/tvPerMonth"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunitosans_regular"
+                                android:padding="@dimen/_15sdp"
+                                android:text="@string/str_per_month"
+                                android:textColor="@color/color_white"
+                                android:textSize="@dimen/_14sdp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        app:cardCornerRadius="@dimen/_3sdp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:fontFamily="@font/nunitosans_bold"
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp"
+                            android:text="SAVE 50%"
+                            android:textAllCaps="false"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/_12sdp" />
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="0dp">
+
+                        <LinearLayout
+                            android:id="@+id/llMonthlyPlan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="0.2dp"
+                            android:background="@drawable/card_edge_gray"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvMonthlyPlan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:fontFamily="@font/nunitosans_regular"
+                                android:text="@string/str_monthly_plan"
+                                android:textColor="@color/color_black"
+                                android:textSize="@dimen/_14sdp" />
+
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_25sdp"
+
+                                    android:layout_height="@dimen/_25sdp"
+                                    app:srcCompat="@drawable/logo_splash" />
+                                <TextView
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:id="@+id/tv_999"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nunitosans_bold"
+                                    android:text="2"
+                                    android:textColor="@color/app_yellow_color"
+                                    android:textSize="@dimen/_21sdp" />
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:id="@+id/tvFreeTrail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunitosans_regular"
+                                android:padding="@dimen/_5sdp"
+                                android:text="@string/str_free_trail"
+                                android:textColor="@color/color_black"
+                                android:textSize="@dimen/_14sdp" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/str_try_7_days_for_free"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/_14sdp"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/tvCountinue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_30sdp"
+                android:background="@drawable/selected_state"
+                android:fontFamily="@font/nunitosans_bold"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/str_continue"
+                android:textAllCaps="false"
+                android:textColor="@color/color_white"
+
+                android:textSize="@dimen/_16sdp"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="@string/str_cancel_anytime_billed_annually"
+                android:textColor="@color/color_text_gray"
+                android:textSize="@dimen/_16sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="@string/str_by_continuing_you_accept_our"
+                android:textAllCaps="false"
+                android:textColor="@color/color_text_gray"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/tvTermsCondi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="@string/str_terms_condition"
+                android:textAllCaps="false"
+                android:textColor="@color/color_text_gray"
+                android:textSize="@dimen/_12sdp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

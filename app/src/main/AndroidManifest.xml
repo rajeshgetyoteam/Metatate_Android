@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.getyoteam.budamind">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+<!--    <uses-permission android:name="com.android.vending.BILLING" />-->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.getyoteam.budamind.MyApplication"
+        android:allowBackup="false"
+        android:appComponentFactory="whateverString"
+        android:icon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="false"
+        android:largeHeap="true"
+        android:hardwareAccelerated="true"
+        android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:appComponentFactory,allowBackup,supportsRtl">
+        <activity
+            android:name="com.getyoteam.budamind.activity.ShareQuoteActivity"
+            android:theme="@style/AppTheme.NooActionBar"/>
+
+        <activity
+            android:name="com.getyoteam.budamind.activity.ReceiveActivity"
+            android:theme="@style/AppTheme.NooActionBar"/>
+
+        <activity
+            android:name="com.getyoteam.budamind.activity.SendTokenActivity"
+            android:theme="@style/AppTheme.NooActionBar"/>
+        <activity
+            android:name="com.getyoteam.budamind.activity.ExportPrivateActivity"
+            android:theme="@style/AppTheme.NooActionBar"/>
+        <activity
+            android:name="com.getyoteam.budamind.activity.ImportWallatActivity"
+            android:theme="@style/AppTheme.NooActionBar"/>
+        <activity
+            android:name="com.getyoteam.budamind.activity.WalletActivity"
+            android:theme="@style/AppTheme.NooActionBarw"/>
+        <activity
+            android:name="com.getyoteam.budamind.activity.WalletHistoryActivity"
+            android:theme="@style/AppTheme.NooActionBarw"/>
+        <activity
+            android:name="com.getyoteam.budamind.activity.NotificationActivity"
+            android:label="@string/title_activity_notification"
+            android:theme="@style/AppTheme.NooActionBar"/>
+        <activity
+            android:name="com.getyoteam.budamind.activity.ReminderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.QuotesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.ResetPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.VerifyedOTPActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <activity
+            android:name="com.getyoteam.budamind.activity.UpdateProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.ChapterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.DownloadActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.TermsOfUseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.PrivacyPolicyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.exoplayer.MainExoActivity"
+            android:parentActivityName="com.getyoteam.budamind.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.PlayCourseActivity"
+            android:parentActivityName="com.getyoteam.budamind.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.testaudioexohls.PlayerExoActivity"
+            android:parentActivityName="com.getyoteam.budamind.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+
+        <activity
+            android:name="com.getyoteam.budamind.testaudioexohls.PlayerExoTaskActivity"
+            android:parentActivityName="com.getyoteam.budamind.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" >
+
+        <intent-filter>
+            <action android:name="COURSE" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="SOUND" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="MOMENT" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+            <intent-filter>
+                <action android:name="NOTIFICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name="com.getyoteam.budamind.activity.SubscribeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.SubScribedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.PlayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+
+        <activity
+            android:name="com.getyoteam.budamind.activity.PlayTaskMomentsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.SignInActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.SignUpNewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.SignUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.LoginWithSocialActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.ChooseYourGoalActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+        <activity
+            android:name="com.getyoteam.budamind.activity.WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
+
+        <activity
+            android:name="com.getyoteam.budamind.activity.SplashActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+<!--                <action android:name="SOUND" />-->
+<!--                <action android:name="COURSE" />-->
+<!--                <action android:name="MOMENT" />-->
+            </intent-filter>
+
+
+            <intent-filter>
+                <data android:scheme="clarityapp" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+
+        <!-- Branch init -->
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_biJzMU54fxHILna4h5MmPghaFwmPNrvA" />
+        <!-- Branch testing (TestMode "true" to simulate fresh installs on dev environment) -->
+        <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
+
+        <!-- Branch install referrer tracking (optional) -->
+        <receiver android:name="io.branch.referral.InstallListener" android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name="com.getyoteam.budamind.utils.SampleBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.getyoteam.budamind.utils.AlarmReceiver" />
+        <receiver android:name="com.getyoteam.budamind.utils.StopRingReceiver" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.getyoteam.budamind.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            android:readPermission="com.neevababy.READ_PERMISSION"
+            android:writePermission="com.neevababy.WRITE_PERMISSION"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"
+                tools:replace="android:resource"/>
+        </provider>
+
+        <service
+            android:name="com.getyoteam.budamind.utils.AlarmNotificationService"
+            android:enabled="true" />
+        <service android:name="com.getyoteam.budamind.utils.MediaPlayerService" />
+        <service android:name="com.getyoteam.budamind.utils.RingtonePlayingService" />
+        <service
+            android:name="com.getyoteam.budamind.utils.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="com.getyoteam.budamind.playback.MusicService" />
+        <service android:name="com.getyoteam.budamind.exoplayer.MusicServiceExo" />
+        <service android:name="com.getyoteam.budamind.testaudioexohls.AudioService" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/noti_icon" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/color_yellow" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="firebase_notification" />
+    </application>
+
+</manifest>
