@@ -52,24 +52,19 @@
                         android:textSize="@dimen/_20sdp" />
 
                     <LinearLayout
+                        android:id="@+id/layBalance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="@drawable/roundr_bg_balance"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:paddingStart="@dimen/_5sdp"
-                        android:paddingEnd="@dimen/_5sdp">
-
-                        <TextView
-
-                            style="@style/TextRegular"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/_5sdp"
-                            android:text="Balance "
-                            android:textColor="@color/color_white"
-                            android:textSize="@dimen/_12sdp" />
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -78,16 +73,36 @@
 
                         </ImageView>
 
-                        <TextView
-                            android:id="@+id/tvBalance"
-                            style="@style/TextRegular"
+                        <LinearLayout
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/roundr_bg_balance"
-                            android:padding="@dimen/_5sdp"
-                            android:text="$CHI 00.00"
-                            android:textColor="@color/color_white"
-                            android:textSize="@dimen/_12sdp" />
+                            android:gravity="start"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:orientation="vertical">
+
+<!--                            <TextView-->
+
+<!--                                style="@style/TextRegular"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+
+<!--                                android:text="Balance "-->
+<!--                                android:textColor="@color/color_white"-->
+<!--                                android:textSize="@dimen/_12sdp" />-->
+
+                            <TextView
+                                android:id="@+id/tvBalance"
+                                style="@style/TextRegular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CHI 00.00"
+                                android:textColor="@color/color_614192"
+                                android:textSize="@dimen/_12sdp" />
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
 
@@ -95,13 +110,13 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_190sdp"
+                    android:layout_height="@dimen/_250sdp"
                     android:gravity="center">
 
                     <RelativeLayout
 
-                        android:layout_width="@dimen/_190sdp"
-                        android:layout_height="@dimen/_190sdp"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_250sdp"
                         android:layout_centerInParent="true">
 
                         <ImageView
@@ -114,85 +129,50 @@
 
                     <RelativeLayout
 
-                        android:layout_width="@dimen/_190sdp"
-                        android:layout_height="@dimen/_190sdp"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_250sdp"
                         android:layout_centerInParent="true">
-
-<!--                        <at.grabner.circleprogress.CircleProgressView-->
-
-<!--                            android:id="@+id/circleView"-->
-<!--                            android:layout_width="@dimen/_130sdp"-->
-<!--                            android:layout_height="@dimen/_130sdp"-->
-<!--                            android:layout_centerInParent="true"-->
-<!--                            android:background="@color/transparent"-->
-<!--                            android:visibility="gone"-->
-<!--                            app:cpv_autoTextSize="false"-->
-<!--                            app:cpv_barColor="#5F58B8"-->
-<!--                            app:cpv_barColor1="#AB80C8"-->
-<!--                            app:cpv_barColor2="#8C6EB1"-->
-<!--                            app:cpv_barWidth="35dp"-->
-<!--                            app:cpv_fillColor="@color/transparent"-->
-<!--                            app:cpv_innerContourSize="0dp"-->
-<!--                            app:cpv_maxValue="100"-->
-<!--                            app:cpv_outerContourSize="0dp"-->
-<!--                            app:cpv_rimColor="@color/transparent"-->
-<!--                            app:cpv_rimWidth="@dimen/_45sdp"-->
-<!--                            app:cpv_seekMode="false"-->
-<!--                            app:cpv_showUnit="true"-->
-<!--                            app:cpv_textColor="@color/color_6E81AO"-->
-<!--                            app:cpv_textScale="1"-->
-<!--                            app:cpv_textSize="@dimen/_20sdp"-->
-<!--                            app:cpv_textTypeface="@style/TextRegular"-->
-<!--                            app:cpv_unit="Minute"-->
-<!--                            app:cpv_unitColor="@color/color_6E81AO"-->
-<!--                            app:cpv_unitPosition="bottom"-->
-<!--                            app:cpv_unitScale="1"-->
-<!--                            app:cpv_unitSize="@dimen/_10sdp"-->
-<!--                            app:cpv_unitTypeface="@style/TextRegular"-->
-<!--                            app:cpv_value="0" />-->
 
                         <com.mikhaellopez.circularprogressbar.CircularProgressBar
                             android:id="@+id/circularProgressBar"
-                            android:layout_width="@dimen/_130sdp"
-                            android:layout_height="@dimen/_130sdp"
+                            android:layout_width="@dimen/_180sdp"
+                            android:layout_height="@dimen/_180sdp"
                             android:layout_centerInParent="true"
                             app:cpb_background_progressbar_color="@color/transparent"
-                            app:cpb_background_progressbar_width="@dimen/_25sdp"
+                            app:cpb_background_progressbar_width="@dimen/_10sdp"
                             app:cpb_progress="00"
                             app:cpb_progress_direction="to_right"
                             app:cpb_progressbar_color_direction="top_to_bottom"
                             app:cpb_progressbar_color_end="#8C6EB1"
                             app:cpb_progressbar_color_start="#5F58B8"
-                            app:cpb_progressbar_width="@dimen/_30sdp"
+                            app:cpb_progressbar_width="@dimen/_28sdp"
                             app:cpb_round_border="true" />
 
                         <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/tvProgress"
                                 style="@style/TextBold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
                                 android:gravity="center"
-                                android:text="0"
+                                android:text=""
                                 android:textColor="@color/color_6E81AO"
-                                android:textSize="@dimen/_18sdp" />
+                                android:textSize="@dimen/_16sdp" />
 
                             <TextView
-                                android:layout_marginTop="@dimen/_minus5sdp"
                                 style="@style/TextRegular"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="Minutes"
+                                android:text="Weekly Target"
                                 android:textColor="@color/color_6E81AO"
-                                android:textSize="@dimen/_14sdp" />
+                                android:textSize="@dimen/_13sdp" />
                         </LinearLayout>
 
 
@@ -200,6 +180,81 @@
 
 
                 </RelativeLayout>
+
+
+                <LinearLayout
+
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp">
+
+
+                    <TextView
+                        android:id="@+id/tvGoal"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_15sdp"
+                        android:background="@drawable/roundr_bg_balance"
+                        android:backgroundTint="@color/color_white"
+                        style="@style/TextBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Set DAILY GOAL - 00 Minutes"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp">
+
+                    <LinearLayout
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_15sdp"
+                        android:gravity="center"
+                        android:background="@drawable/roundr_bg_balance"
+                        android:backgroundTint="@color/color_white"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+
+                            style="@style/TextBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Daily Rewards"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/_12sdp" />
+                        <TextView
+                            android:id="@+id/tvGoalEarn"
+                            style="@style/TextBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0/0 $CHI"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/_12sdp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -220,6 +275,7 @@
                         android:textSize="@dimen/_18sdp" />
 
                     <TextView
+                        android:visibility="gone"
                         style="@style/TextRegular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

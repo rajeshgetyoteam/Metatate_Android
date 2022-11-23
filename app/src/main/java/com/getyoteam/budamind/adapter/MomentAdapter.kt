@@ -1,20 +1,22 @@
 package com.getyoteam.budamind.adapter
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.getyoteam.budamind.Model.CourseListModel
 import com.getyoteam.budamind.Model.DownloadFileModel
 import com.getyoteam.budamind.Model.MomentListModel
-import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.utils.AppDatabase
 import com.getyoteam.budamind.utils.Utils
@@ -54,22 +56,54 @@ class MomentAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, possion: Int) {
-        viewHolder.tvMomentTitle.text = momentModelArraylist!!.get(possion).getTitle()!!.trim()
-        viewHolder.tvMomentSubTitle.text = momentModelArraylist!!.get(possion).getSubtitle()!!.trim()
-        val min = momentModelArraylist.get(possion).getMinutes().toString()
-        val isPaid = momentModelArraylist.get(possion).getFreePaid().toString()
-        viewHolder.tvMomentMin.text = min + " mins"
-
+        val dataModel  = momentModelArraylist!![possion]
+        viewHolder.tvMomentTitle.text = dataModel.getTitle()!!.trim()
+        viewHolder.tvMomentSubTitle.text = dataModel.getSubtitle()!!.trim()
+        val min = dataModel.getMinutes().toString()
+        val isPaid = dataModel.getFreePaid().toString()
+        viewHolder.tvMomentMin.text = "$min mins"
 
         Glide.with(context)
-            .load(momentModelArraylist.get(possion).getImage())
+            .load(dataModel.getImage())
             .placeholder(ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)))
             .transition(DrawableTransitionOptions.withCrossFade())
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(viewHolder.ivMomentImages)
 
+        if(dataModel!!.isAds!!){
+            viewHolder.layAdds.visibility = View.VISIBLE
+            Glide.with(context)
+                .load(dataModel!!.adUrl)
+                .placeholder(ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(viewHolder.ivAddBanner)
+
+//            viewHolder.layAdds.layoutParams.width = dataModel!!.adWidth!!.toInt()
+//            if (dataModel.adHeight.isNullOrEmpty()){
+//                viewHolder.layAdds.layoutParams.height =
+//                    context.resources.getDimension(R.dimen._100sdp).toInt()
+//            }else{
+//                val density = context.resources.displayMetrics.density
+//                val hight: Float = dataModel.adHeight!!.toInt() * density
+//                viewHolder.layAdds.layoutParams.height = hight.toInt()
+//            }
+
+        }else{
+
+            viewHolder.layAdds.visibility = View.GONE
+        }
+
+        viewHolder.layAdds.setOnClickListener {
+
+        }
+
+        viewHolder.layItem.setOnClickListener {
+            onMomentAdapterInteractionListener.onMomentAdapterInteractionListener(dataModel,false)
+        }
+
         if (isPaid.equals("paid", ignoreCase = true)) {
-            if(momentModelArraylist.get(possion).purchased!!) {
+            if(dataModel.purchased!!) {
                 viewHolder.ivMomentLock.visibility = View.GONE
                 viewHolder.layCoin.visibility = View.GONE
             }else{
@@ -81,11 +115,26 @@ class MomentAdapter(
             viewHolder.layCoin.visibility = View.GONE
         }
 
-        if (momentModelArraylist.get(possion).coins != null){
-            val token = Utils.format(momentModelArraylist.get(possion).coins!!.toBigInteger())
+        if (dataModel.coins != null){
+            val token = Utils.format(dataModel.coins!!.toBigInteger())
             viewHolder.tvPrice.text = token.replace("$","$"+"CHI")
         }else{
             viewHolder.tvPrice.text = "0"
+        }
+
+        viewHolder.layAdds.setOnClickListener {
+            try {
+                val webpage: Uri = Uri.parse(dataModel.adLink)
+                val myIntent = Intent(Intent.ACTION_VIEW, webpage)
+                context.startActivity(myIntent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(
+                    context,
+                    "No application can handle this request. Please install a web browser or check your URL.",
+                    Toast.LENGTH_LONG
+                ).show()
+                e.printStackTrace()
+            }
         }
 
 
@@ -105,14 +154,17 @@ class MomentAdapter(
         val tvMomentMin = view.tvMomentMin
         val tvMomentTitle = view.tvMomentTitle
         val ivMomentImages = view.ivMomentImages
+        val ivAddBanner = view.ivAddBanner
         val ivMomentLock = view.ivMomentLock
         val layCoin = view.layCoin
         val tvPrice = view.tvPrice
+        val layItem = view.layItem
+        val layAdds = view.layAdds
     }
 
     interface OnMomentAdapterInteractionListener {
         fun onMomentAdapterInteractionListener(
-            courseModel: CourseListModel,
+            courseModel: MomentListModel,
             wantToDelete: Boolean
         )
     }
@@ -121,7 +173,6 @@ class MomentAdapter(
 //        viewHolder: ViewHolder,
 //        possion: Int
 //    ) {
-////        TODO("/data/user/0/com.mindfulness.greece/76a86802-8f51-449d-94b2-f8d2f182cbf5.mp3")
 //        val dirPath = context.getApplicationInfo().dataDir
 //        viewHolder.circleProgressNormal.visibility = View.VISIBLE
 //        viewHolder.ivSleepDownload.visibility = View.GONE

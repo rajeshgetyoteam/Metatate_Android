@@ -12,6 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:layout_alignParentEnd="true"
             android:id="@+id/ivClose"
@@ -37,7 +38,7 @@
                 android:backgroundTint="@color/color_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Would you like to withdraw the balance?"
+                android:text="How much would you like to withdraw?"
                 android:gravity="center"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/_18sdp"
@@ -52,19 +53,70 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_30sdp"
-
                 android:background="@drawable/edittext_border"
-                android:hint="Enter Receive Address"
+                android:hint="Enter ERC-20 Receive Address"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:imeOptions="actionDone"
+                android:paddingEnd="@dimen/_10sdp"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp" />
 
-            <EditText
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/lblAmount"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:backgroundTint="@color/color_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Amount \n00"
+                    android:gravity="center"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/_15sdp"
+                    style="@style/TextBold"/>
+
+                <SeekBar
+                    android:id="@+id/seekAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:maxHeight="@dimen/_4sdp"
+                    android:minHeight="@dimen/_4sdp"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/progress_amount_drawable"
+                    android:thumbTint="@color/colorPrimary" />
+
+                <TextView
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:background="@drawable/round_corner_bg"
+                    android:id="@+id/lblProgress"
+                    style="@style/TextBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="0%"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/_13sdp" />
+            </LinearLayout>
+
+            <EditText
+                android:visibility="gone"
                 android:id="@+id/etAmmount"
                 style="@style/TextLight"
                 android:layout_width="match_parent"
@@ -82,7 +134,6 @@
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp" />
-
 
             <RelativeLayout
                 android:layout_marginBottom="@dimen/_5sdp"
@@ -119,20 +170,21 @@
                     android:paddingEnd="@dimen/_20sdp"
                     android:visibility="invisible" />
             </RelativeLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_40sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:id="@+id/tvNote"
                     style="@style/TextRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center|start"
+                    android:gravity="center"
                     android:text="@string/label_note"
                     android:textAllCaps="false"
                     android:textColor="#1D1D1D"
@@ -141,12 +193,6 @@
 
         </LinearLayout>
 
-
-
     </RelativeLayout>
-
-
-
-
 
 </androidx.cardview.widget.CardView>

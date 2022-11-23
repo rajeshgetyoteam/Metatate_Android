@@ -121,7 +121,7 @@ public class MediaBrowserHelper {
                 mMediaController.registerCallback(mMediaControllerCallback);
 
 
-            } catch (RemoteException e) {
+            } catch (Exception e) {
                 Log.d(TAG, String.format("onConnected: Problem: %s", e.toString()));
                 throw new RuntimeException(e);
             }

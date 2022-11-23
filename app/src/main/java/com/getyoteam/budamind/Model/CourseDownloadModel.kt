@@ -89,6 +89,26 @@ class CourseDownloadModel : Serializable {
     @ColumnInfo(name = "isDownloaded")
     private var isDownloaded: Boolean? = null
 
+    @SerializedName("purchased")
+    @Expose
+    @ColumnInfo(name = "purchased")
+    var purchased: Boolean? = null
+
+    @SerializedName("coinForContent")
+    @Expose
+    @ColumnInfo(name = "coinForContent")
+    var coinForContent: String? = null
+
+    @SerializedName("coins")
+    @Expose
+    @ColumnInfo(name = "coins")
+    var coins: String? = null
+
+    @SerializedName("freePaid")
+    @Expose
+    @ColumnInfo(name = "freePaid")
+    var freePaid: String? = null
+
     fun getCourseId(): Int? {
         return courseId
     }

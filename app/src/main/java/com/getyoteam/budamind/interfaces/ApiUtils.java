@@ -12,7 +12,7 @@ public class ApiUtils {
     private ApiUtils() {
 
     }
-    public static ClarityAPI getAPIService() {
-        return RetrofitClient.getClient(BASE_URL).create(ClarityAPI.class);
+    public static API getAPIService() {
+        return RetrofitClient.getClient(BASE_URL).create(API.class);
     }
 }

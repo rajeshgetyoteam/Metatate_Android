@@ -55,19 +55,12 @@ class CoursesDownloadFragment : Fragment(), CourseDownloadAdapter.OnCourseDownlo
 
         coursArrayList = ArrayList<CourseDownloadModel>()
         coursDBArrayList = ArrayList<CourseListModel>()
-        rvCourseList!!.layoutManager = GridLayoutManager(requireContext(), 2) as RecyclerView.LayoutManager?
-        rvCourseList.addItemDecoration(
-            GridItemDecoration(
-                resources.getDimension(R.dimen._35sdp).toInt(),
-                2
-            )
-        )
+
         swipeToRefresh.setRefreshing(false)
         swipeToRefresh.setEnabled(false)
         coursDBArrayList.addAll(db.courseDao().getAll() as ArrayList<CourseListModel>)
 
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -76,8 +69,8 @@ class CoursesDownloadFragment : Fragment(), CourseDownloadAdapter.OnCourseDownlo
 
     override fun onCourseDownloadAdapterInteractionListener(courseModel: CourseDownloadModel) {
         val intent= Intent(requireActivity(),ChapterActivity::class.java)
-        intent.putExtra("courseDownloadModel",courseModel);
-        intent.putExtra("firstCourse",coursDBArrayList.get(0));
+        intent.putExtra("courseDownloadModel",courseModel)
+        intent.putExtra("firstCourse",coursDBArrayList.get(0))
         startActivity(intent)
     }
 

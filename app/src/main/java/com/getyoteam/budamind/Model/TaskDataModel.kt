@@ -1,5 +1,6 @@
 package com.getyoteam.budamind.Model
 
+import androidx.room.ColumnInfo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.mindfulness.greece.model.MeditationStateModel
@@ -10,7 +11,6 @@ class TaskDataModel {
     @SerializedName("itemId")
     @Expose
     var itemId: String? = null
-
 
     @SerializedName("chapterId")
     @Expose
@@ -53,12 +53,29 @@ class TaskDataModel {
     @Expose
     var courseData: CourseListModel? = null
 
-
     @SerializedName("sounds")
     @Expose
     var sounds: SoundListModel? = null
 
+    @SerializedName("ads")
+    @Expose
+    @ColumnInfo(name = "ads")
+    var isAds: Boolean? = false
 
+    @SerializedName("adUrl")
+    @Expose
+    @ColumnInfo(name = "adUrl")
+    var adUrl: String? = null
+
+    @SerializedName("adHeight")
+    @Expose
+    @ColumnInfo(name = "adHeight")
+    var adHeight: String? = null
+
+    @SerializedName("adWidth")
+    @Expose
+    @ColumnInfo(name = "adWidth")
+    var adWidth: String? = null
 
 
 }

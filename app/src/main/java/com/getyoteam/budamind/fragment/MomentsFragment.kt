@@ -7,29 +7,24 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.getyoteam.budamind.Model.CourseListModel
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.facebook.login.LoginManager
 import com.getyoteam.budamind.Model.LibraryModel
 import com.getyoteam.budamind.Model.MomentListModel
+import com.getyoteam.budamind.Model.responcePurchaseModel
 import com.getyoteam.budamind.MyApplication
-
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.activity.PlayActivity
+import com.getyoteam.budamind.activity.SignInActivity
 import com.getyoteam.budamind.adapter.MomentAdapter
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
-import com.getyoteam.budamind.interfaces.CustomTouchListener
-import com.getyoteam.budamind.interfaces.onItemClickListener
 import com.getyoteam.budamind.utils.AppDatabase
-import com.facebook.login.LoginManager
-import com.getyoteam.budamind.Model.responcePurchaseModel
-import com.getyoteam.budamind.activity.SignInActivity
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.GoogleApiClient
@@ -40,24 +35,12 @@ import com.mindfulness.greece.model.MeditationStateModel
 import kotlinx.android.synthetic.main.fragment_moments.*
 import kotlinx.android.synthetic.main.fragment_moments.cvInternetToast
 import kotlinx.android.synthetic.main.fragment_moments.swipeToRefresh
-import kotlinx.android.synthetic.main.fragment_sound.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.ArrayList
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MomentsFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- *
- */
 class MomentsFragment : Fragment(),
     MomentAdapter.OnMomentAdapterInteractionListener ,SwipeRefreshLayout.OnRefreshListener{
-
 
     private var authToken: String? = ""
     private var meditationStateModel: MeditationStateModel? = null
@@ -99,23 +82,21 @@ class MomentsFragment : Fragment(),
         swipeToRefresh.setOnRefreshListener(this)
 //        swipeToRefresh.setEnabled(false);
 
-        rvMomentList.addOnItemTouchListener(object : CustomTouchListener(requireContext(), object :
-            onItemClickListener {
-            override fun onClick(view: View?, index: Int) {
-                val momentListModel = momentArrayList.get(index)
-                if (momentListModel.getFreePaid().equals("Free", ignoreCase = true)) {
-                    loadMoment(index, momentListModel)
-                } else {
-
-
-                    if (momentListModel.purchased!!) {
-                        loadMoment(index, momentListModel)
-                    } else {
-                        wanCoinDialog(momentListModel.getMomentId())
-                    }
-                }
-            }
-        }) {})
+//        rvMomentList.addOnItemTouchListener(object : CustomTouchListener(requireContext(), object :
+//            onItemClickListener {
+//            override fun onClick(view: View?, index: Int) {
+//                val momentListModel = momentArrayList.get(index)
+//                if (momentListModel.getFreePaid().equals("Free", ignoreCase = true)) {
+//                    loadMoment(index, momentListModel)
+//                } else {
+//                    if (momentListModel.purchased!!) {
+//                        loadMoment(index, momentListModel)
+//                    } else {
+//                        wanCoinDialog(momentListModel.getMomentId())
+//                    }
+//                }
+//            }
+//        }) {})
 
         cvInternetToast.setOnClickListener {
             cvInternetToast.visibility = View.GONE
@@ -158,7 +139,7 @@ class MomentsFragment : Fragment(),
         }
         dialog.show()
     }
-    private fun loadMoment(index: Int, momentListModel: MomentListModel) {
+    private fun loadMoment( momentListModel: MomentListModel) {
         val gson = Gson()
         val jsonMoment = gson.toJson(momentListModel)
         val jsonMeditation = gson.toJson(meditationStateModel)
@@ -235,7 +216,17 @@ class MomentsFragment : Fragment(),
         }
     }
 
-    override fun onMomentAdapterInteractionListener(courseModel: CourseListModel, wantToDelete: Boolean) {
+    override fun onMomentAdapterInteractionListener(momentListModel: MomentListModel, wantToDelete: Boolean) {
+
+        if (momentListModel.getFreePaid().equals("Free", ignoreCase = true)) {
+            loadMoment(momentListModel)
+        } else {
+            if (momentListModel.purchased!!) {
+                loadMoment(momentListModel)
+            } else {
+                wanCoinDialog(momentListModel.getMomentId())
+            }
+        }
     }
 
     override fun onResume() {
@@ -259,11 +250,7 @@ class MomentsFragment : Fragment(),
 
     private fun getMomentDetail() {
         swipeToRefresh.setRefreshing(true);
-        val retrofit = Retrofit.Builder()
-            .baseUrl(getString(R.string.base_url))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+
         val call = ApiUtils.getAPIService().getLibraryList(authToken!!,userId)
 
         call.enqueue(object : Callback<LibraryModel> {

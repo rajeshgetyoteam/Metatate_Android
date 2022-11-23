@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeToRefresh"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -28,53 +27,70 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     app:srcCompat="@drawable/logo_splash" />
+                <TextView
+                    android:id="@+id/tvHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/nunitosans_bold"
+                    android:gravity="center"
+                    android:text="@string/str_task"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/_18sdp" />
+
 
                 <LinearLayout
-                    android:id="@+id/layWallet"
+                    android:id="@+id/layBalance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/round_corner_border"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                  android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@drawable/roundr_bg_balance"
                     android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tvHeader"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:fontFamily="@font/nunitosans_bold"
-                        android:gravity="center"
-                        android:text="00"
-                        android:textColor="@color/color_white"
-                        android:textSize="@dimen/_15sdp" />
-
-                    <View
-
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:background="@color/color_white">
-
-                    </View>
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp">
 
                     <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:src="@drawable/earn">
-
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_meditation">
                     </ImageView>
+
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:orientation="vertical">
+
+<!--                        <TextView-->
+<!--                            style="@style/TextRegular"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Balance "-->
+<!--                            android:textColor="@color/color_white"-->
+<!--                            android:textSize="@dimen/_10sdp" />-->
+
+                        <TextView
+                            android:id="@+id/tvBalance"
+                            style="@style/TextRegular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CHI 00.00"
+                            android:textColor="@color/color_614192"
+                            android:textSize="@dimen/_10sdp" />
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
             </RelativeLayout>
 
-
             <androidx.core.widget.NestedScrollView
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:overScrollMode="never"
@@ -83,14 +99,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_25sdp"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_10sdp">
 
@@ -100,13 +114,15 @@
                             style="@style/TextRegular"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
-                            android:text="Complete the tasks to earn tokens"
+                            android:gravity="center"
+                            android:text="Complete these tasks to earn $CHI"
                             android:textColor="@color/color_black"
                             android:textSize="@dimen/_14sdp" />
                     </LinearLayout>
 
                     <RelativeLayout
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -132,6 +148,10 @@
                             android:textColor="@color/color_black"
                             android:textSize="@dimen/_14sdp" />
                     </RelativeLayout>
+
+
+
+
 
 
 <!--                    <androidx.cardview.widget.CardView-->
@@ -456,14 +476,12 @@
 <!--                                android:textSize="@dimen/_15sdp"-->
 <!--                                android:visibility="visible" />-->
 <!--                        </LinearLayout>-->
-
-
 <!--                    </androidx.cardview.widget.CardView>-->
 
                     <androidx.cardview.widget.CardView
+                        android:layout_margin="@dimen/_10sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_35sdp"
                         app:cardCornerRadius="@dimen/_5sdp">
 
@@ -509,7 +527,6 @@
                                         android:layout_marginStart="@dimen/_10sdp"
                                         android:layout_marginEnd="@dimen/_10sdp"
                                         android:layout_weight="1"
-
                                         android:gravity="center|start"
                                         android:text="Invite Friends
 - earn bonus"
@@ -524,7 +541,6 @@
                                         android:layout_marginTop="@dimen/_5sdp"
                                         android:layout_marginEnd="@dimen/_10sdp"
                                         android:layout_weight="1"
-
                                         android:gravity="center|start"
                                         android:text="Let's build a Healthy
 community together.
@@ -532,31 +548,49 @@ We will reward you for
 each active invited user."
                                         android:textColor="#1D1D1D"
                                         android:textSize="@dimen/_12sdp" />
+
                                 </LinearLayout>
 
 
                             </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/tvInviteFriends"
-                                style="@style/TextRegular"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_20sdp"
-                                android:layout_marginTop="@dimen/_20sdp"
-                                android:layout_marginRight="@dimen/_20sdp"
-                                android:layout_marginBottom="@dimen/_20sdp"
+                            <RelativeLayout
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="@dimen/_40sdp"
+                                android:layout_marginEnd="@dimen/_40sdp"
+                                android:layout_marginTop="@dimen/_15sdp"
                                 android:background="@drawable/selected_state"
-                                android:gravity="center"
-                                android:paddingStart="@dimen/_60sdp"
-                                android:paddingTop="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_60sdp"
-                                android:paddingBottom="@dimen/_5sdp"
-                                android:text="CLAIM"
-                                android:textAllCaps="true"
-                                android:textColor="@color/color_white"
-                                android:textSize="@dimen/_15sdp"
-                                android:visibility="visible" />
+                                android:gravity="center_vertical"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/tvInviteFriends"
+                                    style="@style/TextRegular"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_marginLeft="@dimen/_20sdp"
+                                    android:layout_marginRight="@dimen/_20sdp"
+                                    android:text="Share Link"
+                                    android:textColor="@color/color_white"
+                                    android:textSize="@dimen/_15sdp"
+                                    android:visibility="visible" />
+
+                                <ProgressBar
+                                    android:id="@+id/progressBarSubmit"
+                                    android:layout_width="wrap_content"
+                                    android:visibility="invisible"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    style="@android:style/Widget.ProgressBar.Small"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:indeterminateDrawable="@drawable/progress"
+                                    android:layout_height="wrap_content"/>
+                            </RelativeLayout>
+
+
                         </LinearLayout>
 
 
@@ -590,6 +624,8 @@ each active invited user."
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/_15sdp" />
         </androidx.cardview.widget.CardView>
+
+
     </RelativeLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

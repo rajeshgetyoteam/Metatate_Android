@@ -9,70 +9,40 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.getyoteam.budamind.Model.CommonModel
 import com.getyoteam.budamind.Model.WallateHistoryModel
 import com.getyoteam.budamind.Model.WallateResponceModel
-import com.getyoteam.budamind.Model.responceBudaPriceModel
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.adapter.WallateHisteoryAdapter
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
 import com.getyoteam.budamind.utils.Utils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_wallet.*
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.text.DateFormat
-import java.text.DecimalFormat
-import java.text.ParseException
-import java.text.SimpleDateFormat
+import java.math.BigInteger
+import java.text.*
 import java.util.*
-import kotlin.collections.ArrayList
+import java.util.regex.Pattern
 
 
 class WalletActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
+    var withdrawLimit: BigInteger? = null
 
-    var isWithdrawEnable :Boolean? = null
+    val CHAIN_ADDRESS = Pattern.compile("^0x[a-fA-F0-9]{40}\$")
+    var isWithdrawEnable: Boolean? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wallet)
-//        MyApplication.prefs!!.myWallateAddress = "0x77799e843c0cfd5ba2f5e52c6012b6b5720d5c06"
-//        var myaddress = MyApplication.prefs!!.myWallateAddress
-//        val binanceManager = BinanceManager.getInstance()
-//        /**
-//         * @param infura - Initialize infura
-//         */
-////        binanceManager.init("https://data-seed-prebsc-1-s1.binance.org:8545"); // for test net
-//        binanceManager.init("https://bsc-dataseed1.binance.org:443")
-//        binanceManager.getBNBBalance(myaddress, this)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({ balance ->
-//                /**
-//                 * if function successfully completes result can be caught in this block
-//                 */
-////                Toast.makeText(this, balance.toString(), Toast.LENGTH_SHORT).show()
-//                tvMyBalance.setText( balance.toString())
-//            }, { error ->
-//                /**
-//                 * if function fails error can be caught in this block
-//                 */
-//                Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
-//            })
+
         val c1 = ContextCompat.getColor(this, R.color.app_pink_color)
         swipeToRefresh.setColorSchemeColors(c1)
         swipeToRefresh.setOnRefreshListener(this)
@@ -112,7 +82,23 @@ class WalletActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
                 var nextDate = MyApplication.prefs!!.nextDate
 
                 if (isWithdrawEnable!!) {
-                    withdrawDialog()
+                    val blnc = MyApplication.prefs!!.myBalance.toBigInteger()
+                    Log.d("okh", "BALANCE : " + blnc.toString())
+                    Log.d("okh", "LIMITE : " + withdrawLimit)
+
+                    if (blnc < withdrawLimit) {
+                        val msg =
+                            "You don’t have sufficient balance to withdraw, it must be minimum  $isWithdrawEnable"
+                        Toast.makeText(
+                            this,
+                            msg,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    } else {
+                        withdrawDialog()
+                    }
+
 
                 } else {
                     Toast.makeText(
@@ -151,76 +137,7 @@ class WalletActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
 //            }
 //        }
 
-
-
-
-
     }
-    private fun getBudhaPrice() {
-        swipeToRefresh.isRefreshing = true
-
-        val logging = HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BODY
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.nomics.com/v1/currencies/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val mindFulNessAPI = retrofit.create(ClarityAPI::class.java)
-        val call = mindFulNessAPI.getTicker(
-            "f74b0f300342169ca51b24e4b0b5f23bec262dc4",
-            "CHI",
-            "1d",
-            "USD",
-            "100",
-            "1"
-        )
-
-        call.enqueue(object : Callback<ArrayList<responceBudaPriceModel>> {
-            override fun onFailure(call: Call<ArrayList<responceBudaPriceModel>>, t: Throwable) {
-                if (swipeToRefresh != null)
-                    swipeToRefresh.isRefreshing = false
-                Toast.makeText(
-                    this@WalletActivity,
-                    getString(R.string.str_something_went_wrong),
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-            }
-
-            override fun onResponse(
-                call: Call<ArrayList<responceBudaPriceModel>>,
-                response: Response<ArrayList<responceBudaPriceModel>>
-            ) {
-                if (response.code() == 200) {
-                    if (swipeToRefresh != null) {
-                        swipeToRefresh.isRefreshing = false
-
-                        var data = response
-
-
-                        val todayPrice = response.body()!!.get(0).price
-
-                        val bal =
-                            todayPrice!!.toBigDecimal() * MyApplication.prefs!!.myBalance.toBigDecimal()
-
-                        val usdBal = DecimalFormat("0.00000").format(bal)
-                        tvBalance.text = "$" + usdBal + ""
-
-                    }
-                } else {
-                    if (swipeToRefresh != null) {
-                        swipeToRefresh.isRefreshing = false
-                    }
-                    val p = 1
-                    val bal = p.toBigDecimal() * MyApplication.prefs!!.myBalance.toBigDecimal()
-
-                    val usdBal = DecimalFormat("0.00000").format(bal)
-                    tvBalance.text = "$" + usdBal + ""
-                }
-            }
-        })
-    }
-
 
 
     private fun getWalletAndHistory() {
@@ -233,13 +150,12 @@ class WalletActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
         call.enqueue(object : Callback<WallateResponceModel> {
             override fun onFailure(call: Call<WallateResponceModel>, t: Throwable) {
                 if (swipeToRefresh != null)
-                    swipeToRefresh.setRefreshing(false);
+                    swipeToRefresh.isRefreshing = false
                 Toast.makeText(
                     applicationContext,
                     getString(R.string.str_something_went_wrong),
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
             }
 
             override fun onResponse(
@@ -270,13 +186,15 @@ class WalletActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
                         val data = gson.toJson(commonModel.history)
                         MyApplication.prefs!!.wallateResponce = data
 
+                        withdrawLimit = commonModel.withdrawLimit!!.toBigInteger()
+
                         setData()
 
-                        val p = 0.0000000000869
-                        val bal = p.toBigDecimal() * MyApplication.prefs!!.myBalance.toBigDecimal()
-
-                        val usdBal = DecimalFormat("0.00000").format(bal)
-                        tvBalance.text = "$" + usdBal + ""
+//                        val p = 0.0000000000869
+//                        val bal = p.toBigDecimal() * MyApplication.prefs!!.myBalance.toBigDecimal()
+//
+//                        val usdBal = DecimalFormat("0.00000").format(bal)
+//                        tvBalance.text = "$" + usdBal + ""
 //                        getBudhaPrice()
                     }
                 }
@@ -284,15 +202,21 @@ class WalletActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
         })
     }
 
+    fun String.isChainAddressValid(): Boolean {
+        return CHAIN_ADDRESS.matcher(this).matches()
+    }
+
+
     fun setData() {
 
         val gson = Gson()
 
-        val a = "$"+"CHI"
+        val a = "$" + "CHI"
         val blnc = Utils.formatBal(MyApplication.prefs!!.myBalance.toBigInteger())
-        tvMyBalance.setText(blnc.replace("$",a))
+        tvMyBalance.setText(blnc.replace("$", a))
+//        tvMyBalance.text = MyApplication.prefs!!.myBalance.toBigInteger().toString()
         val rsrned = Utils.formatBal(MyApplication.prefs!!.totRsrned.toBigInteger())
-        tvTotEarn.setText(rsrned.replace("$",a))
+        tvTotEarn.text = rsrned.replace("$", a)
 
         val data = MyApplication.prefs!!.wallateResponce.toString()
         val type = object : TypeToken<java.util.ArrayList<WallateHistoryModel?>?>() {}.type
@@ -320,6 +244,7 @@ class WalletActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
     }
 
     fun withdrawDialog() {
+        var withdrawAmount = 0L
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_withdraw_view)
@@ -338,41 +263,92 @@ class WalletActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
         val etAddress: EditText
         val etAmount: EditText
         val tvSend: TextView
+        val lbAmount: TextView
+        val lblProgress: TextView
+        val seekAmount: SeekBar
         close = dialog.findViewById(R.id.ivClose)
         etAddress = dialog.findViewById(R.id.etAddress)
         etAmount = dialog.findViewById(R.id.etAmmount)
         tvSend = dialog.findViewById(R.id.tvSend)
+        lbAmount = dialog.findViewById(R.id.lblAmount)
+        lblProgress = dialog.findViewById(R.id.lblProgress)
+        seekAmount = dialog.findViewById(R.id.seekAmount)
         close.setOnClickListener {
             dialog.dismiss()
         }
 
+        seekAmount.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                // here, you react to the value being set in seekBar
+
+                val balance = MyApplication.prefs!!.myBalance.toLong()
+                val amount = progress.toLong() * balance
+                val finalAmount = amount / 100
+                withdrawAmount = finalAmount
+                val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
+                formatter.applyPattern("#,###")
+                val a = formatter.format(finalAmount)
+
+                lbAmount.text = "Amount" + "\n" + a
+                lblProgress.text = progress.toString() + " %"
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                // you can probably leave this empty
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                // you can probably leave this empty
+            }
+        })
+
         tvSend.setOnClickListener {
 
-            var address = etAddress.text.toString().trim()
-            var amount = etAmount.text.toString().trim()
+            val address = etAddress.text.toString().trim()
+
+            Log.d("okh", "withdrawAmount : " + withdrawAmount.toString())
+            Log.d("okh", "LIMITE : " + withdrawLimit)
 
             if (address.isNullOrEmpty()) {
                 Toast.makeText(
                     applicationContext,
-                    "Please Enter Receive Address!!",
+                    "Please Enter ERC-20 Receive Address!!",
                     Toast.LENGTH_SHORT
                 )
                     .show()
-            } else if (amount.isNullOrBlank()) {
+            } else if (!address.isChainAddressValid()) {
                 Toast.makeText(
                     applicationContext,
-                    "Please Enter Receive Amount!!",
+                    "Please Enter Valid ERC-20 Receive Address!!",
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
+            } else if (withdrawAmount <= 0) {
+                Toast.makeText(
+                    applicationContext,
+                    "Please Select Withdraw Amount!!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (withdrawAmount.toBigInteger() < withdrawLimit) {
+                val msg = "Please withdraw minimum amount which is $withdrawLimit"
+                Toast.makeText(
+                    applicationContext,
+                    msg,
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 dialog.dismiss()
-                callWithdrawRequest(address, amount.toString())
+                callWithdrawRequest(address, withdrawAmount.toString())
 
             }
 
         }
         dialog.show()
+    }
+
+    fun doubleToStringNoDecimal(d: Double): String? {
+        val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
+        formatter.applyPattern("#,###")
+        return formatter.format(d)
     }
 
     fun getCurrentWeekDate() {
@@ -475,8 +451,7 @@ class WalletActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
                         applicationContext,
                         getString(R.string.str_something_went_wrong),
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
                 }
             }
         })

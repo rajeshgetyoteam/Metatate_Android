@@ -10,8 +10,10 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.*
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -19,21 +21,16 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.SkuDetails
 import com.facebook.login.LoginManager
 import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
-import com.getyoteam.budamind.activity.ChapterActivity
-import com.getyoteam.budamind.activity.MainActivity
-import com.getyoteam.budamind.activity.PlayActivity
-import com.getyoteam.budamind.activity.SignInActivity
+import com.getyoteam.budamind.activity.*
 import com.getyoteam.budamind.adapter.CourseHomeAdapter
 import com.getyoteam.budamind.adapter.HomeTaskAdapter
-import com.getyoteam.budamind.adapter.MomentHomeAdapter
+import com.getyoteam.budamind.interfaces.API
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.testaudioexohls.PlayerExoTaskActivity
 import com.getyoteam.budamind.utils.AppDatabase
 import com.getyoteam.budamind.utils.ManagePermissions
 import com.getyoteam.budamind.utils.MediaPlayerService
@@ -54,13 +51,14 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractionListener,
-    View.OnClickListener,
-    MomentHomeAdapter.OnMomentHomeAdapterInteractionListener,
+    View.OnClickListener, HomeTaskAdapter.OnTaskHomeAdapterInteractionListener,
     SwipeRefreshLayout.OnRefreshListener {
+    private var dialogAddGoal: Dialog? = null
     private var authToken: String? = ""
     private lateinit var profile: Profile
     private lateinit var momentModel: MomentListModel
@@ -85,8 +83,8 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
     private lateinit var managePermissions: ManagePermissions
     private val PermissionsRequestCode = 123
     private var skuListSubPurchase: List<PurchaseModel>? = null
-    private var skuList = mutableListOf<SkuDetails>()
-    var billingClient: BillingClient? = null
+//    private var skuList = mutableListOf<SkuDetails>()
+//    var billingClient: BillingClient? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -125,6 +123,11 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
             .build()
         mGoogleApiClient.connect()
 
+        layBalance.setOnClickListener {
+            val intent = Intent(requireContext(), WalletActivity::class.java)
+            startActivity(intent)
+        }
+
         val c1 = ContextCompat.getColor(requireContext(), R.color.app_pink_color)
         swipeToRefresh.setColorSchemeColors(c1)
 
@@ -140,7 +143,9 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
         swipeToRefresh.setOnRefreshListener(this)
 
         tvSubscribe.setOnClickListener(this)
+        tvGoal.setOnClickListener(this)
         cvInternetToast.setOnClickListener(this)
+
         if (!isMyServiceRunning(MediaPlayerService::class.java))
             MyApplication.prefs!!.prevIndexSound = -1
 
@@ -180,7 +185,7 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
 
     private fun callRefferealAPI(referalId: String) {
 
-        val call = ApiUtils.getAPIService().referralRewards(userId, referalId)
+        val call = ApiUtils.getAPIService().referralRewards(referalId,userId)
 
         call.enqueue(object : Callback<CommanResponseModel> {
             override fun onFailure(call: Call<CommanResponseModel>, t: Throwable) {
@@ -195,68 +200,122 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
 
                     MyApplication.prefs!!.referalId = ""
 
-                    Log.d("myTag", response.body()!!.getStatus())
+                    Log.d("myTag", response.body()!!.getStatus().toString())
 
                 }
             }
         })
     }
 
+    private fun openAddGoalDialog() {
+
+        dialogAddGoal = Dialog(requireContext(), R.style.WideDialog)
+        dialogAddGoal!!.window!!.setBackgroundDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                android.R.color.transparent
+            )
+        )
+        val layoutParams = dialogAddGoal!!.window!!.attributes
+        dialogAddGoal!!.window!!.attributes = layoutParams
+        dialogAddGoal!!.setContentView(R.layout.dialog_add_goal)
+        dialogAddGoal!!.setCanceledOnTouchOutside(true)
+        dialogAddGoal!!.setCancelable(true)
+        dialogAddGoal!!.show()
+
+        val tvCancel = dialogAddGoal!!.findViewById<TextView>(R.id.tvCancel)
+        val tvAdd = dialogAddGoal!!.findViewById<TextView>(R.id.tvAdd)
+        val etNameDialog = dialogAddGoal!!.findViewById<EditText>(R.id.etName)
+
+        etNameDialog.setText(MyApplication.prefs!!.dailyGoal.toString())
+        tvCancel.setOnClickListener {
+            dialogAddGoal!!.dismiss()
+        }
+
+
+        tvAdd!!.setOnClickListener {
+
+            val goal = etNameDialog.text.toString()
+
+            if (goal.isNotEmpty()) {
+                dialogAddGoal!!.dismiss()
+
+                MyApplication.prefs!!.dailyGoal = goal.toInt()
+                setGoalData()
+            } else {
+                Toast.makeText(requireContext(), "Please Enter Goal", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
+
+    private fun setGoalData() {
+        val goal = MyApplication.prefs!!.dailyGoal
+        val todayEarn = MyApplication.prefs!!.todayEarn
+        val earnLimit = MyApplication.prefs!!.dailyEarnLimit
+
+        val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
+        formatter.applyPattern("#,###")
+        val tEarn =  formatter.format(todayEarn!!.toInt())
+        val limit =  formatter.format(earnLimit!!.toInt())
+
+        tvGoal.text = "Set Daily Goal - $goal Minutes"
+        val a = "$" +"CHI"
+        tvGoalEarn.text = "$tEarn/$limit $a"
+
+
+        try {
+            val count: Double = String.format("%.2f", MyApplication.prefs!!.weeklyMinute).toDouble()
+            val c: Double = String.format("%.0f", MyApplication.prefs!!.weeklyMinute).toDouble()
+
+            if (goal!! > 0) {
+                val weeklyGoal = goal!! * 7
+
+                val p = count.toInt() * 100 / weeklyGoal
+
+                if (p > 0) {
+                    circularProgressBar.progress = (p.toFloat())
+                    tvProgress.text = count.toInt().toString()+"/"+weeklyGoal.toString() + " Minutes"
+                } else {
+                    circularProgressBar.progress = 0f
+                    tvProgress.text = "0/"+weeklyGoal.toString()+ " Minutes"
+                }
+
+
+            } else {
+//                if (count!!.toInt() > 100) {
+//                    circularProgressBar.progress = 100f
+//                    tvProgress.text = "100"
+//                } else {
+//                    circularProgressBar.progress = (count!!.toFloat())
+//                    tvProgress.text = count.toInt().toString()
+//                }
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+
+    }
 
     override fun onResume() {
         super.onResume()
 
+        setGoalData()
         currentCourseId = MyApplication.prefs!!.courseId
         MyApplication.prefs!!.subPurchase = false
         MyApplication.prefs!!.subscriptionType = ""
 
         lblName.text = MyApplication.prefs!!.first_name
-        try {
-//            val count =
-            val count:Double = String.format("%.2f", MyApplication.prefs!!.weeklyMinute).toDouble()
-            if (count!!.toInt() > 100) {
-                circularProgressBar.progress = (100f)
-                tvProgress.text = "100"
-            } else {
-                circularProgressBar.progress = (count!!.toFloat())
-                tvProgress.text = count.toString()
-            }
-        }catch (e :Exception){
-            e.printStackTrace()
+
+
+
+        val taskdata = MyApplication.prefs!!.dailyTaskList.toString()
+        if (taskdata.isNotEmpty()) {
+            setData()
         }
-
-
-//        val meditationStateModelArrayList = db.meditationStateDao().getAll()
-//        val m = homeResponse.getProfile()?.getMinuteMeditate()!!.toFloat()
-//        if (meditationStateModelArrayList.isNotEmpty()) {
-//            val mStateModel: MeditationStateModel = meditationStateModelArrayList[0]
-//            try {
-//                if (mStateModel != null) {
-//                    val totalMin = mStateModel?.getWeeklyMinutes() as Int
-//                    if (totalMin > 100) {
-//                        circularProgressBar.progress = (100f)
-//                        tvProgress.text = "100"
-//                    } else {
-//                        circularProgressBar.progress = (totalMin.toFloat())
-//                        tvProgress.text = totalMin.toString()
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
-//
-//        } else {
-//            circularProgressBar.progress = (0f)
-//            tvProgress.text = "0"
-//        }
         getCountDetail()
-//                if (totalWeeklyMin > 100){
-//                    circularProgressBar.progress = (100f)
-//                    tvProgress.text = "100"
-//                }else{
-//                    circularProgressBar.progress = (totalWeeklyMin.toFloat())
-//                    tvProgress.text = totalWeeklyMin.toString()
-//                }
 
         if (!MyApplication.prefs!!.referalId.isNullOrBlank()) {
             callRefferealAPI(MyApplication.prefs!!.referalId)
@@ -264,14 +323,13 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
 
         val data = MyApplication.prefs!!.taskResponce
 
-        if (data.isNullOrBlank()) {
-            getTasks()
-        } else {
-            setData()
-        }
+//        if (data.isNullOrBlank()) {
+//            getTasks()
+//        } else {
+//            setData()
+//        }
 
         if (isAdded)
-
             loadData()
         swipeToRefresh.post(object : Runnable {
             override fun run() {
@@ -312,22 +370,11 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
                     (context as MainActivity).ChangeToTask()
                 }
             }
-        }
-    }
 
-    override fun onMomentHomeAdapterInteractionListener(
-        momentListModel: MomentListModel,
-        possion: Int
-    ) {
-        momentModel = momentListModel
-        if (momentModel.getFreePaid().equals("free", ignoreCase = true)) {
-            loadMomentScreen(possion)
-        } else {
-            if (momentModel!!.purchased!!) {
-                loadMomentScreen(possion)
-            } else {
-                purchaseDialogMoment(momentModel.getMomentId())
+            R.id.tvGoal -> {
+                openAddGoalDialog()
             }
+
         }
     }
 
@@ -399,6 +446,7 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
                             Toast.LENGTH_SHORT
                         ).show()
                         getSleepDetail()
+                        getCountDetail()
 
                     } else {
                         if (swipeToRefresh != null)
@@ -440,10 +488,9 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
 
         val intent = Intent(requireActivity(), PlayActivity::class.java)
         intent.putExtra("mo", "");
-//        intent.putExtra("meditationStateModel", meditationStateModel)
-//        intent.putExtra("possion", possion)
         startActivity(intent)
     }
+
 
     private fun getSleepDetail() {
 //        swipeToRefresh.isRefreshing = true
@@ -476,10 +523,10 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
 
                                 MyApplication.prefs!!.myBalance = homeResponse.balance.toString()
 
-                                val bal = MyApplication.prefs!!.myBalance.toBigDecimal()
 
-                                val usdBal = Utils.formatBal(bal!!.toBigInteger())
-                                tvBalance.text = usdBal.replace("$", "$" + "CHI")
+                                val a = " $"+"CHI"
+                                val blnc = Utils.formatBal(MyApplication.prefs!!.myBalance.toBigInteger())
+                                tvBalance.text = blnc +a
                                 coursArrayList =
                                     homeResponse.getHome()!!
                                         .getCourseList() as ArrayList<CourseListModel>
@@ -537,184 +584,190 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
         })
     }
 
-    private fun getTasks() {
+    private fun getTaskData(homeResponse: TaskResponse) {
+        val tData: ArrayList<TaskListModel> = ArrayList()
 
-        val userId = MyApplication.prefs!!.userId
-        swipeToRefresh.isRefreshing = true
+        val cList = homeResponse.getHome()!!.getCourseList()
+        val mList = homeResponse.getHome()!!.getMomentList()
+        val sList = homeResponse.getHome()!!.getSoundList()
 
-        val call = ApiUtils.getAPIService().getTask(userId)
 
-        call.enqueue(object : Callback<TaskResponceModel> {
-            override fun onFailure(call: Call<TaskResponceModel>, t: Throwable) {
-                if (swipeToRefresh != null)
-                    swipeToRefresh.isRefreshing = false
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.str_something_went_wrong),
-                    Toast.LENGTH_SHORT
-                ).show()
 
-                Log.d("onFailure", t.message)
+        for (i in 0 until mList!!.size) {
+            if (mList[i].getRewarded() == false) {
+                val taskDataModel = TaskListModel()
+                taskDataModel.moment = mList[i]
+                taskDataModel.type = "moments"
+                tData.add(taskDataModel)
+                break
             }
+        }
 
-            override fun onResponse(
-                call: Call<TaskResponceModel>,
-                response: Response<TaskResponceModel>
-            ) {
-                if (response.code() == 200) {
-                    try {
-                        if (swipeToRefresh != null)
-                            swipeToRefresh.isRefreshing = false;
 
-                        val commonModel = response.body()
+        for (i in 0 until sList!!.size) {
+            if (sList[i].rewarded == false) {
+                val taskDataModel = TaskListModel()
+                taskDataModel.sounds = sList[i]
+                taskDataModel.type = "sound"
+                tData.add(taskDataModel)
 
-                        if (commonModel!!.status.equals(getString(R.string.str_success))) {
-                            var data: ArrayList<TaskDataModel>? = null
+                break
+            }
+        }
 
-                            val gson = Gson()
-                            val meditationStateModel = commonModel.meditationState
+        for (i in 0 until cList!!.size) {
+            val taskDataModel = TaskListModel()
 
-                            val jsonMeditation = gson.toJson(meditationStateModel)
+            if (taskDataModel.chapter != null) {
+                break
+            }
+            if (cList[i].rewarded == false) {
 
-                            MyApplication.prefs!!.stateModel = jsonMeditation
+                taskDataModel.courseData = cList[i]
+                taskDataModel.type = "courses"
 
-                            val taskData = gson.toJson(commonModel.tasks)
-                            MyApplication.prefs!!.taskResponce = taskData
-                            setData()
-
-                        }
-                    } catch (e: IllegalStateException) {
-                        e.printStackTrace()
+                val chapterArrayList =
+                    cList[i].chapters!!.reversed() as ArrayList<ChapterListModel>
+                for (i in 0 until chapterArrayList!!.size) {
+                    if (chapterArrayList[i].rewarded!! == false) {
+                        taskDataModel.chapter = chapterArrayList[i]
+                        tData.add(taskDataModel)
+                        break
                     }
-
                 }
             }
-        })
+        }
+
+
+        Handler().postDelayed({
+            val gson = Gson()
+            val taskData = gson.toJson(tData)
+            MyApplication.prefs!!.dailyTaskList = taskData
+            MyApplication.prefs!!.courseCoin = homeResponse.getHome()!!.courseCoin
+            MyApplication.prefs!!.momentCoin = homeResponse.getHome()!!.momentCoin
+            MyApplication.prefs!!.soundsCoin = homeResponse.getHome()!!.soundsCoin
+            setData()
+
+        }, 400)
+
+
     }
 
     fun setData() {
         val gson = Gson()
-
-        val taskdata = MyApplication.prefs!!.taskResponce.toString()
-        val type = object : TypeToken<ArrayList<TaskDataModel?>?>() {}.type
-        val data = gson.fromJson<java.util.ArrayList<TaskDataModel>>(
+        val taskdata = MyApplication.prefs!!.dailyTaskList
+        val type = object : TypeToken<ArrayList<TaskListModel?>?>() {}.type
+        val data = gson.fromJson<ArrayList<TaskListModel>>(
             taskdata,
             type
-        ) as ArrayList<TaskDataModel>
-
+        ) as ArrayList<TaskListModel>
 
         if (data!!.size > 0) {
-//            if (data.size > 10) {
-//                tvHeader.text = data.size.toString()
-//            } else {
-//                tvHeader.text = "0" + data.size.toString()
-//            }
+            if (isAdded)
 
-//            tvNoTask.visibility = View.GONE
-            rvTasks.adapter =
-                HomeTaskAdapter(data, requireContext())
+                rvTasks.adapter =
+                    HomeTaskAdapter(data, requireContext(), this)
         } else {
-//            tvHeader.text = "00"
-//            tvNoTask.visibility = View.VISIBLE
+            rvTasks.visibility = View.GONE
         }
+
 
     }
 
     private fun getCountDetail() {
-//        swipeToRefresh.isRefreshing = true
 
-        val call = ApiUtils.getAPIService().getHomeDetail(authToken!!, userId)
+        val call = ApiUtils.getAPIService().getTaskDetail(authToken!!, userId)
 
-        call.enqueue(object : Callback<HomeResponse> {
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+        call.enqueue(object : Callback<TaskResponse> {
+            override fun onFailure(call: Call<TaskResponse>, t: Throwable) {
 
             }
 
-            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+            override fun onResponse(call: Call<TaskResponse>, response: Response<TaskResponse>) {
                 if (response.code() == 200) {
                     if (isAdded) {
-                            MyApplication.isHomeAPI = false
+                        MyApplication.isHomeAPI = false
 
-                            val homeResponse = response.body()!!
-                            if (homeResponse.getStatus().equals(getString(R.string.str_success))) {
+                        val homeResponse = response.body()!!
+                        if (homeResponse.getStatus().equals(getString(R.string.str_success))) {
 
-                                meditationStateModel!!.setUserId(userId.toInt())
-                                meditationStateModel!!.setCurrentStreak(
-                                    homeResponse.getProfile()?.getCurrentStreak()
-                                )
-                                meditationStateModel!!.setLongestStreak(
-                                    homeResponse.getProfile()?.getLongestStreak()
-                                )
-                                meditationStateModel!!.setMinuteMeditated(
-                                    homeResponse.getProfile()?.getMinuteMeditate()!!.toFloat()
-                                )
-                                meditationStateModel!!.setTotalSessions(
-                                    homeResponse.getProfile()?.getTotalSessions()
-                                )
-                                meditationStateModel!!.setDailyMinutes(
-                                    homeResponse.getProfile()?.getDailyMinuteMeditate()!!.toFloat()
-                                )
+                            meditationStateModel!!.setUserId(userId.toInt())
+                            meditationStateModel!!.setCurrentStreak(
+                                homeResponse.getProfile()?.getCurrentStreak()
+                            )
+                            meditationStateModel!!.setLongestStreak(
+                                homeResponse.getProfile()?.getLongestStreak()
+                            )
+                            meditationStateModel!!.setMinuteMeditated(
+                                homeResponse.getProfile()?.getMinuteMeditate()!!.toFloat()
+                            )
+                            meditationStateModel!!.setTotalSessions(
+                                homeResponse.getProfile()?.getTotalSessions()
+                            )
+                            meditationStateModel!!.setDailyMinutes(
+                                homeResponse.getProfile()?.getDailyMinuteMeditate()!!.toFloat()
+                            )
 
-                                meditationStateModel!!.setWeeklyMinutes(
-                                    homeResponse.getProfile()?.getWeeklyMinuteMeditate()!!.toFloat()
-                                )
+                            meditationStateModel!!.setWeeklyMinutes(
+                                homeResponse.getProfile()?.getWeeklyMinuteMeditate()!!.toFloat()
+                            )
 
-                                if (homeResponse.getProfile()?.getProfilePic() != null) {
-                                    MyApplication.prefs!!.profilePic =
-                                        homeResponse.getProfile()?.getProfilePic()!!
-                                }
-                                if (homeResponse.getProfile()?.getFirstName() != null) {
-                                    MyApplication.prefs!!.first_name =
-                                        homeResponse.getProfile()?.getFirstName()!!
-                                }
-                                if (homeResponse.getProfile()?.getLastName() != null) {
-                                    MyApplication.prefs!!.last_name =
-                                        homeResponse.getProfile()?.getLastName()!!
-                                }
+                            if (homeResponse.getProfile()?.getProfilePic() != null) {
+                                MyApplication.prefs!!.profilePic =
+                                    homeResponse.getProfile()?.getProfilePic()!!
+                            }
+                            if (homeResponse.getProfile()?.getFirstName() != null) {
+                                MyApplication.prefs!!.first_name =
+                                    homeResponse.getProfile()?.getFirstName()!!
+                            }
+                            if (homeResponse.getProfile()?.getLastName() != null) {
+                                MyApplication.prefs!!.last_name =
+                                    homeResponse.getProfile()?.getLastName()!!
+                            }
 
-                                if (homeResponse.getProfile()?.getEmail() != null) {
-                                    MyApplication.prefs!!.email =
-                                        homeResponse.getProfile()?.getEmail()!!
-                                }
-                                val meditationStateModelArrayList = db.meditationStateDao().getAll()
-                                var meditationStateModelTemp = MeditationStateModel()
-                                if (meditationStateModelArrayList.size > 0)
-                                    meditationStateModelTemp = meditationStateModelArrayList.get(0)
+                            if (homeResponse.getProfile()?.getEmail() != null) {
+                                MyApplication.prefs!!.email =
+                                    homeResponse.getProfile()?.getEmail()!!
+                            }
+                            val meditationStateModelArrayList = db.meditationStateDao().getAll()
+                            var meditationStateModelTemp = MeditationStateModel()
+                            if (meditationStateModelArrayList.size > 0)
+                                meditationStateModelTemp = meditationStateModelArrayList.get(0)
 
-                                if (meditationStateModel!!.getMinuteMeditated() != meditationStateModelTemp.getMinuteMeditated()) {
-                                    if (meditationStateModelTemp.getMinuteMeditated() != null) {
-                                        setMeditationState(
-                                            meditationStateModelTemp.getMinuteMeditated()!!,
-                                            meditationStateModelTemp.getCurrentStreak()!!,
-                                            meditationStateModelTemp.getLongestStreak()!!,
-                                            meditationStateModelTemp.getTotalSessions()!!,
-                                            meditationStateModelTemp.getDailyMinutes()!!
-                                        )
-                                    } else {
-                                        db.meditationStateDao().insertAll(meditationStateModel!!)
-                                    }
+                            if (meditationStateModel!!.getMinuteMeditated() != meditationStateModelTemp.getMinuteMeditated()) {
+                                if (meditationStateModelTemp.getMinuteMeditated() != null) {
+                                    setMeditationState(
+                                        meditationStateModelTemp.getMinuteMeditated()!!,
+                                        meditationStateModelTemp.getCurrentStreak()!!,
+                                        meditationStateModelTemp.getLongestStreak()!!,
+                                        meditationStateModelTemp.getTotalSessions()!!,
+                                        meditationStateModelTemp.getDailyMinutes()!!
+                                    )
                                 } else {
                                     db.meditationStateDao().insertAll(meditationStateModel!!)
                                 }
-
-                                checkDateOfMeditation()
-
-                                val totalWeeklyMin = homeResponse.getProfile()?.getWeeklyMinuteMeditate()
-                                val totalDailyMin = homeResponse.getProfile()?.getWeeklyMinuteMeditate()
-                                val totalMeditateMinute = homeResponse.getProfile()?.getMinuteMeditate()
-                                MyApplication.prefs!!.weeklyMinute  = totalWeeklyMin!!.toFloat()
-                                MyApplication.prefs!!.dailyMinute  = totalDailyMin!!.toFloat()
-                                MyApplication.prefs!!.totalMeditateMinute  = totalMeditateMinute!!.toFloat()
-
-                                val count:Double = String.format("%.2f", totalWeeklyMin).toDouble()
-                                if (totalWeeklyMin > 100) {
-                                    circularProgressBar.progress = (100f)
-                                    tvProgress.text = "100"
-                                } else {
-                                    circularProgressBar.progress = (count.toFloat())
-                                    tvProgress.text = count.toString()
-                                }
+                            } else {
+                                db.meditationStateDao().insertAll(meditationStateModel!!)
                             }
+
+                            checkDateOfMeditation()
+
+                            val totalWeeklyMin = homeResponse.getProfile()?.getWeeklyMinuteMeditate()
+                            val totalDailyMin = homeResponse.getProfile()?.getWeeklyMinuteMeditate()
+                            val totalMeditateMinute = homeResponse.getProfile()?.getMinuteMeditate()
+                            val dailyEarnLimit = homeResponse.dailyLimit
+                            val todayEarn = homeResponse.todayEarn
+                            MyApplication.prefs!!.weeklyMinute = totalWeeklyMin!!.toFloat()
+                            MyApplication.prefs!!.dailyMinute = totalDailyMin!!.toFloat()
+                            MyApplication.prefs!!.totalMeditateMinute = totalMeditateMinute!!.toFloat()
+                            MyApplication.prefs!!.dailyEarnLimit = dailyEarnLimit
+                            MyApplication.prefs!!.todayEarn = todayEarn
+
+                            setGoalData()
+
+                            getTaskData(homeResponse)
+
+                        }
 
                     }
                 }
@@ -866,7 +919,7 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
 //        userMap.put("dailyMinutes", dailyMin.toString())
         userMap.put("totalSessions", totalSession.toString())
 
-        val mindFulNessAPI = retrofit.create(ClarityAPI::class.java)
+        val mindFulNessAPI = retrofit.create(API::class.java)
         val call = mindFulNessAPI.updateProfile(userMap)
         call.enqueue(object : Callback<CommanResponseModel> {
             override fun onFailure(call: Call<CommanResponseModel>, t: Throwable) {
@@ -896,15 +949,6 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
 //                totalDailyMin = meditationStateModel?.getDailyMinutes() as Float
 //                totalWeeklyMin = meditationStateModel?.getWeeklyMinutes()as Float
 //            val m = homeResponse.getProfile()?.getMinuteMeditate()!!.toFloat()
-
-//                if (totalWeeklyMin > 100) {
-//
-//                    circularProgressBar.progress = (100f)
-//                    tvProgress.text = "100"
-//                } else {
-//                    circularProgressBar.progress = (totalWeeklyMin.toFloat())
-//                    tvProgress.text = totalWeeklyMin.toString()
-//                }
 
 
             }
@@ -969,22 +1013,13 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
         coursArrayList.addAll(db.courseDao().getAll().reversed())
         soundArrayList.addAll(db.soundDao().getAll())
 
-//        getBudhaPrice()
-//        getProfileDetail()
+
         try {
+            val a = " $"+"CHI"
+            val blnc = Utils.formatBal(MyApplication.prefs!!.myBalance.toBigInteger())
+            tvBalance.text = blnc +a
 
-            var b = MyApplication.prefs!!.myBalance
-            if (b.isEmpty()){
-                b= "0"
-            }
-
-            val p = 0.0000000000869
-            val bal = p.toBigDecimal() * b.toBigDecimal()
-
-            val usdBal = DecimalFormat("0.00000").format(bal)
-            tvBalance.text = "$" + usdBal + ""
-
-        }catch (e :Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 
@@ -1139,129 +1174,12 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
             courseSortArrayList = coursArrayList
         }
 
-        //        if (courseSortArrayList.size > 0)
-//            MyApplication.prefs!!.firstMeditationId = coursArrayList.get(0).getCourseId()!!
-
         rvLessions.adapter =
             CourseHomeAdapter(courseSortArrayList, this@HomeFragment, requireContext())
-//        rvMoment.adapter =
-//            MomentHomeAdapter(momentArrayList, this@HomeFragment, requireContext())
 
-//        if (coursArrayList.size > 0) {
-//            if (currentCourseId == 0) {
-//                loadHomeCourse(coursArrayList.get(0))
-//            } else {
-//                for (i in 0 until coursArrayList.size) {
-//                    val courseModel = coursArrayList.get(i)
-//                    if (currentCourseId == courseModel.getCourseId()) {
-//                        loadHomeCourse(courseModel)
-//                        break
-//                    }
-//                }
-//            }
-//        }
 
     }
 
-    private fun getBudhaPrice() {
-//        swipeToRefresh.isRefreshing = true
-
-        val logging = HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BODY
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.nomics.com/v1/currencies/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val mindFulNessAPI = retrofit.create(ClarityAPI::class.java)
-        val call = mindFulNessAPI.getTicker(
-            "f74b0f300342169ca51b24e4b0b5f23bec262dc4",
-            "CHI",
-            "1d",
-            "USD",
-            "100",
-            "1"
-        )
-
-        call.enqueue(object : Callback<ArrayList<responceBudaPriceModel>> {
-            override fun onFailure(call: Call<ArrayList<responceBudaPriceModel>>, t: Throwable) {
-                if (swipeToRefresh != null)
-                    swipeToRefresh.isRefreshing = false
-                Toast.makeText(
-                    requireActivity(),
-                    getString(R.string.str_something_went_wrong),
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-            }
-
-            override fun onResponse(
-                call: Call<ArrayList<responceBudaPriceModel>>,
-                response: Response<ArrayList<responceBudaPriceModel>>
-            ) {
-                if (response.code() == 200) {
-                    if (swipeToRefresh != null) {
-                        swipeToRefresh.isRefreshing = false
-
-                        var data = response
-
-
-                        val todayPrice = response.body()!!.get(0).price
-                        Log.d("okhttp", "Coin Price :" + todayPrice)
-
-                        val bal =
-                            todayPrice!!.toBigDecimal() * MyApplication.prefs!!.myBalance.toBigDecimal()
-
-                        val usdBal = DecimalFormat("0.00000").format(bal)
-
-                        try {
-                            val bal = MyApplication.prefs!!.myBalance.toBigDecimal()
-                            val p = Utils.formatBal(bal!!.toBigInteger())
-                            tvBalance.text = p.replace("$", "$" + "CHI")
-
-                        } catch (e: IllegalStateException) {
-                            e.printStackTrace()
-                        }
-
-                    }
-                } else {
-                    if (swipeToRefresh != null) {
-                        swipeToRefresh.isRefreshing = false
-                    }
-                    try {
-//                        tvBalance.text = "$"+"CHI 00.00"
-
-                        val bal = MyApplication.prefs!!.myBalance.toBigDecimal()
-                        val p = Utils.formatBal(bal!!.toBigInteger())
-
-                        tvBalance.text = p.replace("$", "$" + "CHI")
-
-                    } catch (e: IllegalStateException) {
-                        e.printStackTrace()
-                    }
-
-                }
-            }
-        })
-    }
-
-    public fun loadFirstCourse() {
-        courseModel = courseSortArrayList.get(0)
-        loadCourseScreen()
-    }
-
-    private fun loadHomeCourse(course: CourseListModel) {
-        courseModel = course
-        val totalSong = db.chapterDao().loadAllByIds(course.getCourseId()!!)
-        val totalPlayedSong = db.chapterPlayedDao().loadAllByIds(course.getCourseId()!!)
-        if (totalSong.size > 0 && totalPlayedSong.size > 0) {
-//            circleProgressCourseComplation.visibility = View.VISIBLE
-//            val perItem = 100 / totalSong.size
-//            val progress = totalPlayedSong.size * perItem
-//            circleProgressCourseComplation.setProgress(progress)
-
-//            wheelprogress.setPercentage(50)
-        }
-    }
 
 
     private fun checkInternetConnection(): Boolean {
@@ -1276,17 +1194,6 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
@@ -1296,19 +1203,107 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
         if (isAdded) {
             if (checkInternetConnection()) {
                 getSleepDetail()
-                getTasks()
-//                getProfileDetail()
-//                getBudhaPrice()
+                getCountDetail()
             } else {
                 swipeToRefresh.isRefreshing = false
                 Toast.makeText(
                     requireContext(),
                     "Please Chek Internet Connection",
-                    Toast.LENGTH_SHORT
-                ).show()
+                    Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
+    override fun onTaskHomeAdapterInteractionListener(dataModel: TaskListModel) {
+        if (dataModel.type.equals("moments")) {
+
+            val gson = Gson()
+            val jsonMoment = gson.toJson(dataModel.moment)
+            MyApplication.prefs!!.momentModel = jsonMoment
+            val intent = Intent(context, PlayTaskMomentsActivity::class.java)
+            intent.putExtra("m", "")
+            intent.putExtra("taskid", "")
+            startActivity(intent)
+
+
+        } else if (dataModel.type.equals("courses")) {
+            val gson = Gson()
+            val jsonChapter = gson.toJson(dataModel.chapter);
+            val jsonCourse = gson.toJson(dataModel.courseData);
+
+
+            MyApplication.prefs!!.chapterModel = jsonChapter
+            MyApplication.prefs!!.courseModel = jsonCourse
+
+            val intent = Intent(context, PlayerExoTaskActivity::class.java)
+
+            intent.putExtra("taskid", "")
+            startActivity(intent)
+
+        } else if (dataModel.type.equals("sound")) {
+
+            val momentModel = MomentListModel()
+
+            momentModel.setMomentId(dataModel.sounds!!.getSoundId())
+            momentModel.setTitle(dataModel.sounds!!.getTitle().toString())
+            momentModel.setSubtitle(dataModel.sounds!!.getSubtitle().toString())
+            momentModel.setImage(dataModel.sounds!!.image.toString())
+            momentModel.setMomentId(dataModel.sounds!!.getSoundId())
+            momentModel.setAudio(dataModel.sounds!!.getAudio().toString())
+            momentModel.setFreePaid(dataModel.sounds!!.getFreePaid().toString())
+            momentModel.purchased = dataModel.sounds!!.purchased
+            momentModel.coins = dataModel.sounds!!.coins
+            momentModel.coinForContent = dataModel.sounds!!.coinForContent
+            momentModel.setMinutes(dataModel.sounds!!.getMinutes().toString())
+            momentModel.setSeconds(dataModel.sounds!!.getSeconds().toString())
+            momentModel.setSeconds(dataModel.sounds!!.getSeconds().toString())
+
+            val gson = Gson()
+            val jsonMoment = gson.toJson(momentModel)
+            MyApplication.prefs!!.momentModel = jsonMoment
+            val intent = Intent(context, PlayTaskSoundActivity::class.java)
+            intent.putExtra("m", "")
+            intent.putExtra("taskid", "")
+            startActivity(intent)
+
+
+        }
+    }
+
+    fun wanCoinDialog(momentId: Int?) {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_purchase_view)
+        val window = dialog.window
+        window!!.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+        window.setBackgroundDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                android.R.color.transparent
+            )
+        )
+        val close: ImageView
+        val tvYes: TextView
+        val tvNo: TextView
+        close = dialog.findViewById(R.id.ivClose)
+        tvYes = dialog.findViewById(R.id.tvyes)
+        tvNo = dialog.findViewById(R.id.tvNo)
+        close.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        tvYes.setOnClickListener {
+            callApiForPurchase(momentId!!)
+            dialog.dismiss()
+        }
+
+        tvNo.setOnClickListener {
+
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
 }

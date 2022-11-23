@@ -17,19 +17,12 @@ import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
 import com.getyoteam.budamind.utils.Utils
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_choose_your_goal.*
-import kotlinx.android.synthetic.main.activity_sign_in.*
-import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
@@ -49,8 +42,8 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
         setContentView(R.layout.activity_choose_your_goal)
 //        db = AppDatabase.getDatabase(this)
         isFirstTime = intent.getBooleanExtra("isFirstTime", false)
-        wallateStatus = intent.getStringExtra("wallateStatus")
-        tokenCredited = intent.getStringExtra("credited")
+        wallateStatus = intent.getStringExtra("wallateStatus").toString()
+        tokenCredited = intent.getStringExtra("credited").toString()
 //        totalGoal = MyApplication.prefs!!!!.totalGoal
 //        wanCoinDialog("1")
 
@@ -114,7 +107,7 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
         if (1 == MyApplication.prefs!!!!.anxiety) {
             cbReduceAnxiety.isChecked = true
             cvReduceAnxiety.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
-            ivReduceAnxiety.setBackgroundColor(resources.getColor(R.color.color_card_7eb1e2))
+            ivReduceAnxiety.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             flReduceAnxiety.visibility = View.VISIBLE
         }
 
@@ -122,43 +115,43 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
             cbImproveFocus.isChecked = true
             cvImproveFocus.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
             flImproveFocus.visibility = View.VISIBLE
-            ivImproveFocus.setBackgroundColor(resources.getColor(R.color.color_card_ebb96b))
+            ivImproveFocus.setBackgroundColor(resources.getColor(R.color.colorPrimary))
         }
 
         if (1 == MyApplication.prefs!!!!.gratitute) {
             cbDevelopGratitute.isChecked = true
             cvDevelopGratitute.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
-            ivDevelopGratitute.setBackgroundColor(resources.getColor(R.color.color_card_ec8c8c))
+            ivDevelopGratitute.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             flDevelopGratitute.visibility = View.VISIBLE
         }
         if (1 == MyApplication.prefs!!!!.happiness) {
             cbIncreaseHappiness.isChecked = true
             cvIncreaseHappiness.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
-            ivIncreaseHappiness.setBackgroundColor(resources.getColor(R.color.color_card_7eb1e2))
+            ivIncreaseHappiness.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             flIncreaseHappiness.visibility = View.VISIBLE
         }
         if (1 == MyApplication.prefs!!!!.meditate) {
             cbLearnToMeditate.isChecked = true
             cvLearnToMeditate.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
-            ivLearnToMeditate.setBackgroundColor(resources.getColor(R.color.color_card_7eb1e2))
+            ivLearnToMeditate.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             flLearnToMeditate.visibility = View.VISIBLE
         }
         if (1 == MyApplication.prefs!!!!.selfEsteem) {
             cbBuildSelfEsteem.isChecked = true
             cvBuildSelfEsteem.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
-            ivBuildSelfEsteem.setBackgroundColor(resources.getColor(R.color.color_card_ebb96b))
+            ivBuildSelfEsteem.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             flBuildSelfEsteem.visibility = View.VISIBLE
         }
         if (1 == MyApplication.prefs!!!!.sleep) {
             cbBetterSleep.isChecked = true
             cvBetterSleep.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
             flBetterSleep.visibility = View.VISIBLE
-            ivBetterSleep.setBackgroundColor(resources.getColor(R.color.color_card_ec8c8c))
+            ivBetterSleep.setBackgroundColor(resources.getColor(R.color.colorPrimary))
         }
         if (1 == MyApplication.prefs!!!!.stress) {
             cbReduceStress.isChecked = true
             cvReduceStress.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
-            ivReduceStress.setBackgroundColor(resources.getColor(R.color.color_card_ec8c8c))
+            ivReduceStress.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             flReduceStress.visibility = View.VISIBLE
         }
 
@@ -299,7 +292,7 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
             R.id.cbReduceStress -> {
                 if (isChecked) {
                     cvReduceStress.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
-                    ivReduceStress.setBackgroundColor(resources.getColor(R.color.color_card_ec8c8c))
+                    ivReduceStress.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                     flReduceStress.visibility = View.VISIBLE
                     MyApplication.prefs!!.stress = 1
 //                    val goalModel = GoalModel()
@@ -325,7 +318,7 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
                 if (isChecked) {
                     cvBetterSleep.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
                     flBetterSleep.visibility = View.VISIBLE
-                    ivBetterSleep.setBackgroundColor(resources.getColor(R.color.color_card_ec8c8c))
+                    ivBetterSleep.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                     MyApplication.prefs!!.sleep = 1
 //                    val goalModel = GoalModel()
 //                    goalModel.setGoalId(2)
@@ -351,7 +344,7 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
                 if (isChecked) {
                     cvImproveFocus.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
                     flImproveFocus.visibility = View.VISIBLE
-                    ivImproveFocus.setBackgroundColor(resources.getColor(R.color.color_card_ebb96b))
+                    ivImproveFocus.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                     MyApplication.prefs!!.focus = 1
 //                    val goalModel = GoalModel()
 //                    goalModel.setGoalId(3)
@@ -380,7 +373,7 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
                             R.anim.zoom_in
                         )
                     )
-                    ivLearnToMeditate.setBackgroundColor(resources.getColor(R.color.color_card_7eb1e2))
+                    ivLearnToMeditate.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                     flLearnToMeditate.visibility = View.VISIBLE
                     MyApplication.prefs!!.meditate = 1
 //                    val goalModel = GoalModel()
@@ -416,7 +409,7 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
                             R.anim.zoom_in
                         )
                     )
-                    ivDevelopGratitute.setBackgroundColor(resources.getColor(R.color.color_card_ec8c8c))
+                    ivDevelopGratitute.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                     flDevelopGratitute.visibility = View.VISIBLE
                     MyApplication.prefs!!.gratitute = 1
 //                    val goalModel = GoalModel()
@@ -446,7 +439,7 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
             R.id.cbReduceAnxiety -> {
                 if (isChecked) {
                     cvReduceAnxiety.setAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_in))
-                    ivReduceAnxiety.setBackgroundColor(resources.getColor(R.color.color_card_7eb1e2))
+                    ivReduceAnxiety.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                     flReduceAnxiety.visibility = View.VISIBLE
 
                     MyApplication.prefs!!.anxiety = 1
@@ -483,7 +476,7 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
                             R.anim.zoom_in
                         )
                     )
-                    ivIncreaseHappiness.setBackgroundColor(resources.getColor(R.color.color_card_7eb1e2))
+                    ivIncreaseHappiness.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                     flIncreaseHappiness.visibility = View.VISIBLE
                     MyApplication.prefs!!.happiness = 1
 //                    val goalModel = GoalModel()
@@ -518,7 +511,7 @@ class ChooseYourGoalActivity : AppCompatActivity(), CompoundButton.OnCheckedChan
                             R.anim.zoom_in
                         )
                     )
-                    ivBuildSelfEsteem.setBackgroundColor(resources.getColor(R.color.color_card_ebb96b))
+                    ivBuildSelfEsteem.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                     flBuildSelfEsteem.visibility = View.VISIBLE
                     MyApplication.prefs!!.selfEsteem = 1
 //                    val goalModel = GoalModel()

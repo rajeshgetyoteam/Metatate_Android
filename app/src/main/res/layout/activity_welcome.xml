@@ -1,54 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/color_white"
-    tools:context="com.getyoteam.budamind.activity.WelcomeActivity">
-
-<!--    <ScrollView-->
-
-<!--        android:overScrollMode="never"-->
-<!--        android:scrollbars="none"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="fill_parent"-->
-<!--        android:background="@color/color_white"-->
-<!--        android:fillViewport="true"-->
-<!--&gt;-->
+    android:background="@color/color_white">
 
         <LinearLayout
-            android:layout_weight="1"
+            android:layout_centerInParent="true"
             android:id="@+id/layLogo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_marginTop="@dimen/_40sdp"
-                android:layout_width="@dimen/_130sdp"
-                android:layout_height="@dimen/_130sdp"
-                app:srcCompat="@drawable/logo_splash" />
-
             <TextView
+                android:layout_marginTop="@dimen/_25sdp"
                 android:id="@+id/tvWelcomeClarity"
                 style="@style/TextBold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
                 android:gravity="center"
-                android:text="Welcome to \nMetatate"
+                android:text="Welcome to"
                 android:textColor="@color/app_pink_color"
-                android:textSize="@dimen/_25sdp" />
+                android:textSize="@dimen/_35sdp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/ic_metatate_text"
+                    android:layout_width="@dimen/_135sdp"
+                    android:layout_height="@dimen/_35sdp">
+
+                </ImageView>
+
+            </LinearLayout>
 
             <TextView
+                android:layout_marginTop="@dimen/_5sdp"
                 style="@style/TextRegular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Mindfulness is Metatate "
+                android:text="Find your peace"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_11sdp" />
 
@@ -86,16 +81,15 @@ industry since 1950."
 
 
         </LinearLayout>
-<!--    </ScrollView>-->
+
 
     <TextView
 
-        android:layout_below="@+id/layLogo"
         android:id="@+id/btnGetStarted"
         style="@style/TextMiduam"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_20sdp"
@@ -107,4 +101,4 @@ industry since 1950."
         android:textColor="@color/color_white"
         android:textSize="@dimen/_17sdp"
         android:visibility="visible" />
-</LinearLayout>
+</RelativeLayout>

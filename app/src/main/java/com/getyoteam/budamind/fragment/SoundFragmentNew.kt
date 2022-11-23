@@ -1,3 +1,4 @@
+/*
 package com.getyoteam.budamind.fragment
 
 import android.Manifest
@@ -30,7 +31,6 @@ import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.activity.SignInActivity
 import com.getyoteam.budamind.activity.SubscribeActivity
-import com.getyoteam.budamind.adapter.SoundAdapter
 import com.getyoteam.budamind.interfaces.ApiUtils
 import com.getyoteam.budamind.interfaces.CustomTouchListener
 import com.getyoteam.budamind.interfaces.onItemClickListener
@@ -648,3 +648,4 @@ class SoundFragmentNew : Fragment(), SwipeRefreshLayout.OnRefreshListener,SoundA
     }
 
 }
+*/

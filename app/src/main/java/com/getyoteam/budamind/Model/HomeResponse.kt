@@ -34,6 +34,14 @@ class HomeResponse {
     @Expose
      var walletId: String? = null
 
+    @SerializedName("dailyLimit")
+    @Expose
+    var dailyLimit : Float? = 0f
+
+    @SerializedName("todayEarn")
+    @Expose
+    var todayEarn  : Float? = 0f
+
 
     @SerializedName("home")
     @Expose

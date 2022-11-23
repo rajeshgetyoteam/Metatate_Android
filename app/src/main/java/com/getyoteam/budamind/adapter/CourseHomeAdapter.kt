@@ -43,30 +43,37 @@ class CourseHomeAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, possion: Int) {
 
+        val dataModel = courseArrayList!![possion]
+
         viewHolder.ivLock.visibility = View.VISIBLE
         Glide.with(context)
-            .load(courseArrayList!!.get(possion).getBanner())
+            .load(dataModel.getBanner())
             .placeholder(ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)))
             .transition(DrawableTransitionOptions.withCrossFade())
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(viewHolder.ivCommonItem)
-        viewHolder.tvCommonItemName.text = courseArrayList.get(possion).getCourseName()
+        viewHolder.tvCommonItemName.text = dataModel.getCourseName()
 
-        val min = courseArrayList.get(possion).getToMinutes().toString()
-        viewHolder.tvCommonItemDescreption.text = courseArrayList.get(possion).getDescription()
-        viewHolder.tvCommonItemTime.text = min + " Min"
-        if (courseArrayList.get(possion).freePaid.equals("Free", true)) {
+        val min = dataModel.getToMinutes().toString()
+        if (dataModel.genre!!.isNotEmpty()){
+            viewHolder.tvCommonItemDescreption.text = dataModel.genre
+        }else{
+            viewHolder.tvCommonItemDescreption.text = dataModel.getDescription()
+        }
+
+        viewHolder.tvCommonItemTime.text = "$min Min"
+        if (dataModel.freePaid.equals("Free", true)) {
             viewHolder.layPrice.visibility = View.GONE
             viewHolder.ivLock.visibility = View.GONE
 
         } else {
-            if (courseArrayList.get(possion).purchased!!) {
+            if (dataModel.purchased!!) {
                 viewHolder.layPrice.visibility = View.GONE
                 viewHolder.ivLock.visibility = View.GONE
             } else {
 
-                if (courseArrayList.get(possion).coins != null) {
-                    val p = Utils.format(courseArrayList.get(possion).coins!!.toBigInteger())
+                if (dataModel.coins != null) {
+                    val p = Utils.format(dataModel.coins!!.toBigInteger())
                     viewHolder.tvPrice.text = p.toString().replace("$","$"+"CHI")
 
                 } else {
@@ -77,7 +84,7 @@ class CourseHomeAdapter(
 
         viewHolder.ivCommonItem.setOnClickListener {
             onCourseHomeAdapterInteractionListener!!.onCourseHomeAdapterInteractionListener(
-                courseArrayList.get(possion)
+                dataModel
             )
         }
 

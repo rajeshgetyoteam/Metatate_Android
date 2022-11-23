@@ -52,6 +52,7 @@ class Prefs(context: Context) {
     val PREF_NEXT_WITHDROWDATE="nextdate"
     val PREF_WALLET_RESPONCE="w_responce"
     val PREF_TASK_RESPONCE="t_responce"
+    val PREF_DAILY_TASK="dailytask"
     val PREF_REFERALUSER_ID="e_id"
 
     val PREF_CATAGORY_ANXIETY="anxiety"
@@ -62,12 +63,24 @@ class Prefs(context: Context) {
     val PREF_CATAGORY_SELF_ESTEEN="selfEsteem"
     val PREF_CATAGORY_SLEEP="sleep"
     val PREF_CATAGORY_STRESS="stress"
+    val PREF_DAILY_GOAL="d_goal"
 
     val PREF_DAILY_MINUTE="d_mimute"
     val PREF_WEEKLY_MINUTE="w_mimute"
     val PREF_TOT_MEDITATE_MINUTE="tot_m_mimute"
+    val PREF_EARN_LIMITE="earn_limit"
+    val PREF_TODAY_EARNED="today_earned"
+    val PREF_TOT_TIME_SPENT="tot_time_sepnt"
+    val IS_APP_IN_BACKGROUND="bacground"
+    val COURSE_COIN="c_coin"
+    val MOMENT_COIN="m_coin"
+    val SOUND_COIN="s_coin"
 
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
+
+    var appInBacground: Boolean
+        get() = prefs.getBoolean(IS_APP_IN_BACKGROUND, false)
+        set(value) = prefs.edit().putBoolean(IS_APP_IN_BACKGROUND, value).apply()
 
     var weeklyMinute: Float?
         get() = prefs.getFloat(PREF_WEEKLY_MINUTE, 0f)
@@ -81,11 +94,35 @@ class Prefs(context: Context) {
         get() = prefs.getFloat(PREF_TOT_MEDITATE_MINUTE, 0f)
         set(value) = prefs.edit().putFloat(PREF_TOT_MEDITATE_MINUTE, value!!).apply()
 
+    var dailyEarnLimit: Float?
+        get() = prefs.getFloat(PREF_EARN_LIMITE, 0f)
+        set(value) = prefs.edit().putFloat(PREF_EARN_LIMITE, value!!).apply()
 
+    var todayEarn: Float?
+        get() = prefs.getFloat(PREF_TODAY_EARNED, 0f)
+        set(value) = prefs.edit().putFloat(PREF_TODAY_EARNED, value!!).apply()
+
+    var totTimeSpent: Int?
+        get() = prefs.getInt(PREF_TOT_TIME_SPENT, 0)
+        set(value) = prefs.edit().putInt(PREF_TOT_TIME_SPENT, value!!).apply()
+
+    var courseCoin: Int?
+        get() = prefs.getInt(COURSE_COIN, 0)
+        set(value) = prefs.edit().putInt(COURSE_COIN, value!!).apply()
+
+    var momentCoin: Int?
+        get() = prefs.getInt(MOMENT_COIN, 0)
+        set(value) = prefs.edit().putInt(MOMENT_COIN, value!!).apply()
+
+    var soundsCoin: Int?
+        get() = prefs.getInt(SOUND_COIN, 0)
+        set(value) = prefs.edit().putInt(SOUND_COIN, value!!).apply()
 
     var anxiety: Int?
         get() = prefs.getInt(PREF_CATAGORY_ANXIETY, 0)
         set(value) = prefs.edit().putInt(PREF_CATAGORY_ANXIETY, value!!).apply()
+
+
 
     var focus: Int?
         get() = prefs.getInt(PREF_CATAGORY_FOCUS, 0)
@@ -115,6 +152,9 @@ class Prefs(context: Context) {
         get() = prefs.getInt(PREF_CATAGORY_STRESS, 0)
         set(value) = prefs.edit().putInt(PREF_CATAGORY_STRESS, value!!).apply()
 
+    var dailyGoal: Int?
+        get() = prefs.getInt(PREF_DAILY_GOAL, 5)
+        set(value) = prefs.edit().putInt(PREF_DAILY_GOAL, value!!).apply()
 
     var referalId: String
         get() = prefs.getString(PREF_REFERALUSER_ID, "")!!
@@ -127,6 +167,11 @@ class Prefs(context: Context) {
     var taskResponce: String
         get() = prefs.getString(PREF_TASK_RESPONCE, "")!!
         set(value) = prefs.edit().putString(PREF_TASK_RESPONCE, value).apply()
+
+
+    var dailyTaskList: String
+        get() = prefs.getString(PREF_DAILY_TASK, "")!!
+        set(value) = prefs.edit().putString(PREF_DAILY_TASK, value).apply()
 
     var totRsrned: String
         get() = prefs.getString(PREF_TOTAL_EARNED, "")!!
@@ -175,6 +220,7 @@ class Prefs(context: Context) {
     var profilePic: String
         get() = prefs.getString(PROFILE_PIC, "")!!
         set(value) = prefs.edit().putString(PROFILE_PIC, value).apply()
+
     var first_name: String
         get() = prefs.getString(FIRST_NAME, "")!!
         set(value) = prefs.edit().putString(FIRST_NAME, value).apply()
@@ -236,15 +282,19 @@ class Prefs(context: Context) {
     var songQuote: String
         get() = prefs.getString(SONG_QUOTE, "")!!
         set(value) = prefs.edit().putString(SONG_QUOTE, value).apply()
+
     var totalGoal: Int
         get() = prefs.getInt(TOTAL_GOAL, 0)
         set(value) = prefs.edit().putInt(TOTAL_GOAL, value).apply()
+
     var firstMeditationSize: Int
         get() = prefs.getInt(FIRST_MEDITATION_SIZE, 0)
         set(value) = prefs.edit().putInt(FIRST_MEDITATION_SIZE, value).apply()
+
     var firstMeditationId: Int
         get() = prefs.getInt(FIRST_MEDITATION_ID, 0)
         set(value) = prefs.edit().putInt(FIRST_MEDITATION_ID, value).apply()
+
     var courseId: Int
         get() = prefs.getInt(COURSE_ID, 0)
         set(value) = prefs.edit().putInt(COURSE_ID, value).apply()

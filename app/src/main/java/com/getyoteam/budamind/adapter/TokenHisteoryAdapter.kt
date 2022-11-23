@@ -42,6 +42,14 @@ class TokenHisteoryAdapter(
         viewHolder.tvPrice.text = token.replace("$","$"+"CHI")
         viewHolder.tvType.text = dataModel.type
 
+        if(dataModel.type.equals("purchase")){
+            viewHolder.tvEarnSpent.text = "Spent"
+        }else{
+            viewHolder.tvEarnSpent.text = "Earned"
+        }
+
+
+
         val date = dataModel.createdAt!!.toDate().formatTo("yyyy-MM-dd  hh:mm a")
         viewHolder.tvDateTime.text = date
 
@@ -64,6 +72,7 @@ class TokenHisteoryAdapter(
         val tvTitle = view.tvDescription
         val tvPrice = view.tvPrice
         val tvType = view.tvType
+        val tvEarnSpent = view.tvEarnSpent
         val tvDateTime = view.tvDateTime
         lateinit var viewForeground: LinearLayout
         lateinit var viewBackground: RelativeLayout

@@ -35,43 +35,43 @@
                 />
 
         <LinearLayout
-            android:layout_marginTop="@dimen/_minus15sdp"
-            android:orientation="vertical"
-            android:layout_below="@+id/ivImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivImage"
+            android:layout_marginTop="@dimen/_minus15sdp"
+            android:orientation="vertical">
 
             <TextView
-                android:backgroundTint="@color/color_white"
+                style="@style/TextBold"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Congratulations!"
+                android:backgroundTint="@color/color_white"
                 android:gravity="center"
+                android:text="Congratulations!"
                 android:textColor="@color/app_pink_color"
-                android:textSize="@dimen/_18sdp"
-                style="@style/TextBold"/>
+                android:textSize="@dimen/_18sdp" />
 
             <TextView
                 android:id="@+id/tvCoin"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:backgroundTint="@color/color_white"
+                style="@style/TextRegular"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="You have earned 1B $CHI."
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:backgroundTint="@color/color_white"
                 android:gravity="center"
+                android:text="You have earned 0B $CHI."
                 android:textColor="@color/app_pink_color"
-                android:textSize="@dimen/_15sdp"
-                style="@style/TextRegular"/>
+                android:textSize="@dimen/_15sdp" />
 
 
             <RelativeLayout
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
                 android:background="@drawable/selected_state"
                 android:gravity="center_vertical">
 

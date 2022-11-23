@@ -35,23 +35,37 @@
                 app:srcCompat="@drawable/logo_splash" />
 
             <TextView
-
                 android:id="@+id/tvWelcomeClarity"
                 style="@style/TextBold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:gravity="center"
-                android:text="Welcome to \nMetatate"
+                android:text="Welcome to"
                 android:textColor="@color/app_pink_color"
-                android:textSize="@dimen/_25sdp" />
+                android:textSize="@dimen/_35sdp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/ic_metatate_text"
+                    android:layout_width="@dimen/_135sdp"
+                    android:layout_height="@dimen/_35sdp">
+
+                </ImageView>
+
+            </LinearLayout>
 
             <TextView
+                android:layout_marginTop="@dimen/_5sdp"
                 style="@style/TextRegular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Mindfulness is Metatate "
+                android:text="Find your peace"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_11sdp" />
 
@@ -216,7 +230,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginStart="@dimen/_15sdp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginEnd="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/ic_button_background_facebook"

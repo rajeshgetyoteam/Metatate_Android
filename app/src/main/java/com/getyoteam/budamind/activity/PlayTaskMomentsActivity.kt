@@ -1,6 +1,5 @@
 package com.getyoteam.budamind.activity
 
-
 import android.Manifest
 import android.app.ActivityManager
 import android.app.Dialog
@@ -37,20 +36,20 @@ import com.downloader.*
 import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
+import com.getyoteam.budamind.interfaces.API
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
 import com.getyoteam.budamind.playback.MusicNotificationManager
 import com.getyoteam.budamind.playback.MusicService
 import com.getyoteam.budamind.playback.PlaybackInfoListener
 import com.getyoteam.budamind.playback.PlayerAdapter
 import com.getyoteam.budamind.testaudioexohls.AudioService
 import com.getyoteam.budamind.utils.*
+import com.google.android.exoplayer2.util.Util
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.mindfulness.greece.model.MeditationStateModel
 import kotlinx.android.synthetic.main.activity_play.*
 import okhttp3.OkHttpClient
-import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 import retrofit2.Call
@@ -62,7 +61,6 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
-
 
 class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -99,10 +97,7 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
     private var mPlaybackListener: PlaybackListener? = null
 
 
-
-
     inner class PlaybackListener : PlaybackInfoListener() {
-
         override fun onPositionChanged(position: Int) {
             if (!mUserIsSeeking) {
                 val milliSec80Per = (mPlayerAdapter!!.mediaPlayer.duration.toLong() * 80) / 100
@@ -112,10 +107,10 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
                         val min =
                             TimeUnit.MILLISECONDS.toMinutes(mPlayerAdapter!!.mediaPlayer.duration.toLong())
                         apiCallAfterAudioComleteAt90Per(min)
-                        callRewardsAPI()
+                        callRewardsAPI(momentModel!!.getMomentId().toString())
                     }
                 }
-                song_progressbar.setProgress(position)
+                song_progressbar.progress = position
                 val time = String.format(
                     "%02d:%02d",
                     TimeUnit.MILLISECONDS.toMinutes(position.toLong()),
@@ -137,7 +132,7 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         override fun onBufferUpdate(position: Int) {
-            song_progressbar.setSecondaryProgress(position * seekPer)
+            song_progressbar.secondaryProgress = position * seekPer
         }
 
         override fun onPlaybackStarted(totalDuration: Long) {
@@ -195,31 +190,26 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
-    private fun callRewardsAPI() {
+    private fun callRewardsAPI(momentId: String) {
 
         val userId = MyApplication.prefs!!.userId
 
+        val call = ApiUtils.getAPIService().getRewardsOnPlay(userId, "moment", momentId)
 
-        val call = ApiUtils.getAPIService().claimForTask(userId, taskId)
-
-        call.enqueue(object : Callback<responceTaskModel> {
-            override fun onFailure(call: Call<responceTaskModel>, t: Throwable) {
-
+        call.enqueue(object : Callback<responceRewarModel> {
+            override fun onFailure(call: Call<responceRewarModel>, t: Throwable) {
                 Toast.makeText(
                     applicationContext,
                     getString(R.string.str_something_went_wrong),
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
             }
 
             override fun onResponse(
-                call: Call<responceTaskModel>,
-                response: Response<responceTaskModel>
+                call: Call<responceRewarModel>,
+                response: Response<responceRewarModel>
             ) {
                 if (response.code() == 200) {
-
                     val commonModel = response.body()
                     if (commonModel!!.status.equals(getString(R.string.str_success))) {
 
@@ -230,6 +220,7 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
     }
+
 
     fun wanCoinDialog(coin: String) {
         val dialog = Dialog(this)
@@ -278,7 +269,7 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+        val clarityAPI = retrofit.create(API::class.java)
         val call = ApiUtils.getAPIService().getRandomQuotes()
 
         call.enqueue(object : Callback<QuoteModel> {
@@ -303,7 +294,6 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-
     private fun loadSeekBar(totalDuration: Long) {
         val time = String.format(
             "%02d:%02d",
@@ -324,7 +314,6 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
 //            song_progressbar.setSecondaryProgress(100 * seekPer)
         }
     }
-
 
     private fun updatePlayingInfo(restore: Boolean, startPlay: Boolean, state: Int) {
         if (startPlay) {
@@ -356,7 +345,6 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
             }, 250)
         }
     }
-
 
     private fun updatePlayingStatus() {
         val drawable = if (mPlayerAdapter!!.getState() != PlaybackInfoListener.State.PAUSED)
@@ -398,7 +386,6 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
     private fun doBindService() {
         // Establish a connection with the service.  We use an explicit
         // class name because we want a specific service implementation that
@@ -413,9 +400,9 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         mIsBound = true
 
         val startNotStickyIntent = Intent(this, MusicService::class.java)
-        startService(startNotStickyIntent)
+//        startService(startNotStickyIntent)
+        Util.startForegroundService(this,startNotStickyIntent)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -549,7 +536,7 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
 
         if (isSoundServiceRunning(MediaPlayerService::class.java.getName())) {
             val intent = Intent(this, MediaPlayerService::class.java)
-            stopService(intent);
+//            stopService(intent);
         }
 
         if (isSoundServiceRunning(AudioService::class.java.getName())) {
@@ -572,14 +559,15 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
 //        } else {
 //
 //        }
+
         layReward.setOnClickListener {
 
-            Toast.makeText(
-                this,
-                "You cannot skip the content.",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+//            Toast.makeText(
+//                this,
+//                "You cannot skip the content.",
+//                Toast.LENGTH_SHORT
+//            )
+//           .show()
         }
 
         if (momentModel != null) {
@@ -669,7 +657,7 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         tvPlaySubTitle.text = subTitle
 
         progressBar.indeterminateDrawable.setColorFilter(
-            ContextCompat.getColor(this, R.color.color_black),
+            ContextCompat.getColor(this, R.color.color_white),
             PorterDuff.Mode.SRC_IN
         )
 
@@ -698,7 +686,7 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         ivForward.isClickable = false
         ivBackword.isClickable = false
         song_progressbar!!.getThumb()
-            .setColorFilter(resources.getColor(R.color.app_yellow_color), PorterDuff.Mode.SRC_IN);
+            .setColorFilter(resources.getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
 
         getQuote()
@@ -756,13 +744,11 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
     fun resumeOrPause() {
         if (checkIsPlayer()) {
             mPlayerAdapter!!.resumeOrPause()
         }
     }
-
 
     private fun checkIsPlayer(): Boolean {
 
@@ -772,7 +758,6 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         }
         return isPlayer
     }
-
 
     private fun initializeSeekBar() {
         song_progressbar.setOnSeekBarChangeListener(
@@ -896,24 +881,35 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         when (v!!.id) {
             R.id.ivClose -> {
 
-                var time :Long = 0
+                var time: Long = 0
                 val userId = MyApplication.prefs!!.userId
                 if (mPlayerAdapter != null) {
-                    time = TimeUnit.MILLISECONDS.toSeconds(mPlayerAdapter!!.mediaPlayer.currentPosition.toLong())
+                    time =
+                        TimeUnit.MILLISECONDS.toSeconds(mPlayerAdapter!!.mediaPlayer.currentPosition.toLong())
                 }
                 val jsonObj = JSONObject()
-                if (time > 0){
-//                    jsonObj.put("chapterId", chapterId)
-                    jsonObj.put("userId", userId)
-                    jsonObj.put("tabName", "Moment")
-                    jsonObj.put("tabId", momentModel!!.getMomentId())
-                    jsonObj.put("totalSeconds", time.toString())
-                    Utils.callUpdateSeconds("",jsonObj)
+                if (time > 0) {
+                    try {
+                        //jsonObj.put("chapterId", chapterId)
+                        jsonObj.put("userId", userId)
+                        jsonObj.put("tabName", "Moment")
+                        jsonObj.put("tabId", momentModel!!.getMomentId())
+                        jsonObj.put("totalSeconds", time.toString())
+                        Utils.callUpdateSeconds("", jsonObj)
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
 
                 if (isMomentServiceRunning()) {
-                    val intent = Intent(this, MusicService::class.java)
-                    stopService(intent);
+                    try {
+                        val intent = Intent(this, MusicService::class.java)
+                        stopService(intent)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
                 }
                 finish()
             }

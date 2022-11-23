@@ -12,8 +12,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.login.LoginManager
 import com.getyoteam.budamind.Model.CourseListModel
@@ -25,9 +23,7 @@ import com.getyoteam.budamind.activity.ChapterActivity
 import com.getyoteam.budamind.activity.SignInActivity
 import com.getyoteam.budamind.adapter.CourseAdapter
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
 import com.getyoteam.budamind.utils.AppDatabase
-import com.getyoteam.budamind.utils.GridItemDecoration
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.GoogleApiClient
@@ -36,25 +32,13 @@ import com.google.android.gms.common.api.Status
 import kotlinx.android.synthetic.main.fragment_courses.*
 import kotlinx.android.synthetic.main.fragment_courses.cvInternetToast
 import kotlinx.android.synthetic.main.fragment_courses.swipeToRefresh
-import kotlinx.android.synthetic.main.fragment_moments.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [CoursesFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- *
- */
 class CoursesFragment : Fragment(),
     CourseAdapter.OnCourseAdapterInteractionListener, SwipeRefreshLayout.OnRefreshListener {
-
 
     private var authToken: String? = ""
     private var userId: String = ""
@@ -80,27 +64,25 @@ class CoursesFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
         authToken = MyApplication.prefs!!.authToken
         userId = MyApplication.prefs!!.userId
-
         val c1 = ContextCompat.getColor(requireContext(), R.color.app_pink_color)
         swipeToRefresh.setColorSchemeColors(c1)
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
         mGoogleApiClient = GoogleApiClient.Builder(requireActivity())
-            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-            .build()
+            .addApi(Auth.GOOGLE_SIGN_IN_API, gso).build()
         mGoogleApiClient.connect()
 
         db = AppDatabase.getDatabase(requireContext())
         coursArrayList = ArrayList<CourseListModel>()
-        rvCourseList!!.layoutManager =
-            GridLayoutManager(requireContext(), 2) as RecyclerView.LayoutManager?
-        rvCourseList.addItemDecoration(
-            GridItemDecoration(
-                resources.getDimension(R.dimen._35sdp).toInt(),
-                2
-            )
-        )
+//        rvCourseList!!.layoutManager =
+//            GridLayoutManager(requireContext(), 2) as RecyclerView.LayoutManager?
+//        rvCourseList.addItemDecoration(
+//            GridItemDecoration(
+//                resources.getDimension(R.dimen._35sdp).toInt(),
+//                1
+//            )
+//        )
         swipeToRefresh.setOnRefreshListener(this)
 //        swipeToRefresh.setEnabled(false);
         cvInternetToast.setOnClickListener {
@@ -110,7 +92,7 @@ class CoursesFragment : Fragment(),
     }
 
     override fun onRefresh() {
-        if (isAdded()) {
+        if (isAdded) {
             if (checkInternetConnection())
                 getSleepDetail()
             else
@@ -121,35 +103,18 @@ class CoursesFragment : Fragment(),
     override fun onResume() {
         super.onResume()
         loadDataFromDB()
-//        swipeToRefresh.post(object : Runnable {
-//            override fun run() {
-//                if (isAdded()) {
-//                    if (checkInternetConnection()) {
-//                        if (MyApplication.isLibraryAPI)
-//                            getSleepDetail()
-//                    } else {
-//                        cvInternetToast.visibility=View.VISIBLE                    }
-//                }
-//
-//            }
-//        })
     }
 
     private fun getSleepDetail() {
-        swipeToRefresh.setRefreshing(true);
+        swipeToRefresh.isRefreshing = true
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl(getString(R.string.base_url))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
         val call = ApiUtils.getAPIService().getLibraryList(authToken!!, userId)
 
         call.enqueue(object : Callback<LibraryModel> {
             override fun onFailure(call: Call<LibraryModel>, t: Throwable) {
-                if (isAdded()) {
+                if (isAdded) {
                     if (swipeToRefresh != null)
-                        swipeToRefresh.setRefreshing(false);
+                        swipeToRefresh.isRefreshing = false
 
                     Toast.makeText(
                         requireActivity(),
@@ -162,9 +127,9 @@ class CoursesFragment : Fragment(),
 
             override fun onResponse(call: Call<LibraryModel>, response: Response<LibraryModel>) {
                 if (response.code() == 200) {
-                    if (isAdded()) {
+                    if (isAdded) {
                         if (swipeToRefresh != null) {
-                            swipeToRefresh.setRefreshing(false);
+                            swipeToRefresh.isRefreshing = false
                             MyApplication.isLibraryAPI = false
                             val libraryModel = response.body()!!
                             if (libraryModel.getStatus().equals(getString(R.string.str_success))) {
@@ -174,7 +139,6 @@ class CoursesFragment : Fragment(),
                                 if (coursArrayList.size > 0) {
                                     db.courseDao().deleteAll()
                                 }
-
 
                                 for (i in 0..coursArrayList.size - 1) {
                                     val courseListModel = coursArrayList.get(i)

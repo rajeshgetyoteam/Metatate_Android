@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Metatate</string>
 
+
+    <string name="playback_channel_name">Playback</string>
+    <string name="playback_channel_description">Playback Descritpion</string>
+
     <string name="broadcast_seekbar_update">broadcast_seekbar_update</string>
     <string name="broadcast_seekbar_value">broadcast_seekbar_value</string>
     <string name="broadcast_update_ui">broadcast_update_ui</string>
@@ -24,7 +28,7 @@
     <string name="str_get_started">GET STARTED</string>
     <string name="str_choose_your_goals">Choose Your Goals</string>
     <string name="str_take_a_deep_breath_and_think_about_nwhat_is_bothering_you_at_the_moment">Take a deep breath and
-        think about \nwhat is bothering you at the moment.
+        think about \nwhat would you like to work on.
     </string>
     <string name="str_reduce_stress">Reduce Stress</string>
     <string name="str_better_sleep">Better Sleep</string>
@@ -76,6 +80,7 @@
     <string name="str_library">Library</string>
     <string name="str_task">Tasks</string>
     <string name="str_sound">Sounds</string>
+    <string name="str_catalog">Catalog</string>
     <string name="str_profile">Profile</string>
     <string name="str_private_key"><u>Show Private Key</u></string>
     <string name="separator">/</string>
@@ -104,8 +109,11 @@
     <string name="str_terms_of_use">Terms Of Use</string>
     <string name="str_privacy_of_use">Privacy Policy</string>
     <string name="str_logout">Logout</string>
+    <string name="str_course_are_short_guided_meditation_that_will_nhelp_you_during_day_to_day_activities">
+        "\"Unlock yourself and guided meditation courses\nwhile improving your wellbeing\""
+    </string>
     <string name="str_moments_are_short_guided_meditation_that_will_nhelp_you_during_day_to_day_activities">
-        "\"Moments are short guided meditation that will\nhelp you during day to day activities.\""
+        "\"Short guided meditations that help with \nday to day activities\""
     </string>
     <string name="str_choosing_a_soothing_music_to_unwind_and_ease_into_life">"\"Choosing a soothing music to unwind and
         ease into life.\""
@@ -195,8 +203,10 @@
     <string name="label_next">Next</string>
     <string name="label_pause">Pause</string>
     <string name="label_play">Play</string>
-    <string name="label_note"><b>Note: </b>Make sure to add Binance Smart Chain Receive Address</string>
+    <string name="label_note"><b>Note: </b>Make sure to add Ethereum Smart Chain Receive Address</string>
     <string name="str_keep_going">Keep going!</string>
+
+
 
     <!--    <string name="str_terms_of_use1"><![CDATA[<html>-->
     <!--<head>-->

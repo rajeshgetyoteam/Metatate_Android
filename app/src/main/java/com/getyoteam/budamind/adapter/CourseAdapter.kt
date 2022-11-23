@@ -1,14 +1,18 @@
 package com.getyoteam.budamind.adapter
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
+import android.net.Uri
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -19,13 +23,11 @@ import com.getyoteam.budamind.utils.AppDatabase
 import com.getyoteam.budamind.utils.Utils
 import kotlinx.android.synthetic.main.raw_course_item.view.*
 
-
 class CourseAdapter(
     val courseModelArraylist: ArrayList<CourseListModel>?,
     var onCourseAdapterInteractionListner: OnCourseAdapterInteractionListener,
     val context: Context
 ) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
-
 
     private var downloadId: Int = 0
     lateinit var onCourseAdapterInteractionListener: OnCourseAdapterInteractionListener
@@ -35,7 +37,6 @@ class CourseAdapter(
     private var downloadFileModelOld: DownloadFileModel? = null
     private var audioPath: String? = null
     private lateinit var downloadFileModel: DownloadFileModel
-
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
         this.onCourseAdapterInteractionListener = onCourseAdapterInteractionListner
@@ -58,8 +59,15 @@ class CourseAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, possion: Int) {
         viewHolder.tvSleepTitle.text = courseModelArraylist!!.get(possion).getCourseName()!!.trim()
-        val min = courseModelArraylist.get(possion).getToMinutes().toString()
-        viewHolder.tvSleepSubTitle.text = min + " mins"
+        val count = courseModelArraylist.get(possion).totalChapters.toString()
+        viewHolder.tvSleepSubTitle.text = "$count Courses"
+
+        if (courseModelArraylist[possion].genre!!.trim().isNotEmpty()){
+            viewHolder.tvCourseGenre.visibility = View.VISIBLE
+            viewHolder.tvCourseGenre.text = courseModelArraylist[possion].genre.toString()
+        }else{
+            viewHolder.tvCourseGenre.visibility = View.GONE
+        }
 
 
         if (courseModelArraylist.get(possion).freePaid.equals("Free",true)){
@@ -73,7 +81,7 @@ class CourseAdapter(
                 viewHolder.ivLock.visibility = View.GONE
             }else {
                 if (courseModelArraylist.get(possion).coins != null) {
-                    val token = Utils.format(courseModelArraylist.get(possion).coins!!.toBigInteger())
+                    val token = Utils.format(courseModelArraylist[possion].coins!!.toBigInteger())
                     viewHolder.tvPrice.text = token.toString().replace("$","$"+"CHI")
                 } else {
                     viewHolder.tvPrice.text = "0"
@@ -81,8 +89,7 @@ class CourseAdapter(
             }
         }
 
-
-        val color = Color.parseColor(courseModelArraylist!!.get(possion).getColorCode())
+        val color = Color.parseColor(courseModelArraylist!![possion].getColorCode())
         val colorCodes = courseModelArraylist.get(possion).getColorCode()!!.split("#")
         val code = "#B3"+colorCodes.get(1)
         val colorCode= Color.parseColor(code)
@@ -93,11 +100,49 @@ class CourseAdapter(
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(viewHolder.ivSleepImage)
 
-        viewHolder.ivSleepImage.setOnClickListener {
+        if(courseModelArraylist[possion]!!.isAds!!){
+            viewHolder.layAdds.visibility = View.VISIBLE
+            Glide.with(context)
+                .load(courseModelArraylist.get(possion)!!.adUrl)
+                .placeholder(ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(viewHolder.ivAddBanner)
+
+//            viewHolder.layAdds.layoutParams.width = courseModelArraylist.get(possion)!!.adWidth!!.toInt()
+
+//            if (courseModelArraylist.get(possion)!!.adHeight.isNullOrEmpty()){
+//                viewHolder.layAdds.layoutParams.height =
+//                    context.resources.getDimension(R.dimen._100sdp).toInt()
+//            }else{
+//                val density = context.resources.displayMetrics.density
+//                val hight: Float = courseModelArraylist.get(possion)!!.adHeight!!.toInt() * density
+//                viewHolder.layAdds.layoutParams.height = hight.toInt()
+//            }
+        }else{
+
+            viewHolder.layAdds.visibility = View.GONE
+        }
+
+        viewHolder.layAdds.setOnClickListener {
+            try {
+                val webpage: Uri = Uri.parse(courseModelArraylist.get(possion)!!.adLink)
+                val myIntent = Intent(Intent.ACTION_VIEW, webpage)
+                context.startActivity(myIntent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(
+                    context,
+                    "No application can handle this request. Please install a web browser or check your URL.",
+                    Toast.LENGTH_LONG
+                ).show()
+                e.printStackTrace()
+            }
+        }
+
+        viewHolder.itemView.setOnClickListener {
             onCourseAdapterInteractionListener.onCourseAdapterInteractionListener(courseModelArraylist.get(possion))
         }
     }
-
 
     private fun checkInternetConnection(): Boolean {
         val connectivityManager =
@@ -113,8 +158,10 @@ class CourseAdapter(
         val ivSleepImage = view.ivCourseImages
         val tvPrice = view.tvPrice
         val layPrice = view.layPrice
+        val tvCourseGenre = view.tvCourseGenre
         val ivLock = view.ivLock
-        val ivSleepImageColor = view.ivCourseImagesColor
+        val ivAddBanner = view.ivAddBanner
+        val layAdds = view.layAdds
     }
 
     interface OnCourseAdapterInteractionListener {
@@ -166,7 +213,6 @@ class CourseAdapter(
 ////                    viewHolder.ivSleepDownload.setImageResource(R.drawable.ic_download_done_white)
 ////                    db.downloadDao().insertDownloadFile(downloadFileModel)
 //                }
-//
 //            })
 ////        storyModelArraylist!!.get(possion).setDownloadId(downloadId)
 //

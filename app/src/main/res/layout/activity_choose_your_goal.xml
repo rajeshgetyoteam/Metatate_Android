@@ -8,7 +8,6 @@
     tools:context="com.getyoteam.budamind.activity.ChooseYourGoalActivity">
 
 
-
     <TextView
         android:id="@+id/tvHeader"
         style="@style/TextBold"
@@ -16,17 +15,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_40sdp"
         android:gravity="center"
-        android:text="Choose your goals"
+        android:text="Choose Your Goals"
         android:textColor="@color/color_black"
         android:textSize="@dimen/_22sdp" />
 
     <TextView
-        android:layout_margin="@dimen/_10sdp"
         android:id="@+id/tvSkip"
         style="@style/TextMiduam"
-        android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:gravity="center"
         android:text="Skip"
         android:textColor="#707070"
@@ -76,7 +78,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/color_card_ebb96b"
+                    android:backgroundTint="@color/colorPrimary"
                     android:elevation="0dp"
                     app:cardCornerRadius="@dimen/_5sdp">
 
@@ -106,7 +108,7 @@
                         android:gravity="center"
                         android:padding="@dimen/_7sdp"
                         android:text="@string/str_improve_focus"
-                        android:textColor="@color/color_black"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/_11sdp" />
                 </androidx.cardview.widget.CardView>
 
@@ -147,7 +149,7 @@
                         android:gravity="center"
                         android:padding="@dimen/_7sdp"
                         android:text="@string/str_reduce_stress"
-                        android:textColor="@color/color_black"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/_11sdp" />
                 </androidx.cardview.widget.CardView>
 
@@ -198,7 +200,7 @@
                         android:gravity="center"
                         android:padding="@dimen/_7sdp"
                         android:text="@string/str_better_sleep"
-                        android:textColor="@color/color_black"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/_11sdp" />
 
                 </androidx.cardview.widget.CardView>
@@ -241,7 +243,7 @@
                         android:gravity="center"
                         android:padding="@dimen/_7sdp"
                         android:text="@string/str_increase_happiness"
-                        android:textColor="@color/color_black"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/_11sdp" />
                 </androidx.cardview.widget.CardView>
 
@@ -292,7 +294,7 @@
                         android:gravity="center"
                         android:padding="@dimen/_7sdp"
                         android:text="@string/str_reduce_anxiety"
-                        android:textColor="@color/color_black"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/_11sdp" />
                 </androidx.cardview.widget.CardView>
 
@@ -335,7 +337,7 @@
                         android:gravity="center"
                         android:padding="@dimen/_7sdp"
                         android:text="@string/str_develop_gratitute"
-                        android:textColor="@color/color_black"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/_11sdp" />
                 </androidx.cardview.widget.CardView>
 
@@ -356,7 +358,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/color_card_ebb96b"
+                    android:backgroundTint="@color/colorPrimary"
                     android:elevation="0dp"
                     app:cardCornerRadius="@dimen/_5sdp">
 
@@ -386,7 +388,7 @@
                         android:gravity="center"
                         android:padding="@dimen/_7sdp"
                         android:text="@string/str_build_self_esteem"
-                        android:textColor="@color/color_black"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/_10sdp" />
                 </androidx.cardview.widget.CardView>
 
@@ -429,7 +431,7 @@
                         android:gravity="center"
                         android:padding="@dimen/_7sdp"
                         android:text="@string/str_learn_to_meditate"
-                        android:textColor="@color/color_black"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/_11sdp" />
                 </androidx.cardview.widget.CardView>
             </LinearLayout>

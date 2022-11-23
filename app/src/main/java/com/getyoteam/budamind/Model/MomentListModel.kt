@@ -29,8 +29,6 @@ class MomentListModel : Serializable {
     @ColumnInfo(name = "rewarded")
     private var rewarded: Boolean? = null
 
-
-
     @SerializedName("coinForContent")
     @Expose
     @ColumnInfo(name = "coinForContent")
@@ -66,6 +64,32 @@ class MomentListModel : Serializable {
     @Expose
     @ColumnInfo(name = "image")
     private var image: String? = null
+
+    @SerializedName("ads")
+    @Expose
+    @ColumnInfo(name = "ads")
+    var isAds: Boolean? = false
+
+    @SerializedName("adLink")
+    @Expose
+    @ColumnInfo(name = "adLink")
+    var adLink: String? = ""
+
+    @SerializedName("adUrl")
+    @Expose
+    @ColumnInfo(name = "adUrl")
+    var adUrl: String? = null
+
+
+    @SerializedName("adHeight")
+    @Expose
+    @ColumnInfo(name = "adHeight")
+    var adHeight: String? = null
+
+    @SerializedName("adWidth")
+    @Expose
+    @ColumnInfo(name = "adWidth")
+    var adWidth: String? = null
 
     @SerializedName("audio")
     @Expose

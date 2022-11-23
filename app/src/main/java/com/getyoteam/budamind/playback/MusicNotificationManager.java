@@ -56,7 +56,7 @@ public class MusicNotificationManager {
 
         final Intent pauseIntent = new Intent();
         pauseIntent.setAction(action);
-        return PendingIntent.getBroadcast(mMusicService, REQUEST_CODE, pauseIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getBroadcast(mMusicService, REQUEST_CODE, pauseIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     public Notification createNotification() {
@@ -68,7 +68,7 @@ public class MusicNotificationManager {
         stackBuilder.addNextIntentWithParentStack(resultIntent);
         // Get the PendingIntent containing the entire back stack
         PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT |PendingIntent.FLAG_IMMUTABLE);
 
         mNotificationBuilder = new NotificationCompat.Builder(mMusicService, CHANNEL_ID);
 

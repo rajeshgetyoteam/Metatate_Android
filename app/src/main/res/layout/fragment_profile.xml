@@ -116,6 +116,8 @@
                                     android:visibility="gone" />
 
                                 <LinearLayout
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_20sdp"
@@ -124,18 +126,22 @@
                                     android:orientation="horizontal">
 
                                     <LinearLayout
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
+
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/round_corner_bg"
+                                        android:gravity="center"
                                         android:layout_height="wrap_content"
                                         android:orientation="vertical">
 
-                                        <TextView
-                                            android:id="@+id/tvLongestStreak"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center_horizontal"
-                                            android:fontFamily="@font/nunitosans_bold"
-                                            android:textColor="@color/app_pink_color"
-                                            android:textSize="@dimen/_14sdp" />
+                                        <ImageView
+
+                                            android:layout_width="@dimen/_20sdp"
+                                            android:layout_height="@dimen/_20sdp"
+                                            android:layout_margin="@dimen/_5sdp"
+                                            app:srcCompat="@drawable/ic_tot_streak" />
+
 
                                         <TextView
                                             style="@style/TextRegular"
@@ -144,25 +150,39 @@
                                             android:layout_gravity="center_horizontal"
                                             android:gravity="center"
                                             android:text="@string/str_longest_nsteak"
-                                            android:textColor="@color/color_text_gray"
+                                            android:textColor="@color/color_white"
 
                                             android:textSize="@dimen/_12sdp" />
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="@dimen/_30sdp"
-                                        android:orientation="vertical">
 
                                         <TextView
-                                            android:id="@+id/tvTotalSession"
+                                            android:id="@+id/tvLongestStreak"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_horizontal"
+                                            android:layout_margin="@dimen/_5sdp"
                                             android:fontFamily="@font/nunitosans_bold"
-                                            android:textColor="@color/app_pink_color"
+                                            android:textColor="#F1CD5F"
                                             android:textSize="@dimen/_14sdp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_marginEnd="@dimen/_2sdp"
+                                        android:layout_marginStart="@dimen/_2sdp"
+                                        android:layout_width="match_parent"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/round_corner_bg"
+                                        android:gravity="center"
+                                        android:layout_height="wrap_content"
+
+                                        android:orientation="vertical">
+
+                                        <ImageView
+
+                                            android:layout_width="@dimen/_20sdp"
+                                            android:layout_height="@dimen/_20sdp"
+                                            android:layout_margin="@dimen/_5sdp"
+                                            app:srcCompat="@drawable/ic_tot_sessions" />
+
 
                                         <TextView
                                             style="@style/TextRegular"
@@ -171,24 +191,36 @@
                                             android:layout_gravity="center_horizontal"
                                             android:gravity="center"
                                             android:text="@string/str_total_sessions"
-                                            android:textColor="@color/color_text_gray"
+                                            android:textColor="@color/color_white"
                                             android:textSize="@dimen/_12sdp" />
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="@dimen/_30sdp"
-                                        android:orientation="vertical">
 
                                         <TextView
-                                            android:id="@+id/tvMindfulnessMin"
+                                            android:id="@+id/tvTotalSession"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_horizontal"
+                                            android:layout_margin="@dimen/_5sdp"
                                             android:fontFamily="@font/nunitosans_bold"
-                                            android:textColor="@color/colorPrimary"
+                                            android:textColor="#F1CD5F"
                                             android:textSize="@dimen/_14sdp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/round_corner_bg"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+
+                                        android:orientation="vertical">
+
+                                        <ImageView
+
+                                            android:layout_width="@dimen/_20sdp"
+                                            android:layout_height="@dimen/_20sdp"
+                                            android:layout_margin="@dimen/_5sdp"
+                                            app:srcCompat="@drawable/ic_tot_m_minutes" />
 
                                         <TextView
                                             style="@style/TextRegular"
@@ -197,8 +229,19 @@
                                             android:layout_gravity="center_horizontal"
                                             android:gravity="center"
                                             android:text="@string/str_mindfulness_minutes"
-                                            android:textColor="@color/color_text_gray"
+                                            android:textColor="@color/color_white"
                                             android:textSize="@dimen/_12sdp" />
+
+                                        <TextView
+                                            android:id="@+id/tvMindfulnessMin"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_margin="@dimen/_5sdp"
+                                            android:fontFamily="@font/nunitosans_bold"
+                                            android:textColor="@color/color_white"
+                                            android:textSize="@dimen/_14sdp" />
+
                                     </LinearLayout>
                                 </LinearLayout>
                             </LinearLayout>
@@ -428,6 +471,28 @@
                     android:drawableEnd="@drawable/ic_chevron_right_black"
                     android:gravity="start"
                     android:text="Wallet"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/_15sdp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:background="@color/color_light_gray" />
+
+                <TextView
+                    android:id="@+id/tvDeleteAccount"
+                    style="@style/TextMiduam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:drawableEnd="@drawable/ic_chevron_right_black"
+                    android:gravity="start"
+                    android:text="Delete Account"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/_15sdp" />
 

@@ -22,11 +22,9 @@ public class MusicService extends Service {
         sRestoredFromPause = restore;
     }
 
-
     public final MediaPlayerHolder getMediaPlayerHolder() {
         return mMediaPlayerHolder;
     }
-
 
     public MusicNotificationManager getMusicNotificationManager() {
         return mMusicNotificationManager;
@@ -39,10 +37,14 @@ public class MusicService extends Service {
 
     @Override
     public void onDestroy() {
-        mMediaPlayerHolder.registerNotificationActionsReceiver(false);
-        mMusicNotificationManager = null;
-        mMediaPlayerHolder.release();
         super.onDestroy();
+        try {
+            mMediaPlayerHolder.registerNotificationActionsReceiver(false);
+            mMusicNotificationManager = null;
+            mMediaPlayerHolder.release();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -30,14 +30,12 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.facebook.FacebookSdk.getApplicationContext
 import com.facebook.login.LoginManager
-import com.getyoteam.budamind.Model.CommanResponseModel
-import com.getyoteam.budamind.Model.Profile
-import com.getyoteam.budamind.Model.ProfileImage
+import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.activity.*
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import com.getyoteam.budamind.utils.AppDatabase
 import com.getyoteam.budamind.utils.ManagePermissions
 import com.google.android.gms.auth.api.Auth
@@ -47,7 +45,6 @@ import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.common.api.Status
 import com.mindfulness.greece.model.MeditationStateModel
 import io.branch.referral.Branch
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.cvInternetToast
 import kotlinx.android.synthetic.main.fragment_profile.swipeToRefresh
@@ -68,21 +65,13 @@ import java.util.*
 import kotlin.collections.HashMap
 
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [ProfileFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class ProfileFragment : Fragment(), View.OnClickListener {
 
     private var alertDialog: AlertDialog? = null
+    private var alertDeleteDialog: AlertDialog? = null
     private lateinit var last_name: String
     private lateinit var first_name: String
-    private var totalMin: Int = 0
+//    private var totalMin: Int = 0
     private var meditationStateModel: MeditationStateModel? = null
     private lateinit var list: List<String>
     private var profile: Profile? = null
@@ -148,6 +137,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         ivEditCamera.setOnClickListener(this)
         ivSaveProfile.setOnClickListener(this)
         tvLogOut.setOnClickListener(this)
+        tvDeleteAccount.setOnClickListener(this)
         tvDownloads.setOnClickListener(this)
         tvUnlockClarityPremium.setOnClickListener(this)
         tvMindfulnessReminder.setOnClickListener(this)
@@ -193,13 +183,59 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         showDialog()
     }
 
+    private fun deleteProfile() {
+        swipeToRefresh.isRefreshing = true
+
+        val call = ApiUtils.getAPIService().deleteUser(authToken!!,userId)
+
+        call.enqueue(object : Callback<com.getyoteam.budamind.Model.Status> {
+            override fun onFailure(call: Call<com.getyoteam.budamind.Model.Status>, t: Throwable) {
+                if (isAdded) {
+                    if (swipeToRefresh != null)
+                        swipeToRefresh.isRefreshing = false
+
+                    Toast.makeText(activity, getString(R.string.str_something_went_wrong), Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+            override fun onResponse(call: Call<com.getyoteam.budamind.Model.Status>, response: Response<com.getyoteam.budamind.Model.Status>) {
+                if (response.code() == 200) {
+                    if (isAdded) {
+                        if (swipeToRefresh != null) {
+                            swipeToRefresh.isRefreshing = false
+
+                            val libraryModel = response.body()!!
+                            if (libraryModel.status.equals(getString(R.string.str_success))) {
+                                Branch.getInstance(getApplicationContext()).logout()
+                                MyApplication.prefs!!.isFirstApp = true
+                                logOutAfterDialog()
+                            } else {
+                                Toast.makeText(
+                                    activity,
+                                    getString(R.string.str_something_went_wrong),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }
+                }else{
+                    if (swipeToRefresh != null)
+                        swipeToRefresh.isRefreshing = false
+                        Toast.makeText(requireContext(), getString(R.string.str_something_went_wrong), Toast.LENGTH_SHORT)
+                            .show()
+                }
+            }
+        })
+    }
+
     private fun getProfileDetail() {
         swipeToRefresh.isRefreshing = true
         val retrofit = Retrofit.Builder()
             .baseUrl(getString(R.string.base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val mindFulNessAPI = retrofit.create(ClarityAPI::class.java)
+        val mindFulNessAPI = retrofit.create(API::class.java)
         val call = mindFulNessAPI.getProfileDetail(authToken!!, userId)
 
         call.enqueue(object : Callback<Profile> {
@@ -210,8 +246,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     requireActivity(),
                     getString(R.string.str_something_went_wrong),
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
             }
 
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
@@ -353,7 +388,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     ) {
         val userId = MyApplication.prefs!!.userId
 
-
         val userMap: java.util.HashMap<String, String> = java.util.HashMap<String, String>()
         userMap.put("userId", userId)
         userMap.put("currentStreak", currentStreak.toString())
@@ -384,7 +418,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             currentStreak = meditationStateModel?.getCurrentStreak() as Int
             longestStreak = meditationStateModel?.getLongestStreak() as Int
             totalSession = meditationStateModel?.getTotalSessions() as Int
-            totalMin = meditationStateModel?.getMinuteMeditated() as Int
+//            totalMin = meditationStateModel?.getMinuteMeditated() as Int
         }
 
         val calendar = Calendar.getInstance()
@@ -398,7 +432,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         val previousDate = MyApplication.prefs!!.prevDate
         if (!previousDate.equals(prevDateAsString)) {
             if (!previousDate.equals(todayAsString, ignoreCase = true)) {
-                setMeditationState(totalMin, 0, longestStreak, totalSession)
+                setMeditationState(0, 0, longestStreak, totalSession)
             }
         }
     }
@@ -410,7 +444,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             .baseUrl(getString(R.string.base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val mindFulNessAPI = retrofit.create(ClarityAPI::class.java)
+        val mindFulNessAPI = retrofit.create(API::class.java)
         val userMap: HashMap<String, String> = HashMap<String, String>()
         userMap.put("userId", userId)
         userMap.put("firstName", etFirstName.text.toString())
@@ -556,9 +590,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     val intent = Intent(requireContext(), SubScribedActivity::class.java)
                     startActivity(intent)
                 } else {
-                    val intent = Intent(requireContext(), SubscribeActivity::class.java)
-                    intent.putExtra("isFirstTime", false)
-                    startActivity(intent)
+//                    val intent = Intent(requireContext(), SubscribeActivity::class.java)
+//                    intent.putExtra("isFirstTime", false)
+//                    startActivity(intent)
                 }
             }
             R.id.tvDownloads -> {
@@ -569,6 +603,43 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 alertDialog!!.show()
 
             }
+            R.id.tvDeleteAccount -> {
+                val builder = AlertDialog.Builder(requireContext())
+
+                // Set a title for alert dialog
+                builder.setTitle("Delete Account")
+
+                // Set a message for alert dialog
+                builder.setMessage("Are you sure, you would like to delete account?")
+
+
+                // On click listener for dialog buttons
+                val dialogClickListener = DialogInterface.OnClickListener { _, which ->
+                    when (which) {
+                        DialogInterface.BUTTON_POSITIVE -> {
+
+                            deleteProfile()
+
+                        }
+                        DialogInterface.BUTTON_NEGATIVE -> alertDialog!!.dismiss()
+                    }
+                }
+
+
+                // Set the alert dialog positive/yes button
+                builder.setPositiveButton("Yes", dialogClickListener)
+
+                // Set the alert dialog negative/no button
+                builder.setNegativeButton("NO", dialogClickListener)
+
+                // Set the alert dialog neutral/cancel button
+
+                // Initialize the AlertDialog using builder object
+                alertDeleteDialog = builder.create()
+                alertDeleteDialog!!.show()
+
+            }
+
             R.id.tvChangePassword -> {
                 MyApplication.prefs!!.forgotPassword = false
                 val intent = Intent(requireActivity(), ChangePasswordActivity::class.java)
@@ -598,7 +669,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         val builder = AlertDialog.Builder(requireContext())
 
         // Set a title for alert dialog
-        builder.setTitle("Metatate")
+        builder.setTitle("Logout?")
 
         // Set a message for alert dialog
         builder.setMessage("Are you sure, you would like to Log Out?")
@@ -645,6 +716,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         MyApplication.prefs!!.weeklyMinute = 0f
         MyApplication.prefs!!.dailyMinute = 0f
         MyApplication.prefs!!.totalMeditateMinute = 0f
+        MyApplication.prefs!!.todayEarn = 0f
+        MyApplication.prefs!!.dailyEarnLimit = 0f
 
         db.meditationStateDao().deleteAll()
         db.chapterPlayedDao().deleteAllData()
@@ -903,7 +976,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             RequestBody.create(MediaType.parse("image/*"), imgFile)
         );
         val imageRequestBody = RequestBody.create(MediaType.parse("text/plain"), "customer_image");
-        val mindFulNessAPI = retrofit.create(ClarityAPI::class.java)
+        val mindFulNessAPI = retrofit.create(API::class.java)
 
         val call = mindFulNessAPI.updateUserProfilePhoto(
             multipartBody,

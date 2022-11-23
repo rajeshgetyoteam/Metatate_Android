@@ -30,7 +30,7 @@ import com.getyoteam.budamind.activity.MainActivity
 import com.getyoteam.budamind.activity.QuotesActivity
 import com.getyoteam.budamind.activity.ReminderActivity
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import com.getyoteam.budamind.playback.MusicService
 import com.getyoteam.budamind.utils.*
 import com.google.android.exoplayer2.ExoPlayer
@@ -42,6 +42,7 @@ import com.mindfulness.greece.model.MeditationStateModel
 import kotlinx.android.synthetic.main.activity_exoplayer_player.*
 import kotlinx.android.synthetic.main.custom_playback_control_minimal.*
 import okhttp3.OkHttpClient
+import org.jetbrains.anko.runOnUiThread
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,6 +56,7 @@ import java.util.concurrent.TimeUnit
 
 
 class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
+    var connection :ServiceConnection? = null
     private var curuntDuration = 0
     private var isFirstTime: Boolean = true
     private val TAG = "MainActivity"
@@ -128,50 +130,50 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
         chapterModel = gson.fromJson(jsonChapter, ChapterListModel::class.java)
         courseModel = gson.fromJson(jsonCourse, CourseListModel::class.java)
         meditationStateModel = gson.fromJson(jsonMeditation, MeditationStateModel::class.java)
-        headerTitle = chapterModel!!.getCourseName()
+        headerTitle = courseModel!!.getCourseName()
         headerSubTitle = chapterModel!!.getChapterName()
         audioPath = chapterModel!!.getAudioUrl()
         fileId = chapterModel!!.getChapterId()!!
         audioPath = chapterModel!!.getAudioUrl()
         modelName = "chapterModel"
 
-        isRewarded = chapterModel!!.getRewarded()!!
+        isRewarded = chapterModel!!.rewarded!!
 
 
-        if (isRewarded!!) {
-            layRewarded.visibility = View.GONE
-        } else {
-            layRewarded.visibility = View.VISIBLE
-        }
+//        if (isRewarded!!) {
+//            layRewarded.visibility = View.GONE
+//        } else {
+//            layRewarded.visibility = View.VISIBLE
+//        }
 
-
+        layRewarded.visibility = View.VISIBLE
         laybacword.setOnClickListener {
 
-            Toast.makeText(
-                this,
-                "You cannot skip the content.",
-                Toast.LENGTH_SHORT
-            ).show()
+//            Toast.makeText(
+//                this,
+//                "You cannot skip the content.",
+//                Toast.LENGTH_SHORT
+//            ).show()
         }
 
         layForword.setOnClickListener {
 
-            Toast.makeText(
-                this,
-                "You cannot skip the content.",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+//            Toast.makeText(
+//                this,
+//                "You cannot skip the content.",
+//                Toast.LENGTH_SHORT
+//            )
+//                .show()
         }
 
         layProgress.setOnClickListener {
 
-            Toast.makeText(
-                this,
-                "You cannot skip the content.",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+//            Toast.makeText(
+//                this,
+//                "You cannot skip the content.",
+//                Toast.LENGTH_SHORT
+//            )
+//                .show()
         }
 //        layRewarded.setOnClickListener {
 //
@@ -197,7 +199,7 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
             downloadFileModel!!.setModelName(modelName!!)
             downloadFileModel!!.setMinute("")
             downloadFileModel!!.setSubTitle(chapterModel!!.getChapterName()!!)
-            downloadFileModel!!.setTitle(chapterModel!!.getCourseName())
+            downloadFileModel!!.setTitle(courseModel!!.getCourseName())
             downloadFileModel!!.setAudioFilePath(getString(R.string.download_path) + packageName + "/")
         }
 
@@ -220,7 +222,7 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
 
         if (isSoundServiceRunning(MediaPlayerService::class.java.name)) {
             val intent = Intent(this, MediaPlayerService::class.java)
-            stopService(intent);
+            stopService(intent)
         }
 
 
@@ -340,10 +342,10 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
 //                        time = TimeUnit.MILLISECONDS.toSeconds(playerView.player.currentPosition).toLong()
 
                     }
-                    val min = TimeUnit.MILLISECONDS.toMinutes(playerView.player.currentPosition).toInt()
+                    val min = TimeUnit.MILLISECONDS.toMinutes(playerView.player!!.currentPosition).toInt()
                     val sec =
-                        TimeUnit.MILLISECONDS.toSeconds(playerView.player.duration) - TimeUnit.MINUTES.toSeconds(
-                            TimeUnit.MILLISECONDS.toMinutes(playerView.player.currentPosition))
+                        TimeUnit.MILLISECONDS.toSeconds(playerView.player!!.duration) - TimeUnit.MINUTES.toSeconds(
+                            TimeUnit.MILLISECONDS.toMinutes(playerView.player!!.currentPosition))
                     time = TimeUnit.MILLISECONDS.toSeconds(curuntDuration.toLong()).toLong()
                     val jsonObj = JSONObject()
                     if (time > 0) {
@@ -364,26 +366,24 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
                         stopService()
                     }
 
-
                     if (playerState == ExoPlayer.STATE_ENDED) {
 //                        if (!isAPICallingDone) {
                         if (MyApplication.prefs!!.firstMeditationId == 0) {
                             MyApplication.prefs!!.firstMeditationId = chapterModel!!.getCourseId()!!
                         }
-                        val min = TimeUnit.MILLISECONDS.toMinutes(playerView.player.currentPosition).toInt()
+                        val min = TimeUnit.MILLISECONDS.toMinutes(playerView.player!!.currentPosition).toInt()
                         val sec =
-                            TimeUnit.MILLISECONDS.toSeconds(playerView.player.currentPosition) - TimeUnit.MINUTES.toSeconds(
-                                TimeUnit.MILLISECONDS.toMinutes(playerView.player.currentPosition))
+                            TimeUnit.MILLISECONDS.toSeconds(playerView.player!!.currentPosition) - TimeUnit.MINUTES.toSeconds(
+                                TimeUnit.MILLISECONDS.toMinutes(playerView.player!!.currentPosition))
                         apiCallAfterAudioComleteAt90Per(min)
 
-//                        }
                         val chapterListPlayedModel = ChapterListPlayedModel()
                         chapterListPlayedModel.setAudioUrl(chapterModel!!.getAudioUrl()!!)
                         chapterListPlayedModel.setChapterId(chapterModel!!.getChapterId())
                         chapterListPlayedModel.setChapterName(chapterModel!!.getChapterName()!!)
                         chapterListPlayedModel.setCourseId(chapterModel!!.getCourseId()!!)
                         chapterListPlayedModel.setFreePaid(chapterModel!!.getFreePaid()!!)
-                        chapterListPlayedModel.setCourseName(chapterModel!!.getCourseName()!!)
+                        chapterListPlayedModel.setCourseName(courseModel!!.getCourseName()!!)
                         db!!.chapterPlayedDao().insertAll(chapterListPlayedModel)
                         MyApplication.prefs!!.courseId = chapterModel!!.getCourseId()!!
                         val isReminder = MyApplication.prefs!!.isReminder
@@ -405,15 +405,14 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
                             intentQuotesActivity.putExtra("courseModel", courseModel)
                             intentQuotesActivity.putExtra(
                                 "meditationStateModel",
-                                meditationStateModel
-                            )
+                                meditationStateModel)
                             startActivity(intentQuotesActivity)
                             finish()
                         }
                     }
 
                 } else {
-                    Log.e("@@@", "STATE_" + state)
+                    Log.e("@@@", "STATE_ $state")
 
                 }
             }
@@ -421,12 +420,41 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
 
         getQuote()
 
+        runOnUiThread {
+
+          connection = object : ServiceConnection {
+                override fun onServiceDisconnected(name: ComponentName?) {
+
+                }
+
+                override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                    if (service is AudioService.VideoServiceBinder) {
+                        print("service audio service player set")
+                        val mServiceBinder = service
+                        musicService = mServiceBinder.getService()
+                        musicService!!.play(
+                            audioPath!!,
+                            headerTitle,
+                            chapterModel!!.getChapterName(),
+                            downloadFileModelOld,
+                            chapterModel!!.getChapterId().toString(), isRewarded
+                        )
+
+                        playerView.player = service.getExoPlayerInstance()
+                        playerView.controllerAutoShow = true
+                        playerView.showController()
+                        playerView.controllerHideOnTouch = false
+                    }
+                }
+            }
+        }
+
     }
 
     private fun updateProgress() {
 
-        val min = playerView.player.duration.toInt()
-        val curntpos = playerView.player.currentPosition.toInt()
+        val min = playerView.player!!.duration.toInt()
+        val curntpos = playerView.player!!.currentPosition.toInt()
         curuntDuration = curntpos
         var percentage = (min / 100) * 80
 
@@ -450,15 +478,7 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getQuote() {
-        val client = OkHttpClient.Builder()
-            .connectTimeout(100, TimeUnit.SECONDS)
-            .readTimeout(100, TimeUnit.SECONDS).build()
-        val retrofit = Retrofit.Builder()
-            .baseUrl(getString(R.string.base_url))
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+
         val call = ApiUtils.getAPIService().getRandomQuotes()
 
         call.enqueue(object : Callback<QuoteModel> {
@@ -497,6 +517,7 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
     private fun stopService() {
         val serviceIntent = Intent(this@PlayerExoActivity, AudioService::class.java)
         stopService(serviceIntent)
+        Log.d("@@@","stopService")
         finish()
     }
 
@@ -513,14 +534,14 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
             resources.getColor(colorCardYellow),
             PorterDuff.Mode.SRC_IN
         )
-        exo_ffwd.setColorFilter(
-            resources.getColor(colorCardYellow),
-            PorterDuff.Mode.SRC_IN
-        )
-        exo_rew.setColorFilter(
-            resources.getColor(colorCardYellow),
-            PorterDuff.Mode.SRC_IN
-        )
+//        exo_ffwd.setColorFilter(
+//            resources.getColor(colorCardYellow),
+//            PorterDuff.Mode.SRC_IN
+//        )
+//        exo_rew.setColorFilter(
+//            resources.getColor(colorCardYellow),
+//            PorterDuff.Mode.SRC_IN
+//        )
         progressBar.indeterminateDrawable.setColorFilter(
             resources.getColor(colorCardYellow),
             PorterDuff.Mode.SRC_IN
@@ -541,7 +562,7 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
                 var time: Long = 0
 
                 if (playerView.player != null) {
-                    time = TimeUnit.MILLISECONDS.toSeconds(playerView.player.currentPosition).toLong()
+                    time = TimeUnit.MILLISECONDS.toSeconds(playerView.player!!.currentPosition).toLong()
                 }
                 val jsonObj = JSONObject()
                 if (time > 0) {
@@ -941,49 +962,27 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
             broadcastReceiver!!,
             IntentFilter("com.example.exoplayer.PLAYER_STATUS")
         )
+
+//        intentService = Intent(this, AudioPlayerService::class.java)
+//        bindService(intent, connection, Context.BIND_AUTO_CREATE)
+//        return Util.startForegroundService(this, intent)
         return if (Util.SDK_INT >= 26) {
-            bindService(intent, connection, Context.BIND_AUTO_CREATE)
-            context.startForegroundService(intent)
+            bindService(intent, connection!!, Context.BIND_AUTO_CREATE)
+            Util.startForegroundService(this,intent)
         } else {
-            bindService(intent, connection, Context.BIND_AUTO_CREATE)
+            bindService(intent, connection!!, Context.BIND_AUTO_CREATE)
             context.startService(intent)
         }
     }
 
-    private val connection = object : ServiceConnection {
-        override fun onServiceDisconnected(name: ComponentName?) {
 
-        }
-
-        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-            if (service is AudioService.VideoServiceBinder) {
-                print("service audio service player set")
-                val mServiceBinder = service
-                musicService = mServiceBinder.getService()
-                musicService!!.play(
-                    audioPath!!,
-                    headerTitle,
-                    chapterModel!!.getChapterName(),
-                    downloadFileModelOld,
-                    chapterModel!!.getChapterId().toString(), isRewarded
-                )
-
-
-                playerView.player = service.getExoPlayerInstance()
-                playerView.controllerAutoShow = true
-                playerView.showController()
-                playerView.controllerHideOnTouch = false
-            }
-        }
-    }
 
     override fun onDestroy() {
         if (checkInternetConnection()) {
-            unbindService(connection)
+            unbindService(connection!!)
             if (broadcastReceiver != null) {
                 LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver!!)
             }
-
         }
         stopService()
 

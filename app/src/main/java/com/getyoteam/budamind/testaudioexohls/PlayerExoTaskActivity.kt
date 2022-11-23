@@ -27,10 +27,8 @@ import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.activity.MainActivity
-import com.getyoteam.budamind.activity.QuotesActivity
-import com.getyoteam.budamind.activity.ReminderActivity
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import com.getyoteam.budamind.playback.MusicService
 import com.getyoteam.budamind.utils.*
 import com.google.android.exoplayer2.ExoPlayer
@@ -141,42 +139,42 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
         modelName = "chapterModel"
 
         isRewarded = false
-
-        if (isRewarded!!) {
-            layRewarded.visibility = View.GONE
-
-        } else {
-            layRewarded.visibility = View.VISIBLE
-        }
+        layRewarded.visibility = View.VISIBLE
+//        if (isRewarded!!) {
+//            layRewarded.visibility = View.GONE
+//
+//        } else {
+//            layRewarded.visibility = View.VISIBLE
+//        }
 
         laybacword.setOnClickListener {
 
-            Toast.makeText(
-                this,
-                "You cannot skip the content.",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+//            Toast.makeText(
+//                this,
+//                "You cannot skip the content.",
+//                Toast.LENGTH_SHORT
+//            )
+//                .show()
         }
 
         layForword.setOnClickListener {
 
-            Toast.makeText(
-                this,
-                "You cannot skip the content.",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+//            Toast.makeText(
+//                this,
+//                "You cannot skip the content.",
+//                Toast.LENGTH_SHORT
+//            )
+//                .show()
         }
 
         layProgress.setOnClickListener {
 
-            Toast.makeText(
-                this,
-                "You cannot skip the content.",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+//            Toast.makeText(
+//                this,
+//                "You cannot skip the content.",
+//                Toast.LENGTH_SHORT
+//            )
+//                .show()
         }
 
 //        layRewarded.setOnClickListener {
@@ -203,7 +201,7 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
             downloadFileModel!!.setModelName(modelName!!)
             downloadFileModel!!.setMinute("")
             downloadFileModel!!.setSubTitle(chapterModel!!.getChapterName()!!)
-            downloadFileModel!!.setTitle(chapterModel!!.getCourseName())
+            downloadFileModel!!.setTitle(courseModel!!.getCourseName())
             downloadFileModel!!.setAudioFilePath(getString(R.string.download_path) + packageName + "/")
         }
 
@@ -389,18 +387,16 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
                                 chapterModel!!.getCourseId()!!
                         }
                         val min =
-                            TimeUnit.MILLISECONDS.toMinutes(playerView.player.getCurrentPosition())
+                            TimeUnit.MILLISECONDS.toMinutes(playerView.player!!.getCurrentPosition())
                                 .toInt()
                         val sec =
-                            TimeUnit.MILLISECONDS.toSeconds(playerView.player.getCurrentPosition()) - TimeUnit.MINUTES.toSeconds(
+                            TimeUnit.MILLISECONDS.toSeconds(playerView.player!!.getCurrentPosition()) - TimeUnit.MINUTES.toSeconds(
                                 TimeUnit.MILLISECONDS.toMinutes(
-                                    playerView.player.getCurrentPosition()
+                                    playerView.player!!.getCurrentPosition()
                                 )
                             )
                         apiCallAfterAudioComleteAt90Per(min)
-
-
-//                            callRewardsAPI(chapterModel!!.getChapterId().toString())
+                            callRewardsAPI(chapterModel!!.getChapterId().toString())
 //                        }
                         val chapterListPlayedModel = ChapterListPlayedModel()
                         chapterListPlayedModel.setAudioUrl(chapterModel!!.getAudioUrl()!!)
@@ -408,31 +404,31 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
                         chapterListPlayedModel.setChapterName(chapterModel!!.getChapterName()!!)
                         chapterListPlayedModel.setCourseId(chapterModel!!.getCourseId()!!)
                         chapterListPlayedModel.setFreePaid(chapterModel!!.getFreePaid()!!)
-                        chapterListPlayedModel.setCourseName(chapterModel!!.getCourseName()!!)
+                        chapterListPlayedModel.setCourseName(courseModel!!.getCourseName()!!)
                         db!!.chapterPlayedDao().insertAll(chapterListPlayedModel)
                         MyApplication.prefs!!.courseId = chapterModel!!.getCourseId()!!
-                        val isFirtsTime = MyApplication.prefs!!.isFirstTime
-                        if (isFirtsTime!!) {
-                            val intentReminderActivity =
-                                Intent(this@PlayerExoTaskActivity, ReminderActivity::class.java)
-                            intentReminderActivity.putExtra("chapterModel", chapterModel)
-                            intentReminderActivity.putExtra("courseModel", courseModel)
-                            intentReminderActivity.putExtra(
-                                "meditationStateModel",
-                                meditationStateModel
-                            )
-                            startActivity(intentReminderActivity)
-                        } else {
-                            val intentQuotesActivity =
-                                Intent(this@PlayerExoTaskActivity, QuotesActivity::class.java)
-                            intentQuotesActivity.putExtra("chapterModel", chapterModel)
-                            intentQuotesActivity.putExtra("courseModel", courseModel)
-                            intentQuotesActivity.putExtra(
-                                "meditationStateModel",
-                                meditationStateModel
-                            )
-                            startActivity(intentQuotesActivity)
-                        }
+//                        val isFirtsTime = MyApplication.prefs!!.isFirstTime
+//                        if (isFirtsTime!!) {
+//                            val intentReminderActivity =
+//                                Intent(this@PlayerExoTaskActivity, ReminderActivity::class.java)
+//                            intentReminderActivity.putExtra("chapterModel", chapterModel)
+//                            intentReminderActivity.putExtra("courseModel", courseModel)
+//                            intentReminderActivity.putExtra(
+//                                "meditationStateModel",
+//                                meditationStateModel
+//                            )
+//                            startActivity(intentReminderActivity)
+//                        } else {
+//                            val intentQuotesActivity =
+//                                Intent(this@PlayerExoTaskActivity, QuotesActivity::class.java)
+//                            intentQuotesActivity.putExtra("chapterModel", chapterModel)
+//                            intentQuotesActivity.putExtra("courseModel", courseModel)
+//                            intentQuotesActivity.putExtra(
+//                                "meditationStateModel",
+//                                meditationStateModel
+//                            )
+//                            startActivity(intentQuotesActivity)
+//                        }
                     }
                     stopService()
                 } else {
@@ -448,10 +444,10 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun updateProgress() {
 
-        val min = playerView.player.duration.toInt()
-        val curntpos = playerView.player.currentPosition.toInt()
+        val min = playerView.player!!.duration.toInt()
+        val curntpos = playerView.player!!.currentPosition.toInt()
         curuntDuration = curntpos
-        var percentage = (min / 100) * 80
+        val percentage = (min / 100) * 80
 
         Log.e("@@@", "percentage: " + percentage)
         Log.e("@@@", "Totalmin: " + min)
@@ -482,7 +478,7 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+        val clarityAPI = retrofit.create(API::class.java)
         val call = ApiUtils.getAPIService().getRandomQuotes()
 
         call.enqueue(object : Callback<QuoteModel> {
@@ -537,14 +533,14 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
             resources.getColor(colorCardYellow),
             PorterDuff.Mode.SRC_IN
         )
-        exo_ffwd.setColorFilter(
-            resources.getColor(colorCardYellow),
-            PorterDuff.Mode.SRC_IN
-        )
-        exo_rew.setColorFilter(
-            resources.getColor(colorCardYellow),
-            PorterDuff.Mode.SRC_IN
-        )
+//        exo_ffwd.setColorFilter(
+//            resources.getColor(colorCardYellow),
+//            PorterDuff.Mode.SRC_IN
+//        )
+//        exo_rew.setColorFilter(
+//            resources.getColor(colorCardYellow),
+//            PorterDuff.Mode.SRC_IN
+//        )
         progressBar.indeterminateDrawable.setColorFilter(
             resources.getColor(colorCardYellow),
             PorterDuff.Mode.SRC_IN
@@ -564,7 +560,7 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
                 var time: Long = 0
 
                 if (playerView.player != null) {
-                    time = TimeUnit.MILLISECONDS.toSeconds(playerView.player.currentPosition).toLong()
+                    time = TimeUnit.MILLISECONDS.toSeconds(playerView.player!!.currentPosition).toLong()
                 }
                 val jsonObj = JSONObject()
                 if (time > 0) {
@@ -800,16 +796,14 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
             setMeditationState(min, currentStreak, longestStreak, totalSession + 1)
         }
     }
-
     private fun callRewardsAPI(id: String) {
 
         val userId = MyApplication.prefs!!.userId
 
+        val call = ApiUtils.getAPIService().getRewardsOnPlay(userId, "course", id)
 
-        val call = ApiUtils.getAPIService().claimForTask(userId, taskId)
-
-        call.enqueue(object : Callback<responceTaskModel> {
-            override fun onFailure(call: Call<responceTaskModel>, t: Throwable) {
+        call.enqueue(object : Callback<responceRewarModel> {
+            override fun onFailure(call: Call<responceRewarModel>, t: Throwable) {
 
                 Toast.makeText(
                     applicationContext,
@@ -820,22 +814,29 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onResponse(
-                call: Call<responceTaskModel>,
-                response: Response<responceTaskModel>
+                call: Call<responceRewarModel>,
+                response: Response<responceRewarModel>
             ) {
                 if (response.code() == 200) {
 
                     val commonModel = response.body()
                     if (commonModel!!.status.equals(getString(R.string.str_success))) {
-                        isgetRewordDone = true
+                        isRewarded = true
 
-                        wanCoinDialog(Utils.format(commonModel.creditedCoins!!.toBigInteger()))
+                        try {
+                            wanCoinDialog(Utils.format(commonModel.creditedCoins!!.toBigInteger()))
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+
 
                     }
                 }
             }
         })
     }
+
+
 
     fun wanCoinDialog(coin: String) {
         val dialog = Dialog(this)
@@ -946,7 +947,7 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
         )
         return if (Util.SDK_INT >= 26) {
             bindService(intent, connection, Context.BIND_AUTO_CREATE)
-            context.startForegroundService(intent)
+            Util.startForegroundService(this,intent)
         } else {
             bindService(intent, connection, Context.BIND_AUTO_CREATE)
             context.startService(intent)

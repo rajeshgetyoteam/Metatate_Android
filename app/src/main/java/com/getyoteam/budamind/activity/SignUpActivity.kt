@@ -27,7 +27,7 @@ import com.getyoteam.budamind.Model.LoginResponseModel
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.actionbar_layout.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -261,7 +261,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
             .baseUrl(getString(R.string.base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+        val clarityAPI = retrofit.create(API::class.java)
         val loginResponseModel = LoginResponseModel(
             pFirstName, pLastName, pPassword, pCustomerEmail,
             "", pLoginThrough, MyApplication.prefs!!.firebaseToken, tz.id.toString()
@@ -304,11 +304,11 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent)
                         }else{
-                            val intent = Intent(applicationContext, SubscribeActivity::class.java)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.putExtra("fromScreen","Login")
-                            startActivity(intent)
+//                            val intent = Intent(applicationContext, SubscribeActivity::class.java)
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            intent.putExtra("fromScreen","Login")
+//                            startActivity(intent)
                         }
                         finish()
                     } else {

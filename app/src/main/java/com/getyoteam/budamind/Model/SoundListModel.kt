@@ -54,6 +54,12 @@ class SoundListModel {
     @ColumnInfo(name = "purchased")
      var purchased: Boolean? = null
 
+    @SerializedName("rewarded")
+    @Expose
+    @ColumnInfo(name = "rewarded")
+    var rewarded: Boolean? = null
+
+
 
     @SerializedName("audio")
     @Expose
@@ -68,6 +74,38 @@ class SoundListModel {
     @Expose
     @ColumnInfo(name = "isFirstTime")
     private var isFirstTime: Boolean? = null
+
+
+    @SerializedName("banner")
+    @Expose
+    @ColumnInfo(name = "banner")
+     var image: String? = null
+
+    @SerializedName("ads")
+    @Expose
+    @ColumnInfo(name = "ads")
+    var isAds: Boolean? = false
+
+    @SerializedName("adLink")
+    @Expose
+    @ColumnInfo(name = "adLink")
+    var adLink: String? = ""
+
+    @SerializedName("adUrl")
+    @Expose
+    @ColumnInfo(name = "adUrl")
+    var adUrl: String? = null
+
+
+    @SerializedName("adHeight")
+    @Expose
+    @ColumnInfo(name = "adHeight")
+    var adHeight: String? = null
+
+    @SerializedName("adWidth")
+    @Expose
+    @ColumnInfo(name = "adWidth")
+    var adWidth: String? = null
 
     fun isFirstTime(): Boolean? {
         return isFirstTime

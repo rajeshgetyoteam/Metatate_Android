@@ -47,7 +47,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //        // Check if message contains a data payload.
         remoteMessage?.data?.isNotEmpty()?.let {
             Log.e(TAG, "Message data payload: " + remoteMessage.data)
-//
 //            // Handle message within 10 seconds
 //            handleNow()
         }
@@ -101,7 +100,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
             this, 0 /* Request code */, intent,
-            PendingIntent.FLAG_ONE_SHOT
+            PendingIntent.FLAG_ONE_SHOT  or PendingIntent.FLAG_IMMUTABLE
         )
 
         val channelId = getString(R.string.app_name)
@@ -120,7 +119,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setColor(ContextCompat.getColor(applicationContext,R.color.color_yellow))
             .setContentText(messageBody)
             .build()
-
 
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

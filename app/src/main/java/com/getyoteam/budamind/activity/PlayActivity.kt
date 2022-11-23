@@ -37,19 +37,19 @@ import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import com.getyoteam.budamind.playback.MusicNotificationManager
 import com.getyoteam.budamind.playback.MusicService
 import com.getyoteam.budamind.playback.PlaybackInfoListener
 import com.getyoteam.budamind.playback.PlayerAdapter
 import com.getyoteam.budamind.testaudioexohls.AudioService
 import com.getyoteam.budamind.utils.*
+import com.google.android.exoplayer2.util.Util
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.mindfulness.greece.model.MeditationStateModel
 import kotlinx.android.synthetic.main.activity_play.*
 import okhttp3.OkHttpClient
-import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 import retrofit2.Call
@@ -70,7 +70,6 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var downloadFileModel: DownloadFileModel
     private var downloadFileModelOld: DownloadFileModel? = null
     private var mIsBound: Boolean? = false
-
     var mConnection :ServiceConnection? = null
     private var isAPICallingDone: Boolean = false
     private var momentModel: MomentListModel? = null
@@ -85,9 +84,6 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
     private var title: String? = null
     private var audioPath: String? = null
     private var mUserIsSeeking = false
-    private var totalMin: Int = 0
-    private var totalDailyMin: Int = 0
-    private var totalWeeklyMin: Int = 0
     private var totalSession: Int = 0
     private var longestStreak: Int = 0
     private var currentStreak: Int = 0
@@ -96,9 +92,6 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
     private var mMusicService: MusicService? = null
     private var mMusicNotificationManager: MusicNotificationManager? = null
     private var mPlaybackListener: PlaybackListener? = null
-
-
-
 
     inner class PlaybackListener : PlaybackInfoListener() {
 
@@ -137,7 +130,7 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         override fun onBufferUpdate(position: Int) {
-            song_progressbar.setSecondaryProgress(position * seekPer)
+            song_progressbar.secondaryProgress = position * seekPer
         }
 
         override fun onPlaybackStarted(totalDuration: Long) {
@@ -182,7 +175,6 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
             }
             val jsonObj = JSONObject()
             if (time > 0){
-//                    jsonObj.put("chapterId", chapterId)
                 jsonObj.put("userId", userId)
                 jsonObj.put("tabName", "Moment")
                 jsonObj.put("tabId", momentModel!!.getMomentId())
@@ -198,18 +190,15 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
 
         val userId = MyApplication.prefs!!.userId
 
-
         val call = ApiUtils.getAPIService().getRewardsOnPlay(userId, "moment", momentId)
 
         call.enqueue(object : Callback<responceRewarModel> {
             override fun onFailure(call: Call<responceRewarModel>, t: Throwable) {
-
                 Toast.makeText(
                     applicationContext,
                     getString(R.string.str_something_went_wrong),
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
             }
 
             override fun onResponse(
@@ -217,7 +206,6 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
                 response: Response<responceRewarModel>
             ) {
                 if (response.code() == 200) {
-
                     val commonModel = response.body()
                     if (commonModel!!.status.equals(getString(R.string.str_success))) {
 
@@ -274,7 +262,7 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+        val clarityAPI = retrofit.create(API::class.java)
         val call = ApiUtils.getAPIService().getRandomQuotes()
 
         call.enqueue(object : Callback<QuoteModel> {
@@ -299,7 +287,6 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-
     private fun loadSeekBar(totalDuration: Long) {
         val time = String.format(
             "%02d:%02d",
@@ -320,7 +307,6 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
 //            song_progressbar.setSecondaryProgress(100 * seekPer)
         }
     }
-
 
     private fun updatePlayingInfo(restore: Boolean, startPlay: Boolean, state: Int) {
         if (startPlay) {
@@ -352,7 +338,6 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
             }, 250)
         }
     }
-
 
     private fun updatePlayingStatus() {
         val drawable = if (mPlayerAdapter!!.getState() != PlaybackInfoListener.State.PAUSED)
@@ -394,7 +379,6 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
     private fun doBindService() {
         // Establish a connection with the service.  We use an explicit
         // class name because we want a specific service implementation that
@@ -409,9 +393,9 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         mIsBound = true
 
         val startNotStickyIntent = Intent(this, MusicService::class.java)
-        startService(startNotStickyIntent)
+//        startService(startNotStickyIntent)
+        Util.startForegroundService(this,startNotStickyIntent)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -548,12 +532,12 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
 
         if (isSoundServiceRunning(MediaPlayerService::class.java.getName())) {
             val intent = Intent(this, MediaPlayerService::class.java)
-            stopService(intent);
+//            stopService(intent)
         }
 
         if (isSoundServiceRunning(AudioService::class.java.getName())) {
             val intent = Intent(this, AudioService::class.java)
-            stopService(intent);
+            stopService(intent)
         }
 
         //Retrieve Data from preference into ModelArrayList
@@ -565,18 +549,19 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         meditationStateModel = gson.fromJson(jsonMeditation, MeditationStateModel::class.java)
 
 
-        if (momentModel!!.getRewarded() != null && momentModel!!.getRewarded()!!) {
-            layReward.visibility = View.GONE
-        } else {
-            layReward.visibility = View.VISIBLE
-        }
+//        if (momentModel!!.getRewarded() != null && momentModel!!.getRewarded()!!) {
+//            layReward.visibility = View.GONE
+//        } else {
+//            layReward.visibility = View.VISIBLE
+//        }
+        layReward.visibility = View.VISIBLE
         layReward.setOnClickListener {
 
-            Toast.makeText(
-                this,
-                "You cannot skip the content.",
-                Toast.LENGTH_SHORT
-            ).show()
+//            Toast.makeText(
+//                this,
+//                "You cannot skip the content.",
+//                Toast.LENGTH_SHORT
+//            ).show()
         }
 
         if (momentModel != null) {
@@ -666,7 +651,7 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         tvPlaySubTitle.text = subTitle
 
         progressBar.indeterminateDrawable.setColorFilter(
-            ContextCompat.getColor(this, R.color.color_black),
+            ContextCompat.getColor(this, R.color.color_white),
             PorterDuff.Mode.SRC_IN
         )
 
@@ -697,12 +682,9 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         song_progressbar!!.getThumb()
             .setColorFilter(resources.getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
-
         getQuote()
 
     }
-
-
 
     fun isSoundServiceRunning(serviceName: String): Boolean {
         val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
@@ -729,8 +711,6 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         }
 
     }
-
-
 
     override fun onResume() {
         super.onResume()

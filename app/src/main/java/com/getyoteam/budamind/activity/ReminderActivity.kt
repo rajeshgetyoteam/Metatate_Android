@@ -91,7 +91,7 @@ class ReminderActivity : AppCompatActivity(), View.OnClickListener {
         alarmMgr = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         alarmIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
-            PendingIntent.getBroadcast(this, 0, intent, 0)
+            PendingIntent.getBroadcast(this, 0, intent, 0 or PendingIntent.FLAG_IMMUTABLE)
         }
 
     }

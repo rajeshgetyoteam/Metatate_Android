@@ -23,7 +23,7 @@ import com.getyoteam.budamind.Model.CommanResponseModel
 import com.getyoteam.budamind.Model.ProfileImage
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import com.getyoteam.budamind.utils.ManagePermissions
 import kotlinx.android.synthetic.main.activity_update_profile.*
 import okhttp3.MediaType
@@ -64,8 +64,8 @@ class UpdateProfileActivity : AppCompatActivity(), View.OnClickListener {
         )
 
         isFirstTime = intent.getBooleanExtra("isFirstTime", false)
-        wallateStatus = intent.getStringExtra("wallateStatus")
-        tokenCredited = intent.getStringExtra("credited")
+        wallateStatus = intent.getStringExtra("wallateStatus").toString()
+        tokenCredited = intent.getStringExtra("credited").toString()
 
         etEmail.text = MyApplication.prefs!!.email
 
@@ -101,7 +101,7 @@ class UpdateProfileActivity : AppCompatActivity(), View.OnClickListener {
             .baseUrl(getString(R.string.base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val mindFulNessAPI = retrofit.create(ClarityAPI::class.java)
+        val mindFulNessAPI = retrofit.create(API::class.java)
         val userMap: HashMap<String, String> = HashMap<String, String>()
         userMap.put("userId", userId)
         userMap.put("firstName", etFirstName.text.toString())
@@ -354,7 +354,7 @@ class UpdateProfileActivity : AppCompatActivity(), View.OnClickListener {
             RequestBody.create(MediaType.parse("image/*"), imgFile)
         );
         val imageRequestBody = RequestBody.create(MediaType.parse("text/plain"), "customer_image");
-        val mindFulNessAPI = retrofit.create(ClarityAPI::class.java)
+        val mindFulNessAPI = retrofit.create(API::class.java)
 
         val call = mindFulNessAPI.updateUserProfilePhoto(
             multipartBody,

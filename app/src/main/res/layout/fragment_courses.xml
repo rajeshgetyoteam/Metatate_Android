@@ -12,15 +12,28 @@
             android:layout_height="match_parent"
             android:background="@color/color_white">
 
+        <TextView
+            android:id="@+id/tvMomentHeader"
+            style="@style/TextRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/str_course_are_short_guided_meditation_that_will_nhelp_you_during_day_to_day_activities"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/_12sdp" />
+
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCourseList"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:visibility="visible"
-                android:layout_height="match_parent"/>
+            android:id="@+id/rvCourseList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tvMomentHeader"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <TextView
             android:layout_centerInParent="true"

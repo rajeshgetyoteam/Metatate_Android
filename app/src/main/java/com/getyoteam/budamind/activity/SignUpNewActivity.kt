@@ -11,7 +11,7 @@ import com.getyoteam.budamind.Model.StatusModel
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_sign_up_new.*
 import okhttp3.OkHttpClient
@@ -110,7 +110,7 @@ class SignUpNewActivity : AppCompatActivity(), View.OnClickListener {
                         ).show()
 
 
-                        val intent = Intent(applicationContext, VerifyedOTPActivity::class.java)
+                        val intent = Intent(applicationContext, VerifyOTPActivity::class.java)
                         intent.putExtra("email", pCustomerEmail)
                         intent.putExtra("otp", commonModel.otp)
                         startActivity(intent)
@@ -152,7 +152,7 @@ class SignUpNewActivity : AppCompatActivity(), View.OnClickListener {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+        val clarityAPI = retrofit.create(API::class.java)
         val loginResponseModel = LoginResponseModel(
             "", "", pPassword, pCustomerEmail,
             "", pLoginThrough, MyApplication.prefs!!.firebaseToken,
@@ -197,9 +197,9 @@ class SignUpNewActivity : AppCompatActivity(), View.OnClickListener {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent)
                         } else {
-                            val intent = Intent(applicationContext, SubscribeActivity::class.java)
-                            intent.putExtra("fromScreen", "Login")
-                            startActivity(intent)
+//                            val intent = Intent(applicationContext, SubscribeActivity::class.java)
+//                            intent.putExtra("fromScreen", "Login")
+//                            startActivity(intent)
                         }
                         finish()
                     } else {

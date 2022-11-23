@@ -32,7 +32,6 @@ import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.adapter.ChapterAdapter
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
 import com.getyoteam.budamind.testaudioexohls.PlayerExoActivity
 import com.getyoteam.budamind.utils.*
 import com.google.android.material.snackbar.Snackbar
@@ -42,18 +41,14 @@ import kotlinx.android.synthetic.main.activity_chapter.*
 import kotlinx.android.synthetic.main.activity_chapter.cvInternetToast
 import kotlinx.android.synthetic.main.activity_chapter.swipeToRefresh
 import kotlinx.android.synthetic.main.activity_chapter.tvCourseMin
-import kotlinx.android.synthetic.main.fragment_courses.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
 class ChapterActivity : AppCompatActivity(),
-    ChapterAdapter.OnChapterAdapterInteractionListener, View.OnClickListener{
+    ChapterAdapter.OnChapterAdapterInteractionListener, View.OnClickListener {
     private var isFree: Boolean = true
     private var firstCourseModel: CourseListModel? = null
     private var index: Int? = -1
@@ -93,22 +88,20 @@ class ChapterActivity : AppCompatActivity(),
             subTitle = courseModel!!.getDescription()
             courseId = courseModel!!.getCourseId()
 
-            if (courseModel!!.freePaid.equals("Free")){
+            if (courseModel!!.freePaid.equals("Free")) {
                 layPrice.visibility = View.GONE
-            }else{
-                if (courseModel!!.purchased!!){
+            } else {
+                if (courseModel!!.purchased!!) {
                     layPrice.visibility = View.GONE
-                }else{
-                    if (courseModel!!.coins != null){
+                } else {
+                    if (courseModel!!.coins != null) {
                         val p = Utils.format(courseModel!!.coins!!.toBigInteger())
 
-                        tvPrice.text = p.replace("$","$"+"CHI")
-                    }else{
+                        tvPrice.text = p.replace("$", "$" + "CHI")
+                    } else {
                         tvPrice.text = "0"
                     }
-
                 }
-
             }
         } else {
             courseDownloadModel = intent.extras!!.get("courseDownloadModel") as CourseDownloadModel
@@ -202,42 +195,49 @@ class ChapterActivity : AppCompatActivity(),
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ivDownload -> {
-                if (courseModel!!.purchased!! || isFree) {
-                    courseDownload = db.courseDownloadDao().loadAllByIds(courseId)
-                    if (courseDownload != null) {
-                        val snackbar = Snackbar.make(
-                            parentLayout,
-                            getString(R.string.str_delete_all_file),
-                            Snackbar.LENGTH_INDEFINITE
-                        )
-                            .setAction(getString(R.string.str_yes), object : View.OnClickListener {
-                                override fun onClick(v: View?) {
-                                    deleteFiles()
-                                }
+                try {
+                    if (courseModel!!.purchased!! || isFree) {
+                        courseDownload = db.courseDownloadDao().loadAllByIds(courseId)
+                        if (courseDownload != null) {
+                            val snackbar = Snackbar.make(
+                                parentLayout,
+                                getString(R.string.str_delete_all_file),
+                                Snackbar.LENGTH_INDEFINITE
+                            )
+                                .setAction(
+                                    getString(R.string.str_yes),
+                                    object : View.OnClickListener {
+                                        override fun onClick(v: View?) {
+                                            deleteFiles()
+                                        }
 
-                            })
-                        snackbar.view.setOnClickListener {
-                            snackbar.dismiss()
-                        }
-                        snackbar.show();
-                    } else {
-                        if (checkInternetConnection()) {
-                            checkDownloadPermmission()
+                                    })
+                            snackbar.view.setOnClickListener {
+                                snackbar.dismiss()
+                            }
+                            snackbar.show();
                         } else {
-                            Toast.makeText(
-                                this@ChapterActivity,
-                                getString(R.string.str_check_internet_connection),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            if (checkInternetConnection()) {
+                                checkDownloadPermmission()
+                            } else {
+                                Toast.makeText(
+                                    this@ChapterActivity,
+                                    getString(R.string.str_check_internet_connection),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
-                    }
 
-                } else {
+                    } else {
 //                    val intent = Intent(this, SubscribeActivity::class.java)
 //                    intent.putExtra("isFirstTime", false)
 //                    startActivity(intent)
-                    purchaseDialogCourse(courseId)
+                        purchaseDialogCourse(courseId)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
+
             }
 
             R.id.circleProgressNormal -> {
@@ -248,7 +248,6 @@ class ChapterActivity : AppCompatActivity(),
             }
         }
     }
-
 
     private fun checkDownloadPermmission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -300,7 +299,7 @@ class ChapterActivity : AppCompatActivity(),
             filename = fileSting.replace("%20", " ")
         }
 
-        Log.e("@@@!", filename)
+        Log.e("@@@!", filename.toString())
         downloadFileModelOld = db.downloadDao().loadDownloadFile(filename!!)
         if (downloadFileModelOld != null) {
 //            ivDownload.visibility = View.VISIBLE
@@ -367,7 +366,7 @@ class ChapterActivity : AppCompatActivity(),
                     circleProgressNormal.progress = curProcess + downloadPer!!
 
                     db.downloadDao().insertDownloadFile(downloadFileModel)
-                    Log.e("@@@==", downloadFileModel.getFileName())
+                    Log.e("@@@==", downloadFileModel.getFileName().toString())
 
                     tvAllDownloading.setText("Downloading " + (pos + 1) + " out of " + chapterArrayList.size.toString() + "...")
 
@@ -406,7 +405,6 @@ class ChapterActivity : AppCompatActivity(),
     }
 
 
-    // Receive the permissions request result
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>,
         grantResults: IntArray
@@ -462,7 +460,6 @@ class ChapterActivity : AppCompatActivity(),
             playChapterSong(chapterListModel)
         }
     }
-
 
     fun purchaseDialogCourse(courseId: Int?) {
         val dialog = Dialog(this)
@@ -562,7 +559,6 @@ class ChapterActivity : AppCompatActivity(),
         })
     }
 
-
     fun wanCoinDialog(chapterId: Int?) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -660,6 +656,7 @@ class ChapterActivity : AppCompatActivity(),
             }
         })
     }
+
     private fun playChapterSong(chapterListModel: ChapterListModel) {
         if (courseModel == null) {
             courseModel = CourseListModel()
@@ -675,39 +672,39 @@ class ChapterActivity : AppCompatActivity(),
 
 //            courseModel!!.setHappiness(courseDownloadModel!!.getHappiness())
 
-            if(courseDownloadModel!!.getHappiness() != null){
+            if (courseDownloadModel!!.getHappiness() != null) {
                 courseModel!!.setFocus(courseDownloadModel!!.getHappiness()!!)
             }
 //            courseModel!!.setGratitute(courseDownloadModel!!.getGratitute()!!)
 
-            if(courseDownloadModel!!.getGratitute() != null){
+            if (courseDownloadModel!!.getGratitute() != null) {
                 courseModel!!.setFocus(courseDownloadModel!!.getGratitute()!!)
             }
 //            courseModel!!.setMeditate(courseDownloadModel!!.getMeditate()!!)
-            if(courseDownloadModel!!.getMeditate() != null){
+            if (courseDownloadModel!!.getMeditate() != null) {
                 courseModel!!.setFocus(courseDownloadModel!!.getMeditate()!!)
             }
 //            courseModel!!.setSelfEsteem(courseDownloadModel!!.getSelfEsteem()!!)
-            if(courseDownloadModel!!.getSelfEsteem() != null){
+            if (courseDownloadModel!!.getSelfEsteem() != null) {
                 courseModel!!.setFocus(courseDownloadModel!!.getSelfEsteem()!!)
             }
 
 //            courseModel!!.setSleep(courseDownloadModel!!.getSleep()!!)
 
-            if(courseDownloadModel!!.getSleep() != null){
+            if (courseDownloadModel!!.getSleep() != null) {
                 courseModel!!.setFocus(courseDownloadModel!!.getSleep()!!)
             }
 
 //            courseModel!!.setStress(courseDownloadModel!!.getStress()!!)
 
-            if(courseDownloadModel!!.getStress() != null){
+            if (courseDownloadModel!!.getStress() != null) {
                 courseModel!!.setFocus(courseDownloadModel!!.getStress()!!)
             }
 
-            if(courseDownloadModel!!.getFocus() != null){
+            if (courseDownloadModel!!.getFocus() != null) {
                 courseModel!!.setFocus(courseDownloadModel!!.getFocus()!!)
             }
-            if(courseDownloadModel!!.getAnxiety() != null){
+            if (courseDownloadModel!!.getAnxiety() != null) {
                 courseModel!!.setFocus(courseDownloadModel!!.getAnxiety())
             }
 
@@ -720,9 +717,9 @@ class ChapterActivity : AppCompatActivity(),
         val mMyPrefManager = MyPreferenceManager(this)
 
         val gson = Gson()
-        val jsonChapter = gson.toJson(chapterListModel);
-        val jsonCourse = gson.toJson(courseModel);
-        val jsonMeditation = gson.toJson(meditationStateModel);
+        val jsonChapter = gson.toJson(chapterListModel)
+        val jsonCourse = gson.toJson(courseModel)
+        val jsonMeditation = gson.toJson(meditationStateModel)
         MyApplication.prefs!!.chapterModel = jsonChapter
         MyApplication.prefs!!.courseModel = jsonCourse
         MyApplication.prefs!!.stateModel = jsonMeditation
@@ -736,29 +733,25 @@ class ChapterActivity : AppCompatActivity(),
 //        intent.putExtra("courseModel", courseModel)
 //        intent.putExtra("meditationStateModel", meditationStateModel)
         startActivity(intent)
+
+
     }
 
     private fun getChapterList() {
         if (chapterArrayList.size < 1) {
-            swipeToRefresh.setRefreshing(true)
+            swipeToRefresh.isRefreshing = true
         }
-        val retrofit = Retrofit.Builder()
-            .baseUrl(getString(R.string.base_url))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
         val call = ApiUtils.getAPIService().getChapterList(courseId, userId)
 
         call.enqueue(object : Callback<ChapterResponse> {
             override fun onFailure(call: Call<ChapterResponse>, t: Throwable) {
                 if (swipeToRefresh != null)
-                    swipeToRefresh.setRefreshing(false)
+                    swipeToRefresh.isRefreshing = false
                 Toast.makeText(
                     this@ChapterActivity,
                     getString(R.string.str_something_went_wrong),
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
             }
 
 
@@ -767,7 +760,7 @@ class ChapterActivity : AppCompatActivity(),
                 response: Response<ChapterResponse>
             ) {
                 if (swipeToRefresh != null)
-                    swipeToRefresh.setRefreshing(false)
+                    swipeToRefresh.isRefreshing = false
 
                 if (response.code() == 200) {
                     val chapterResponse = response.body()!!
@@ -791,11 +784,13 @@ class ChapterActivity : AppCompatActivity(),
 
                     for (i in 0..chapterArrayList.size - 1) {
                         val chapterListModel = chapterArrayList.get(i)
-                        if (courseModel != null){
+                        if (courseModel != null) {
                             chapterListModel.setCourseName(courseModel!!.getCourseName().toString())
                         }
-                        if (courseDownloadModel != null){
-                            chapterListModel.setCourseName(courseDownloadModel!!.getCourseName().toString())
+                        if (courseDownloadModel != null) {
+                            chapterListModel.setCourseName(
+                                courseDownloadModel!!.getCourseName().toString()
+                            )
                         }
 
                         if (chapterListModel.getFreePaid().equals("paid", ignoreCase = true)) {
@@ -825,8 +820,12 @@ class ChapterActivity : AppCompatActivity(),
         if (chapterPlayedArrayList.size > 0) {
             chapterPlayedArrayList.clear()
         }
-        chapterArrayList.addAll(db.chapterDao().loadAllByIds(courseId!!) as ArrayList<ChapterListModel>)
-        chapterPlayedArrayList.addAll(db.chapterPlayedDao().loadAllByIds(courseId!!) as List<ChapterListPlayedModel>)
+        chapterArrayList.addAll(
+            db.chapterDao().loadAllByIds(courseId!!) as ArrayList<ChapterListModel>
+        )
+        chapterPlayedArrayList.addAll(
+            db.chapterPlayedDao().loadAllByIds(courseId!!) as List<ChapterListPlayedModel>
+        )
 
         for (i in 0..chapterArrayList.size - 1) {
             val chapterListModel = chapterArrayList.get(i)
@@ -864,16 +863,15 @@ class ChapterActivity : AppCompatActivity(),
         downloadChapterList.addAll(db.downloadDao().getAll() as ArrayList<DownloadFileModel>)
 
         totalChapterDownloaded = 0
-        for (i in 0..chapterArrayList.size - 1) {
+        for (i in 0 until chapterArrayList.size) {
             audioPath = chapterArrayList.get(i).getAudioUrl()
             if (audioPath != null) {
-               var fileName = audioPath!!.substring(audioPath!!.lastIndexOf('/') + 1)
+                val fileName = audioPath!!.substring(audioPath!!.lastIndexOf('/') + 1)
                 fileNametemp = fileName.replace("%20", " ")
             }
-            for (j in 0..downloadChapterList.size - 1) {
-                if (fileNametemp.equals(downloadChapterList.get(j).getFileName(), ignoreCase = true)) {
+            for (j in 0 until downloadChapterList.size) {
+                if (fileNametemp.equals(downloadChapterList[j].getFileName(), ignoreCase = true)) {
                     totalChapterDownloaded++
-                    break
                 }
             }
         }
@@ -882,7 +880,7 @@ class ChapterActivity : AppCompatActivity(),
 
         if (totalChapterDownloaded == chapterListSize) {
             ivDownload.setImageResource(R.drawable.ic_download_done)
-            tvAllDownloading.setText(chapterArrayList.size.toString() + " sessions downloaded")
+            tvAllDownloading.text = chapterArrayList.size.toString() + " sessions downloaded"
         } else {
             ivDownload.setImageResource(R.drawable.ic_download)
         }
@@ -891,7 +889,6 @@ class ChapterActivity : AppCompatActivity(),
             ChapterAdapter(chapterArrayList, chapterPlayedArrayList, this@ChapterActivity, this)
 
     }
-
 
     private fun checkInternetConnection(): Boolean {
         val connectivityManager =

@@ -26,13 +26,6 @@ import com.mindfulness.greece.model.MeditationStateModel
 import kotlinx.android.synthetic.main.fragment_moments.*
 import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MomentsDownloadFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- *
- */
 class MomentsDownloadFragment : Fragment(),
     MomentAdapter.OnMomentAdapterInteractionListener {
 
@@ -79,13 +72,13 @@ class MomentsDownloadFragment : Fragment(),
                 if (meditationStateModel == null) {
                     val meditationStateModelList = db.meditationStateDao().getAll()
                     if (meditationStateModelList.size > 0) {
-                        meditationStateModel = meditationStateModelList.get(0)
+                        meditationStateModel = meditationStateModelList[0]
                     }
                 }
 
                 val intent = Intent(requireContext(), PlayActivity::class.java)
 
-                var momentListModel = MomentListModel()
+                val momentListModel = MomentListModel()
                 momentListModel.setImage(downloadModel.getImageFile()!!)
                 momentListModel.setMomentId(downloadModel.getFileId()!!)
                 momentListModel.setTitle(downloadModel.getTitle()!!)
@@ -109,7 +102,7 @@ class MomentsDownloadFragment : Fragment(),
     }
 
     override fun onMomentAdapterInteractionListener(
-        courseModel: CourseListModel,
+        courseModel: MomentListModel,
         wantToDelete: Boolean
     ) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

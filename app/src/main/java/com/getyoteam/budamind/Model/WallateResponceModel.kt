@@ -15,6 +15,10 @@ class WallateResponceModel {
     @Expose
      var balance: String? = null
 
+    @SerializedName("withdrawLimit")
+    @Expose
+    var withdrawLimit: String? = null
+
     @SerializedName("withdrawEnable")
     @Expose
     var isWithdrawEnable: Boolean? = null

@@ -14,7 +14,7 @@ import com.getyoteam.budamind.Model.CommonModel
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import kotlinx.android.synthetic.main.activity_reset_password.*
 import kotlinx.android.synthetic.main.activity_reset_password.cbPassword
 import kotlinx.android.synthetic.main.activity_reset_password.etPassword
@@ -91,7 +91,7 @@ class ResetPasswordActivity : AppCompatActivity(), View.OnClickListener {
             .baseUrl(getString(R.string.base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+        val clarityAPI = retrofit.create(API::class.java)
         val call = ApiUtils.getAPIService().setPassword(userId, firebaseToken, pPassword)
 
         call.enqueue(object : Callback<CommonModel> {
@@ -121,9 +121,9 @@ class ResetPasswordActivity : AppCompatActivity(), View.OnClickListener {
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             startActivity(intent)
                         }else{
-                            val intent = Intent(applicationContext, SubscribeActivity::class.java)
-                            intent.putExtra("fromScreen","Login")
-                            startActivity(intent)
+//                            val intent = Intent(applicationContext, SubscribeActivity::class.java)
+//                            intent.putExtra("fromScreen","Login")
+//                            startActivity(intent)
                         }
                         finish()
                     } else {

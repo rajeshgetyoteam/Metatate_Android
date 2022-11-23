@@ -64,8 +64,8 @@ class AlarmNotificationService : IntentService("AlarmNotificationService") {
             putExtra(ACTION_SNOOZE, mNotificationId)
         }
         val snoozePendingIntent: PendingIntent =
-            PendingIntent.getBroadcast(this, 0, snoozeIntent, 0)
-        val pendingIntent = PendingIntent.getActivity(context, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(this, 0, snoozeIntent, 0 or PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent = PendingIntent.getActivity(context, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val res = this.resources
         val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 

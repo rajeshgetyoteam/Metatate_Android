@@ -69,13 +69,14 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <TextView
+                    android:id="@+id/tvEarnSpent"
                     style="@style/TextRegular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
 
                     android:gravity="center|start"
-                    android:text="Received"
+                    android:text="Earned"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/_12sdp" />
             </LinearLayout>

@@ -16,6 +16,7 @@ import com.getyoteam.budamind.Model.CourseDownloadModel
 import com.getyoteam.budamind.Model.DownloadFileModel
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.utils.AppDatabase
+import com.getyoteam.budamind.utils.Utils
 import kotlinx.android.synthetic.main.raw_course_item.view.*
 
 
@@ -55,9 +56,29 @@ class CourseDownloadAdapter(
         viewHolder.tvSleepTitle.text = courseModelArraylist!!.get(possion).getCourseName()!!.trim()
         val min = courseModelArraylist.get(possion).getToMinutes().toString()
         viewHolder.tvSleepSubTitle.text = min + " mins"
-
+        viewHolder.ivLock.visibility = View.GONE
+        viewHolder.layPrice.visibility = View.GONE
         val color = Color.parseColor(courseModelArraylist!!.get(possion).getColorCode())
 //        viewHolder.ivSleepImage.setBackgroundColor(color)
+
+//        if (courseModelArraylist.get(possion).freePaid.equals("Free",true)){
+//            viewHolder.layPrice.visibility = View.GONE
+//            viewHolder.ivLock.visibility = View.GONE
+//
+//        }else{
+//
+//            if (courseModelArraylist.get(possion).purchased!!){
+//                viewHolder.layPrice.visibility = View.GONE
+//                viewHolder.ivLock.visibility = View.GONE
+//            }else {
+//                if (courseModelArraylist.get(possion).coins != null) {
+//                    val token = Utils.format(courseModelArraylist.get(possion).coins!!.toBigInteger())
+//                    viewHolder.tvPrice.text = token.toString().replace("$","$"+"CHI")
+//                } else {
+//                    viewHolder.tvPrice.text = "0"
+//                }
+//            }
+//        }
 
         Glide.with(context)
             .load(courseModelArraylist.get(possion).getBanner())
@@ -66,7 +87,7 @@ class CourseDownloadAdapter(
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(viewHolder.ivSleepImage)
 
-        viewHolder.ivSleepImage.setOnClickListener {
+        viewHolder.itemView.setOnClickListener {
             onCourseDownloadAdapterInteractionListener.onCourseDownloadAdapterInteractionListener(courseModelArraylist.get(possion))
         }
 
@@ -88,6 +109,9 @@ class CourseDownloadAdapter(
         val tvSleepSubTitle = view.tvCourseSubTitle
         val tvSleepTitle = view.tvCourseTitle
         val ivSleepImage = view.ivCourseImages
+        val ivLock = view.ivLock
+        val layPrice = view.layPrice
+        val tvPrice = view.tvPrice
     }
 
     interface OnCourseDownloadAdapterInteractionListener {

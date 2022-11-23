@@ -30,10 +30,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import okhttp3.OkHttpClient
-import org.jetbrains.anko.clearTask
-import org.jetbrains.anko.clearTop
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +43,8 @@ import kotlin.collections.ArrayList
 
 
 class QuotesActivity : AppCompatActivity() {
-
+    private var authToken: String? = ""
+    private lateinit var userId: String
     var currentPage: Int = 0
     var timer: Timer? = null
     val DELAY_MS: Long = 300;//delay in milliseconds before task is to be executed
@@ -70,7 +69,8 @@ class QuotesActivity : AppCompatActivity() {
 //        if (!MyApplication.prefs!!.subPurchase) {
 //            tvHome.setText(getString(R.string.str_subscribe_clarity))
 //        }
-
+        authToken = MyApplication.prefs!!.authToken
+        userId = MyApplication.prefs!!.userId
 
         stringArray = ArrayList<String>()
 //        getQuote()
@@ -114,6 +114,8 @@ class QuotesActivity : AppCompatActivity() {
 
         }
 
+        getCountDetail()
+
         Glide.with(this)
             .load(imgUrl)
             .placeholder(ColorDrawable(ContextCompat.getColor(this, R.color.color_blue)))
@@ -121,10 +123,7 @@ class QuotesActivity : AppCompatActivity() {
             .diskCacheStrategy(DiskCacheStrategy.ALL).into(ivBanner)
 
 
-        if (meditationStateModel != null) {
-            viewPager.setAdapter(MyPagesAdapter(applicationContext, meditationStateModel!!))
-            view_pager_indicator.setupWithViewPager(viewPager)
-        }
+
 
 //        tvHome.setOnClickListener {
 //            if (MyApplication.prefs!!.subPurchase) {
@@ -177,7 +176,7 @@ class QuotesActivity : AppCompatActivity() {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+        val clarityAPI = retrofit.create(API::class.java)
         val call = ApiUtils.getAPIService().getRandomQuotes()
 
         call.enqueue(object : Callback<QuoteModel> {
@@ -196,8 +195,50 @@ class QuotesActivity : AppCompatActivity() {
                         )
                     ) {
                         strQuote = quoteModel.getQuote()
-                        Log.e("quoteModel", strQuote)
+                        Log.e("quoteModel", strQuote.toString())
                         tvQuote.setText(strQuote)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun getCountDetail() {
+
+        val call = ApiUtils.getAPIService().getHomeDetail(authToken!!, userId)
+
+        call.enqueue(object : Callback<HomeResponse> {
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                if (meditationStateModel != null) {
+                    viewPager.setAdapter(MyPagesAdapter(applicationContext, meditationStateModel!!))
+                    view_pager_indicator.setupWithViewPager(viewPager)
+                }
+            }
+
+            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                if (response.code() == 200) {
+                        MyApplication.isHomeAPI = false
+
+                        val homeResponse = response.body()!!
+                        if (homeResponse.getStatus().equals(getString(R.string.str_success))) {
+
+                            val totalWeeklyMin = homeResponse.getProfile()?.getWeeklyMinuteMeditate()
+                            val totalDailyMin = homeResponse.getProfile()?.getWeeklyMinuteMeditate()
+                            val totalMeditateMinute = homeResponse.getProfile()?.getMinuteMeditate()
+                            MyApplication.prefs!!.weeklyMinute  = totalWeeklyMin!!.toFloat()
+                            MyApplication.prefs!!.dailyMinute  = totalDailyMin!!.toFloat()
+                            MyApplication.prefs!!.totalMeditateMinute  = totalMeditateMinute!!.toFloat()
+
+                            if (meditationStateModel != null) {
+                                viewPager.setAdapter(MyPagesAdapter(applicationContext, meditationStateModel!!))
+                                view_pager_indicator.setupWithViewPager(viewPager)
+                            }
+
+                    }else{
+                            if (meditationStateModel != null) {
+                                viewPager.setAdapter(MyPagesAdapter(applicationContext, meditationStateModel!!))
+                                view_pager_indicator.setupWithViewPager(viewPager)
+                            }
                     }
                 }
             }

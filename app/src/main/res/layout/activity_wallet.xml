@@ -99,6 +99,7 @@
                                 android:textSize="@dimen/_17sdp" />
                         </LinearLayout>
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/tvBalance"
                             style="@style/TextRegular"
                             android:layout_width="match_parent"

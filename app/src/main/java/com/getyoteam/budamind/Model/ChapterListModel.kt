@@ -28,7 +28,7 @@ class ChapterListModel : Serializable {
     @SerializedName("rewarded")
     @Expose
     @ColumnInfo(name = "rewarded")
-    private var rewarded: Boolean? = null
+    var rewarded: Boolean? = null
 
     @SerializedName("courseName")
     @Expose
@@ -51,13 +51,14 @@ class ChapterListModel : Serializable {
      var purchased: Boolean? = null
 
 
-    fun getRewarded(): Boolean? {
-        return rewarded
-    }
 
-    fun setRewarded(rewarded: Boolean?) {
-        this.rewarded = rewarded
-    }
+//    fun getRewarded(): Boolean? {
+//        return rewarded
+//    }
+//
+//    fun setRewarded(rewarded: Boolean?) {
+//        this.rewarded = rewarded
+//    }
 
 
     fun getChapterId(): Int? {

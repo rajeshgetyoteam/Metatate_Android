@@ -1,8 +1,10 @@
 package com.getyoteam.budamind.adapter
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,19 +14,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.getyoteam.budamind.Model.TaskDataModel
+import com.getyoteam.budamind.Model.MomentListModel
+import com.getyoteam.budamind.Model.TaskListModel
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
-import com.getyoteam.budamind.activity.MainActivity
 import com.getyoteam.budamind.activity.PlayTaskMomentsActivity
+import com.getyoteam.budamind.activity.PlayTaskSoundActivity
 import com.getyoteam.budamind.testaudioexohls.PlayerExoTaskActivity
 import com.getyoteam.budamind.utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.raw_home_task.view.*
 
 class HomeTaskAdapter(
-    private val dataArraylist: List<TaskDataModel>?,
-    val context: Context
+    private val dataArraylist: List<TaskListModel>?,
+    val context: Context, var onMomentTaskAdapterInteraction: OnTaskHomeAdapterInteractionListener
 ) : RecyclerView.Adapter<HomeTaskAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
@@ -38,16 +41,77 @@ class HomeTaskAdapter(
     }
 
     override fun getItemCount(): Int {
-        return dataArraylist!!.size
+
+        if (dataArraylist!!.size > 4) {
+            return 4
+        } else {
+            return dataArraylist!!.size
+        }
+
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, possion: Int) {
 
         val dataModel = dataArraylist!![possion]
 
-        viewHolder.tvTitle.text = dataModel.titleText
-        val token = Utils.format(dataModel.coins!!.toBigInteger())
-        viewHolder.tvPrice.text = token.replace("$", "$" + "CHI")
+//        if (dataModel.claim.equals("true")) {
+//
+//            viewHolder.layMain.background =
+//                context.resources.getDrawable(R.drawable.round_gray_corner_bg)
+//            viewHolder.itemView.alpha = 0.9f
+//
+//        } else {
+        viewHolder.layMain.background =
+            context.resources.getDrawable(R.drawable.round_white_corner_bg)
+//        }
+        viewHolder.layAdds.setOnClickListener {
+
+            if (dataModel.type.equals("courses")) {
+                try {
+                    val webpage: Uri = Uri.parse(dataModel.courseData!!.adLink)
+                    val myIntent = Intent(Intent.ACTION_VIEW, webpage)
+                    context.startActivity(myIntent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(
+                        context,
+                        "No application can handle this request. Please install a web browser or check your URL.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    e.printStackTrace()
+                }
+
+             } else if (dataModel.type.equals("moments")) {
+                try {
+                    val webpage: Uri = Uri.parse(dataModel.moment!!.adLink)
+                    val myIntent = Intent(Intent.ACTION_VIEW, webpage)
+                    context.startActivity(myIntent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(
+                        context,
+                        "No application can handle this request. Please install a web browser or check your URL.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    e.printStackTrace()
+                }
+
+             } else if (dataModel.type.equals("sound")) {
+
+                try {
+                    val webpage: Uri = Uri.parse(dataModel.sounds!!.adLink)
+                    val myIntent = Intent(Intent.ACTION_VIEW, webpage)
+                    context.startActivity(myIntent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(
+                        context,
+                        "No application can handle this request. Please install a web browser or check your URL.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    e.printStackTrace()
+                }
+
+             }
+
+        }
 
         if (dataModel.type.equals("courses")) {
             Glide.with(context)
@@ -63,8 +127,45 @@ class HomeTaskAdapter(
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(viewHolder.ivTaskImage)
-
             viewHolder.tvTaskMin.text = dataModel.courseData!!.getFromMinutes() + " Minutes"
+
+            viewHolder.tvTitle.text = dataModel.courseData!!.getCourseName()!!.toString()
+
+
+            val token = Utils.format(MyApplication.prefs!!.courseCoin!!.toBigInteger())
+
+            val a = "$"+"CHI"
+            viewHolder.tvPrice.text = "Earn "+token+" $"+"CHI "
+//            viewHolder.tvPrice.text = "300 $ CHI"
+            if (dataModel!!.courseData!!.isAds!!) {
+                viewHolder.layAdds.visibility = View.VISIBLE
+                Glide.with(context)
+                    .load(dataModel!!.courseData!!.adUrl)
+                    .placeholder(
+                        ColorDrawable(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.colorPrimary
+                            )
+                        )
+                    )
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(viewHolder.ivAddBanner)
+//            viewHolder.layAdds.layoutParams.width = dataModel!!.adWidth!!.toInt()
+//                if (dataModel.courseData!!.adHeight.isNullOrEmpty()) {
+//                    viewHolder.layAdds.layoutParams.height = context.resources.getDimension(R.dimen._92sdp).toInt()
+//                } else {
+//                    val density = context.resources.displayMetrics.density
+//                    val hight: Float = dataModel.courseData!!.adHeight!!.toInt() * density
+//                    viewHolder.layAdds.layoutParams.height = hight.toInt()
+//                }
+            } else {
+
+                viewHolder.layAdds.visibility = View.GONE
+            }
+
+
         } else if (dataModel.type.equals("moments")) {
             Glide.with(context)
                 .load(dataModel.moment!!.getImage())
@@ -80,9 +181,45 @@ class HomeTaskAdapter(
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(viewHolder.ivTaskImage)
             viewHolder.tvTaskMin.text = dataModel.moment!!.getMinutes() + " Minutes"
-        } else if (dataModel.type.equals("sounds")) {
+            viewHolder.tvTitle.text = dataModel.moment!!.getTitle()!!.toString()
+
+//            viewHolder.tvPrice.text = "200 $ CHI"
+            val token = Utils.format(MyApplication.prefs!!.momentCoin!!.toBigInteger())
+
+            val a = "$"+"CHI"
+            viewHolder.tvPrice.text = "Earn "+token+" $"+"CHI "
+
+            if (dataModel!!.moment!!.isAds!!) {
+                viewHolder.layAdds.visibility = View.VISIBLE
+                Glide.with(context)
+                    .load(dataModel!!.moment!!.adUrl)
+                    .placeholder(
+                        ColorDrawable(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.colorPrimary
+                            )
+                        )
+                    )
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(viewHolder.ivAddBanner)
+//                if (dataModel.moment!!.adHeight.isNullOrEmpty()) {
+//                    viewHolder.layAdds.layoutParams.height =
+//                        context.resources.getDimension(R.dimen._92sdp).toInt()
+//                } else {
+//                    val density = context.resources.displayMetrics.density
+//                    val hight: Float = dataModel.moment!!.adHeight!!.toInt() * density
+//                    viewHolder.layAdds.layoutParams.height = hight.toInt()
+//                }
+            } else {
+
+                viewHolder.layAdds.visibility = View.GONE
+            }
+
+        } else if (dataModel.type.equals("sound")) {
             Glide.with(context)
-                .load("")
+                .load(dataModel.sounds!!.image)
                 .placeholder(
                     ColorDrawable(
                         ContextCompat.getColor(
@@ -95,84 +232,53 @@ class HomeTaskAdapter(
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(viewHolder.ivTaskImage)
             viewHolder.tvTaskMin.text = dataModel.sounds!!.getMinutes() + " Minutes"
-        } else {
-            Glide.with(context)
-                .load("")
-//            .placeholder(R.drawable.gradient_color)
-                .placeholder(
-                    ColorDrawable(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.color_light_gray
+
+            viewHolder.tvTitle.text = dataModel.sounds!!.getTitle()!!.toString()
+
+//            viewHolder.tvPrice.text = "100 $ CHI"
+
+            val token = Utils.format(MyApplication.prefs!!.soundsCoin!!.toBigInteger())
+
+            val a = "$"+"CHI"
+            viewHolder.tvPrice.text = "Earn "+token+" $"+"CHI "
+
+            if (dataModel!!.sounds!!.isAds!!) {
+                viewHolder.layAdds.visibility = View.VISIBLE
+                Glide.with(context)
+                    .load(dataModel!!.sounds!!.adUrl)
+                    .placeholder(
+                        ColorDrawable(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.colorPrimary
+                            )
                         )
                     )
-                )
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(viewHolder.ivTaskImage)
-            viewHolder.tvTaskMin.text = "00 Minutes"
-        }
-
-
-        if (dataModel.claim.equals("true")) {
-
-            viewHolder.layMain.background =
-                context.resources.getDrawable(R.drawable.round_gray_corner_bg)
-            viewHolder.itemView.alpha = 0.9f
-
-        } else {
-            viewHolder.layMain.background =
-                context.resources.getDrawable(R.drawable.round_white_corner_bg)
-        }
-
-        viewHolder.itemView.setOnClickListener {
-
-            if (dataModel.claim.equals("true")) {
-                Toast.makeText(
-                    context,
-                    "Task Completed!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(viewHolder.ivAddBanner)
+//            viewHolder.layAdds.layoutParams.width = dataModel!!.adWidth!!.toInt()
+//                if (dataModel.sounds!!.adHeight.isNullOrEmpty()) {
+//                    viewHolder.layAdds.layoutParams.height =
+//                        context.resources.getDimension(R.dimen._92sdp).toInt()
+//                } else {
+//                    val density = context.resources.displayMetrics.density
+//                    val hight: Float = dataModel.sounds!!.adHeight!!.toInt() * density
+//                    viewHolder.layAdds.layoutParams.height = hight.toInt()
+//                }
             } else {
 
-                if (dataModel.type.equals("moments")) {
-
-                    val gson = Gson()
-                    val jsonMoment = gson.toJson(dataModel.moment)
-//                val jsonMeditation = gson.toJson(meditationStateModel)
-                    MyApplication.prefs!!.momentModel = jsonMoment
-//                MyApplication.prefs!!.stateModel = jsonMeditation
-                    val intent = Intent(context, PlayTaskMomentsActivity::class.java)
-                    intent.putExtra("m", "")
-                    intent.putExtra("taskid", dataModel.id)
-                    context.startActivity(intent)
-                } else if (dataModel.type.equals("courses")) {
-
-                    val gson = Gson()
-                    val jsonChapter = gson.toJson(dataModel.courses);
-                    val jsonCourse = gson.toJson(dataModel.courseData);
-
-
-                    MyApplication.prefs!!.chapterModel = jsonChapter
-                    MyApplication.prefs!!.courseModel = jsonCourse
-
-                    val intent = Intent(context, PlayerExoTaskActivity::class.java)
-
-                    intent.putExtra("taskid", dataModel.id)
-                    context.startActivity(intent)
-                } else if (dataModel.type.equals("sounds")) {
-
-                    if (context is MainActivity) {
-                        (context as MainActivity).ChangeToSoundFragment(
-                            dataModel.sounds!!.getSoundId().toString(), dataModel.id
-                        )
-                    }
-                }
-
+                viewHolder.layAdds.visibility = View.GONE
             }
 
         }
 
+
+
+        viewHolder.layItem.setOnClickListener {
+
+            onMomentTaskAdapterInteraction.onTaskHomeAdapterInteractionListener(dataModel)
+        }
 
     }
 
@@ -183,8 +289,16 @@ class HomeTaskAdapter(
         val tvTaskMin = view.tvTaskMin
         val ivTaskImage = view.ivTaskImage
         val layMain = view.layMain
-
+        val layItem = view.layItem
+        val ivAddBanner = view.ivAddBanner
+        val layAdds = view.layAdds
+        val layPrice = view.layPrice
 
     }
 
+    interface OnTaskHomeAdapterInteractionListener {
+        fun onTaskHomeAdapterInteractionListener(taskListModel :TaskListModel)
+    }
 }
+
+

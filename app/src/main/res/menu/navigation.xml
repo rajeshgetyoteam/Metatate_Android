@@ -16,10 +16,10 @@
         android:icon="@drawable/selector_bottom_view_track"
         android:title="@string/str_task"/>
 
-<!--    <item-->
-<!--            android:id="@+id/navigation_sound"-->
-<!--            android:icon="@drawable/selector_bottom_view_sound"-->
-<!--            android:title="@string/str_sound"/>-->
+    <item
+            android:id="@+id/navigation_catalog"
+            android:icon="@drawable/selector_bottom_view_sound"
+            android:title="@string/str_catalog"/>
 
     <item
             android:id="@+id/navigation_profile"

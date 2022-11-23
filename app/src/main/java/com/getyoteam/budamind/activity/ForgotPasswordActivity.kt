@@ -9,7 +9,7 @@ import com.getyoteam.budamind.Model.CommonModel
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -73,7 +73,7 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+        val clarityAPI = retrofit.create(API::class.java)
         val call = ApiUtils.getAPIService().forgotPassword(pCustomerEmail)
 
         call.enqueue(object : Callback<CommonModel> {
@@ -92,7 +92,7 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
                     val commonModel = response.body()!!
                     if (commonModel.getStatus().equals(getString(R.string.str_success))) {
                         MyApplication.prefs!!.emailAddress = pCustomerEmail
-                        val intent = Intent(applicationContext, VerifyedOTPActivity::class.java)
+                        val intent = Intent(applicationContext, VerifyOTPActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {

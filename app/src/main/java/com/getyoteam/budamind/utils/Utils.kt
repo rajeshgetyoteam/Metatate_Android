@@ -1,19 +1,27 @@
 package com.getyoteam.budamind.utils
 
+import android.app.ActivityManager
 import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.drawable.VectorDrawable
 import android.media.MediaMetadataRetriever
+import android.net.Uri
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.getyoteam.budamind.Model.Status
+import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.interfaces.ApiUtils
 import com.google.gson.JsonObject
@@ -26,6 +34,7 @@ import java.io.ByteArrayInputStream
 import java.io.InputStream
 import java.math.BigInteger
 import java.text.DecimalFormat
+
 
 object Utils {
     private val suffix = arrayOf("", "K", "M", "B", "T")
@@ -45,6 +54,10 @@ object Utils {
         }
     }
 
+    fun pxToDp(px: Int): Int {
+        return (px / Resources.getSystem().displayMetrics.density) as Int
+    }
+
     private fun getLargeIcon(context: Context): Bitmap {
         val vectorDrawable = context.getDrawable(R.drawable.ic_logo_white) as VectorDrawable?
         val largeIconSize = context.resources.getDimensionPixelSize(R.dimen._12sdp)
@@ -57,7 +70,6 @@ object Utils {
         }
         return bitmap
     }
-
     //    public static String format(BigInteger number) {
     //        String r = new DecimalFormat("##0E0").format(number);
     //        r = r.replaceAll("E[0-9]", suffix[Character.getNumericValue(r.charAt(r.length() - 1)) / 3]);
@@ -106,8 +118,25 @@ object Utils {
         }
     }
 
+
+
     fun formatBal(number: BigInteger): String {
         val suffix = charArrayOf(' ', 'K', 'M', 'B', 'T', 'P', 'E')
+        //        char[] suffix = {' ', '$', '$', '$', '$', '$', '$'};
+        val numValue = number.toLong()
+        val value = Math.floor(Math.log10(numValue.toDouble())).toInt()
+        val base = value / 3
+        return if (value >= 3 && base < suffix.size) {
+            DecimalFormat("#0.000")
+                .format(numValue / Math.pow(10.0, (base * 3).toDouble())) + suffix[base]
+        } else {
+            DecimalFormat("#,##0").format(numValue)
+        }
+    }
+
+    fun formatB(number: BigInteger): String {
+//        val suffix = charArrayOf(' ', 'K', 'M', 'B', 'T', 'P', 'E')
+        val suffix = charArrayOf(' ', '$', '$', '$', '$', '$', '$')
         //        char[] suffix = {' ', '$', '$', '$', '$', '$', '$'};
         val numValue = number.toLong()
         val value = Math.floor(Math.log10(numValue.toDouble())).toInt()
@@ -144,6 +173,41 @@ object Utils {
         dialog.show()
     }
 
+    fun appInForeground(context: Context): Boolean {
+        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val runningAppProcesses = activityManager.runningAppProcesses ?: return false
+        return runningAppProcesses.any { it.processName == context.packageName && it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND }
+    }
+
+    fun callUpdateTimeSpentSeconds(data: JSONObject) {
+
+        val jsonParser = JsonParser()
+        var gsonObject = JsonObject()
+        gsonObject = jsonParser.parse(data.toString()) as JsonObject
+        //print parameter
+        Log.e("MY gson.JSON:  ", "AS PARAMETER  $gsonObject")
+        try {
+            ApiUtils.getAPIService().submitTimeSpent(gsonObject)
+                .enqueue(object : Callback<Status> {
+                    override fun onResponse(
+                        call: Call<Status>,
+                        response: Response<Status>
+                    ) {
+                        MyApplication.prefs!!!!.totTimeSpent = 0
+                        Log.d("Response", response.toString())
+                    }
+
+                    override fun onFailure(
+                        call: Call<Status>,
+                        t: Throwable
+                    ) {
+                        Log.d("Response", t.toString())
+                    }
+                })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
     fun callUpdateSeconds(type: String, data: JSONObject) {
 

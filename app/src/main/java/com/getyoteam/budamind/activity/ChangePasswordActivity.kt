@@ -13,7 +13,7 @@ import com.getyoteam.budamind.Model.CommonModel
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import kotlinx.android.synthetic.main.activity_change_password.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -92,7 +92,7 @@ class ChangePasswordActivity : AppCompatActivity(), View.OnClickListener {
             .baseUrl(getString(R.string.base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+        val clarityAPI = retrofit.create(API::class.java)
         val call = ApiUtils.getAPIService().changePassword(token,userId, oldPasword,newPassword)
 
         call.enqueue(object : Callback<CommonModel> {

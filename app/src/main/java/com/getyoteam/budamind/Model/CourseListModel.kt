@@ -20,6 +20,13 @@ class CourseListModel : Serializable {
     @ColumnInfo(name = "courseName")
     private var courseName: String? = null
 
+
+
+    @SerializedName("genre")
+    @Expose
+    @ColumnInfo(name = "genre")
+    var genre: String? = null
+
     @SerializedName("description")
     @Expose
     @ColumnInfo(name = "description")
@@ -54,6 +61,11 @@ class CourseListModel : Serializable {
     @Expose
     @ColumnInfo(name = "coins")
     var coins: String? = null
+
+    @SerializedName("rewarded")
+    @Expose
+    @ColumnInfo(name = "rewarded")
+    var rewarded: Boolean? = null
 
     @SerializedName("freePaid")
     @Expose
@@ -108,6 +120,36 @@ class CourseListModel : Serializable {
     @Expose
     @ColumnInfo(name = "isDownloaded")
     private var isDownloaded: Boolean? = null
+
+    @Expose
+    @ColumnInfo(name = "totalChapters")
+    var totalChapters: String? = null
+
+    @SerializedName("ads")
+    @Expose
+    @ColumnInfo(name = "ads")
+    var isAds: Boolean? = false
+
+    @SerializedName("adLink")
+    @Expose
+    @ColumnInfo(name = "adLink")
+    var adLink: String? = null
+
+    @SerializedName("adUrl")
+    @Expose
+    @ColumnInfo(name = "adUrl")
+    var adUrl: String? = null
+
+    @SerializedName("adHeight")
+    @Expose
+    @ColumnInfo(name = "adHeight")
+    var adHeight: String? = null
+
+    @SerializedName("adWidth")
+    @Expose
+    @ColumnInfo(name = "adWidth")
+    var adWidth: String? = null
+
 
     fun getCourseId(): Int? {
         return courseId

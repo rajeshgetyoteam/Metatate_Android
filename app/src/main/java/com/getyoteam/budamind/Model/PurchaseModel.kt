@@ -13,7 +13,7 @@ class PurchaseModel {
     @Expose
     @NotNull
     @PrimaryKey
-    private var orderId: String? = null
+    private var orderId: Int = 0
 
     @SerializedName("packageName")
     @Expose
@@ -45,11 +45,11 @@ class PurchaseModel {
     @ColumnInfo(name = "acknowledged")
     private var acknowledged: Boolean? = null
 
-    fun getOrderId(): String? {
+    fun getOrderId(): Int {
         return orderId
     }
 
-    fun setOrderId(orderId: String) {
+    fun setOrderId(orderId: Int) {
         this.orderId = orderId
     }
 

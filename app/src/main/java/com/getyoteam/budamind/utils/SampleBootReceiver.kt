@@ -18,7 +18,7 @@ class SampleBootReceiver : BroadcastReceiver() {
 
         alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
-            PendingIntent.getBroadcast(context, 0, intent, 0)
+            PendingIntent.getBroadcast(context, 0, intent, 0 or PendingIntent.FLAG_IMMUTABLE)
         }
         if (intent.action == "android.intent.action.BOOT_COMPLETED") {
 // Set the alarm to start at 8:30 a.m.

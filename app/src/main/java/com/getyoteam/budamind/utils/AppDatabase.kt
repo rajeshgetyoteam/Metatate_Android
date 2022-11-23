@@ -7,7 +7,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.interfaces.*
-import com.mindfulness.greece.model.CachedPurchase
 import com.mindfulness.greece.model.MeditationStateModel
 
 @Database(
@@ -20,10 +19,9 @@ import com.mindfulness.greece.model.MeditationStateModel
         DownloadFileModel::class,
         MeditationStateModel::class,
         GoalModel::class,
-        CachedPurchase::class,
         PurchaseModel::class,
         SoundListModel::class
-    ), version = 2
+    ), version = 1,exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun courseDao(): CourseDao
@@ -36,7 +34,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun meditationStateDao(): MeditationStateDao
     abstract fun downloadDao(): DownloadDao
     abstract fun purchaseModelDao(): PurchaseModelDao
-    abstract fun purchaseDao(): PurchaseDao
+
 
     companion object {
         @Volatile

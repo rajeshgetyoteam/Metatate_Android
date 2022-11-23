@@ -20,7 +20,7 @@ import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.interfaces.ApiUtils
-import com.getyoteam.budamind.interfaces.ClarityAPI
+import com.getyoteam.budamind.interfaces.API
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -530,7 +530,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                             getString(R.string.str_otp_sent),
                             Toast.LENGTH_SHORT
                         ).show()
-                        val intent = Intent(applicationContext, VerifyedOTPActivity::class.java)
+                        val intent = Intent(applicationContext, VerifyOTPActivity::class.java)
                         intent.putExtra("email", pCustomerEmail)
                         intent.putExtra("otp", commonModel.otp)
                         startActivity(intent)
@@ -570,7 +570,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val clarityAPI = retrofit.create(ClarityAPI::class.java)
+        val clarityAPI = retrofit.create(API::class.java)
         val loginResponseModel = LoginResponseModel(
             "", "", pPassword, pCustomerEmail,
             "", pLoginThrough, MyApplication.prefs!!.firebaseToken,
@@ -615,9 +615,9 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent)
                         } else {
-                            val intent = Intent(applicationContext, SubscribeActivity::class.java)
-                            intent.putExtra("fromScreen", "Login")
-                            startActivity(intent)
+//                            val intent = Intent(applicationContext, SubscribeActivity::class.java)
+//                            intent.putExtra("fromScreen", "Login")
+//                            startActivity(intent)
                         }
                         finish()
                     } else {

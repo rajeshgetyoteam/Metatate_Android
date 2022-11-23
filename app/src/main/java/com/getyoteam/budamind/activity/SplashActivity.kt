@@ -11,16 +11,23 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Base64
 import android.util.Log
+import com.getyoteam.budamind.Model.Status
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.Prefs
 import com.getyoteam.budamind.R
+import com.getyoteam.budamind.interfaces.ApiUtils
+import com.getyoteam.budamind.services.TimeSpentService
 import com.getyoteam.budamind.utils.AlarmReceiver
+import com.getyoteam.budamind.utils.Utils
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import kotlinx.android.synthetic.main.activity_splash.*
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.*
-
 
 class SplashActivity : Activity() {
     private lateinit var calendar: Calendar
@@ -33,7 +40,6 @@ class SplashActivity : Activity() {
 
     internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
-
             if (customerId.equals("")) {
                 intent = Intent(applicationContext, WelcomeActivity::class.java)
             } else {
@@ -47,18 +53,37 @@ class SplashActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        customerId = MyApplication.prefs!!.userId.toString()
+        customerId = MyApplication.prefs!!.userId
         val prfc = Prefs(this)
         prfc.clickaction = "HOME"
         prfc.wallateResponce = ""
         prfc.taskResponce = ""
+        prfc.dailyTaskList = ""
+
+        if (customerId.isNotEmpty()) {
+            callOpenedByUser()
+        }
+
+        if (MyApplication.prefs!!.totTimeSpent!! > 0 && customerId.isNotEmpty()){
+
+            val jsonObj = JSONObject()
+            jsonObj.put("userId", MyApplication.prefs!!.userId)
+            jsonObj.put("totalMinutes",MyApplication.prefs!!.totTimeSpent)
+            Utils.callUpdateTimeSpentSeconds(jsonObj)
+
+        }
+
+
+        val mIntent = Intent(this, TimeSpentService::class.java)
+        mIntent.putExtra("mFilePath", "")
+        TimeSpentService.enqueueWork(this, mIntent)
+        Log.d("TimeSpentService", "Start Services")
 
         runOnUiThread {
             val path = "android.resource://" + packageName + "/" + R.raw.new_splash
             viewVideo.setVideoURI(Uri.parse(path))
             viewVideo.start()
         }
-
 
         printHashKey(this)
 
@@ -69,20 +94,25 @@ class SplashActivity : Activity() {
 
         setTime(8, 0)
 
-        alarmMgr = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        try {
+            alarmMgr = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        alarmIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
-            PendingIntent.getBroadcast(this, 0, intent, 0)
+            alarmIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
+                PendingIntent.getBroadcast(this, 0, intent, 0 or PendingIntent.FLAG_IMMUTABLE)
+            }
+
+            if (MyApplication.prefs!!.isFirstTime!!) {
+                alarmMgr?.setInexactRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    AlarmManager.INTERVAL_DAY,
+                    alarmIntent
+                )
+            }
+        }catch (e :Exception){
+            e.printStackTrace()
         }
 
-        if (MyApplication.prefs!!.isFirstTime!!) {
-            alarmMgr?.setInexactRepeating(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                AlarmManager.INTERVAL_DAY,
-                alarmIntent
-            )
-        }
 
         FirebaseDynamicLinks.getInstance()
             .getDynamicLink(intent)
@@ -93,19 +123,14 @@ class SplashActivity : Activity() {
                     deepLink = pendingDynamicLinkData.link
                     refralcustomerId =
                         deepLink.toString().substringAfterLast(getString(R.string.separator))
-                    Log.d("mytag", "session id - $refralcustomerId")
-
+                    Log.d("mytag", "referral customerId - $refralcustomerId")
                     if (!refralcustomerId.isNullOrBlank()) {
                         prfc.referalId = refralcustomerId
                     }
-
                 }
+            }.addOnFailureListener(this) {
 
             }
-            .addOnFailureListener(this) {
-
-            }
-
     }
 
     private fun setTime(selectedHour: Int, selectedMinute: Int) {
@@ -124,6 +149,31 @@ class SplashActivity : Activity() {
 
         super.onDestroy()
     }
+
+    fun callOpenedByUser() {
+        customerId = MyApplication.prefs!!.userId
+        try {
+            ApiUtils.getAPIService().submitAppOpendTimes(customerId)
+                .enqueue(object : Callback<Status> {
+                    override fun onResponse(
+                        call: Call<Status>,
+                        response: Response<Status>
+                    ) {
+                        Log.d("Response", response.toString())
+                    }
+
+                    override fun onFailure(
+                        call: Call<Status>,
+                        t: Throwable
+                    ) {
+                        Log.d("Response", t.toString())
+                    }
+                })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun printHashKey(pContext: Context) {
         try {
             val info = pContext.packageManager.getPackageInfo(
