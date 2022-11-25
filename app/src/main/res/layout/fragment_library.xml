@@ -84,7 +84,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/_5sdp"
-
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/_5sdp"
             android:background="@drawable/roundr_bg_balance"
@@ -113,7 +112,7 @@
                     style="@style/TextRegular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CHI 00.00"
+                    android:text="00.00B $CHI"
                     android:textColor="@color/color_614192"
                     android:textSize="@dimen/_10sdp" />
 
