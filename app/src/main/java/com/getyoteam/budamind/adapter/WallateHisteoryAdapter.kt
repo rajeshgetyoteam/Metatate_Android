@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.getyoteam.budamind.Model.WallateHistoryModel
+import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.utils.Utils
+import kotlinx.android.synthetic.main.activity_wallet.*
 import kotlinx.android.synthetic.main.raw_wallete.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,8 +38,9 @@ class WallateHisteoryAdapter(
 
        val dataModel = dataArraylist!!.get(possion)
         viewHolder.tvTitle.text = dataModel.description
-        val token = Utils.format(dataModel.coins!!.toBigInteger())
+        val token = Utils.formatBal(dataModel.coins!!.toBigInteger())
         val a = "$"+"CHI"
+
         viewHolder.tvPrice.text = token.replace("$",a)
         viewHolder.tvType.text = dataModel.type
 

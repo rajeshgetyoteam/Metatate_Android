@@ -38,7 +38,7 @@ class TokenHisteoryAdapter(
         viewHolder.viewForeground = viewHolder.itemView.view_foreground
        val dataModel = dataArraylist!!.get(possion)
         viewHolder.tvTitle.text = dataModel.description
-        val token = Utils.format(dataModel.coins!!.toBigInteger())
+        val token = Utils.formatBal(dataModel.coins!!.toBigInteger())
         viewHolder.tvPrice.text = token.replace("$","$"+"CHI")
         viewHolder.tvType.text = dataModel.type
 
@@ -47,9 +47,6 @@ class TokenHisteoryAdapter(
         }else{
             viewHolder.tvEarnSpent.text = "Earned"
         }
-
-
-
         val date = dataModel.createdAt!!.toDate().formatTo("yyyy-MM-dd  hh:mm a")
         viewHolder.tvDateTime.text = date
 

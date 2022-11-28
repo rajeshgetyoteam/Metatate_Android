@@ -312,9 +312,6 @@ class SoundFragmentN() : Fragment(),
     }
 
 
-
-
-
     fun wanCoinDialog(coin: String) {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -416,12 +413,14 @@ class SoundFragmentN() : Fragment(),
                                 if (soundArrayList.size > 0) {
                                     db.soundDao().deleteAll()
                                 }
-                                for (i in 0 until soundArrayList.size) {
-                                    val soundListModel = soundArrayList.get(i)
-                                    soundListModel.setPlaying(false)
-                                    soundListModel.setFirstTime(false)
-                                    db.soundDao().insertAll(soundListModel)
-                                }
+
+                                db.soundDao().insertAll(soundArrayList)
+//                                for (i in 0 until soundArrayList.size) {
+//                                    val soundListModel = soundArrayList.get(i)
+//                                    soundListModel.setPlaying(false)
+//                                    soundListModel.setFirstTime(false)
+//                                    db.soundDao().insertAll(soundListModel)
+//                                }
 
                                 loadDataFromDB()
 
@@ -457,16 +456,25 @@ class SoundFragmentN() : Fragment(),
 
 
     private fun loadDataFromDB() {
-        if (soundArrayList.size > 0) {
-            soundArrayList.clear()
-        }
-        soundArrayList.addAll(db.soundDao().getAll().reversed() as ArrayList<SoundListModel>)
-        if (prevIndexSound != -1 && soundArrayList.size > 0)
-            if (isPlaying)
-                soundArrayList.get(prevIndexSound).setPlaying(true)
+        try {
+            if (soundArrayList.size > 0) {
+                soundArrayList.clear()
+            }
+            val s = db.soundDao().getAll()
+            if (s.size > 0){
+                soundArrayList.addAll(s.reversed() as ArrayList<SoundListModel>)
+                if (prevIndexSound != -1 && soundArrayList.size > 0)
+                    if (isPlaying)
+                        soundArrayList.get(prevIndexSound).setPlaying(true)
 
-        soundAdapter = SoundAdapterNew(soundArrayList, requireContext(), this)
-        rvSoundList.adapter = soundAdapter
+                soundAdapter = SoundAdapterNew(soundArrayList, requireContext(), this)
+                rvSoundList.adapter = soundAdapter
+            }
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+
+
 
     }
 

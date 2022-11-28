@@ -144,7 +144,12 @@ class VerifyOTPActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun removeLastChar(str: String): String {
-        return str.substring(0, str.length - 1)
+        try {
+            return str.substring(0, str.length - 1)
+        }catch (e :Exception){
+            return str
+        }
+
     }
 
     private fun checkInternetConnection(): Boolean {

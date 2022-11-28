@@ -93,7 +93,6 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
-
     companion object {
         private const val LOG_TAG = "BillingRepository"
     }
@@ -310,7 +309,6 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
         lblName.text = MyApplication.prefs!!.first_name
 
 
-
         val taskdata = MyApplication.prefs!!.dailyTaskList.toString()
         if (taskdata.isNotEmpty()) {
             setData()
@@ -521,21 +519,25 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
                             val homeResponse = response.body()!!
                             if (homeResponse.getStatus().equals(getString(R.string.str_success))) {
 
-                                MyApplication.prefs!!.myBalance = homeResponse.balance.toString()
+                                try {
+                                    if (homeResponse.balance.toString().equals("0.0")){
+                                        MyApplication.prefs!!.myBalance = "0"
+                                    }else{
+                                        MyApplication.prefs!!.myBalance = homeResponse.balance.toString()
+                                    }
+                                    val a = " $"+"CHI"
+                                    val blnc = Utils.formatBal(MyApplication.prefs!!.myBalance.toBigInteger())
+                                    tvBalance.text = blnc +a
+                                }catch (e :Exception){
+                                    e.printStackTrace()
+                                }
 
-
-                                val a = " $"+"CHI"
-                                val blnc = Utils.formatBal(MyApplication.prefs!!.myBalance.toBigInteger())
-                                tvBalance.text = blnc +a
                                 coursArrayList =
-                                    homeResponse.getHome()!!
-                                        .getCourseList() as ArrayList<CourseListModel>
+                                    homeResponse.getHome()!!.getCourseList() as ArrayList<CourseListModel>
                                 momentArrayList =
-                                    homeResponse.getHome()!!
-                                        .getMomentList() as ArrayList<MomentListModel>
+                                    homeResponse.getHome()!!.getMomentList() as ArrayList<MomentListModel>
                                 soundArrayList =
-                                    homeResponse.getHome()!!
-                                        .getSoundList() as ArrayList<SoundListModel>
+                                    homeResponse.getHome()!!.getSoundList() as ArrayList<SoundListModel>
 
                                 if (coursArrayList.size > 0) {
                                     db.courseDao().deleteAll()
