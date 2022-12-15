@@ -10,8 +10,8 @@ android {
         applicationId "com.getyoteam.metatate"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 11
-        versionName "2.1"
+        versionCode 12
+        versionName "2.2"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         android.defaultConfig.vectorDrawables.useSupportLibrary = true

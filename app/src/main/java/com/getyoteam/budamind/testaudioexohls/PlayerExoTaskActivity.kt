@@ -210,9 +210,14 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
         if (meditationStateModelArrayList.size > 0)
             meditationStateModelTemp = meditationStateModelArrayList.get(0)
 
-        currentStreak = meditationStateModelTemp.getCurrentStreak() as Int
-        longestStreak = meditationStateModelTemp.getLongestStreak() as Int
-        totalSession = meditationStateModelTemp.getTotalSessions() as Int
+        try {
+            currentStreak = meditationStateModelTemp.getCurrentStreak() as Int
+            longestStreak = meditationStateModelTemp.getLongestStreak() as Int
+            totalSession = meditationStateModelTemp.getTotalSessions() as Int
+        }catch (e :Exception){
+            e.printStackTrace()
+        }
+
 //        totalMin = meditationStateModelTemp.getMinuteMeditated() as Float
 //        totalDailyMin = meditationStateModelTemp.getDailyMinutes() as Float
 //        totalWeeklyMin = meditationStateModelTemp.getWeeklyMinutes() as Float
@@ -945,13 +950,19 @@ class PlayerExoTaskActivity : AppCompatActivity(), View.OnClickListener {
             broadcastReceiver!!,
             IntentFilter("com.example.exoplayer.PLAYER_STATUS")
         )
-        return if (Util.SDK_INT >= 26) {
-            bindService(intent, connection, Context.BIND_AUTO_CREATE)
-            Util.startForegroundService(this,intent)
-        } else {
-            bindService(intent, connection, Context.BIND_AUTO_CREATE)
-            context.startService(intent)
+        try {
+            return if (Util.SDK_INT >= 26) {
+                bindService(intent, connection, Context.BIND_AUTO_CREATE)
+                Util.startForegroundService(this,intent)
+            } else {
+                bindService(intent, connection, Context.BIND_AUTO_CREATE)
+                context.startService(intent)
+            }
+        }catch (e :Exception){
+            e.printStackTrace()
+            return null
         }
+
     }
 
     private val connection = object : ServiceConnection {

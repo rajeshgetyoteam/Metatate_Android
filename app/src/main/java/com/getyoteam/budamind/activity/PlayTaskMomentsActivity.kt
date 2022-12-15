@@ -107,7 +107,12 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
                         val min =
                             TimeUnit.MILLISECONDS.toMinutes(mPlayerAdapter!!.mediaPlayer.duration.toLong())
                         apiCallAfterAudioComleteAt90Per(min)
-                        callRewardsAPI(momentModel!!.getMomentId().toString())
+                        try {
+                            callRewardsAPI(momentModel!!.getMomentId().toString())
+                        }catch (e :Exception){
+                            e.printStackTrace()
+                        }
+
                     }
                 }
                 song_progressbar.progress = position
@@ -399,9 +404,14 @@ class PlayTaskMomentsActivity : AppCompatActivity(), View.OnClickListener {
         )
         mIsBound = true
 
-        val startNotStickyIntent = Intent(this, MusicService::class.java)
+        try {
+            val startNotStickyIntent = Intent(this, MusicService::class.java)
 //        startService(startNotStickyIntent)
-        Util.startForegroundService(this,startNotStickyIntent)
+            Util.startForegroundService(this,startNotStickyIntent)
+
+        }catch (e :Exception){
+            e.printStackTrace()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

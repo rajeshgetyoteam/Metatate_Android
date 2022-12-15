@@ -31,6 +31,7 @@ import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.interfaces.ApiUtils
 import com.getyoteam.budamind.interfaces.API
+import kotlinx.android.synthetic.main.fragment_profile.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -265,8 +266,19 @@ class QuotesActivity : AppCompatActivity() {
             val tvValye = view.findViewById<TextView>(R.id.tvValue)
             if (position == 0) {
                 tvHeader.setText(context.getString(R.string.str_minutes_meditated))
-                val count:Double = String.format("%.2f", MyApplication.prefs!!.totalMeditateMinute).toDouble()
-                tvValye.setText(count.toString())
+                try {
+
+                    val count:Double = String.format("%.2f", MyApplication.prefs!!.totalMeditateMinute).toDouble()
+
+                    if (count < 0) {
+                        tvValye.text = "0"
+                    } else {
+                        tvValye.text =count.toString()
+                    }
+                }catch (e :Exception){
+                    e.printStackTrace()
+                }
+
             } else {
                 tvHeader.setText(context.getString(R.string.str_current_streak))
                 tvValye.setText(meditationStateModel.getCurrentStreak().toString())

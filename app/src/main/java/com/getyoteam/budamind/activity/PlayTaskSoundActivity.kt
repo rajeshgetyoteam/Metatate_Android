@@ -402,9 +402,14 @@ class PlayTaskSoundActivity : AppCompatActivity(), View.OnClickListener {
         )
         mIsBound = true
 
-        val startNotStickyIntent = Intent(this, MusicService::class.java)
+        try {
+            val startNotStickyIntent = Intent(this, MusicService::class.java)
 //        startService(startNotStickyIntent)
-        Util.startForegroundService(this,startNotStickyIntent)
+            Util.startForegroundService(this,startNotStickyIntent)
+
+        }catch (e :Exception){
+            e.printStackTrace()
+        }
     }
 
 

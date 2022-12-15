@@ -509,7 +509,12 @@ class MediaPlayerHolder implements PlayerAdapter,
 
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
-        mPlaybackInfoListener.onBufferUpdate(percent);
+        try {
+            mPlaybackInfoListener.onBufferUpdate(percent);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     private class NotificationReceiver extends BroadcastReceiver {

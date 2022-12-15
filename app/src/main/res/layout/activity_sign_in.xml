@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:src="@drawable/ic_metatate_text"
+                    android:src="@drawable/ic_metatate_new_"
                     android:layout_width="@dimen/_135sdp"
                     android:layout_height="@dimen/_35sdp">
 

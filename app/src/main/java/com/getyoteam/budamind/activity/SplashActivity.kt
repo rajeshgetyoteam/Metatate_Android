@@ -113,19 +113,27 @@ class SplashActivity : Activity() {
             e.printStackTrace()
         }
 
-
         FirebaseDynamicLinks.getInstance()
             .getDynamicLink(intent)
             .addOnSuccessListener(this) { pendingDynamicLinkData ->
                 var deepLink: Uri? = null
                 if (pendingDynamicLinkData != null) {
-                    Log.d("mytag", "deepLink - ${pendingDynamicLinkData.link.toString()}")
+                    Log.d("referalId", "deepLink - ${pendingDynamicLinkData.link.toString()}")
                     deepLink = pendingDynamicLinkData.link
                     refralcustomerId =
                         deepLink.toString().substringAfterLast(getString(R.string.separator))
-                    Log.d("mytag", "referral customerId - $refralcustomerId")
+                    Log.d("referalId", "referral customerId - $refralcustomerId")
+                    Log.d("referalId", "User Id  - ${MyApplication.prefs!!.userId}")
                     if (!refralcustomerId.isNullOrBlank()) {
-                        prfc.referalId = refralcustomerId
+                        if (refralcustomerId != MyApplication.prefs!!.userId){
+                            prfc.referalId = refralcustomerId
+                            Log.d("referalId", "IDS - $refralcustomerId - ${MyApplication.prefs!!.userId}")
+                        }else{
+
+                            Log.d("referalId", "IDS - $refralcustomerId - ${MyApplication.prefs!!.userId}")
+                            prfc.referalId = ""
+                        }
+
                     }
                 }
             }.addOnFailureListener(this) {

@@ -75,43 +75,49 @@ class WalletActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
         }
         tvReceived.setOnClickListener {
 
-            var bal = MyApplication.prefs!!.myBalance
+            try {
+                val bal = MyApplication.prefs!!.myBalance
 
-            if (bal.toFloat() > 0) {
+                if (bal.toFloat() > 0) {
 
-                var nextDate = MyApplication.prefs!!.nextDate
+//                var nextDate = MyApplication.prefs!!.nextDate
 
-                if (isWithdrawEnable!!) {
-                    val blnc = MyApplication.prefs!!.myBalance.toBigInteger()
-                    Log.d("okh", "BALANCE : " + blnc.toString())
-                    Log.d("okh", "LIMITE : " + withdrawLimit)
+                    if (isWithdrawEnable!!) {
+                        val blnc = MyApplication.prefs!!.myBalance.toBigInteger()
+                        Log.d("okh", "BALANCE : " + blnc.toString())
+                        Log.d("okh", "LIMITE : " + withdrawLimit)
 
-                    if (blnc < withdrawLimit) {
-                        val msg =
-                            "You don’t have sufficient balance to withdraw, it must be minimum  $isWithdrawEnable"
-                        Toast.makeText(
-                            this,
-                            msg,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        if (blnc < withdrawLimit!!) {
+                            val msg =
+                                "You don’t have sufficient balance to withdraw, it must be minimum  $withdrawLimit"
+                            Toast.makeText(
+                                this,
+                                msg,
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        } else {
+                            withdrawDialog()
+                        }
+
 
                     } else {
-                        withdrawDialog()
+                        Toast.makeText(
+                            this,
+                            "You can withdraw the amount once in a week!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
-
                 } else {
-                    Toast.makeText(
-                        this,
-                        "You can withdraw the amount once in a week!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "You do not have sufficient balance!", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
-            } else {
-                Toast.makeText(this, "You do not have sufficient balance!", Toast.LENGTH_SHORT)
-                    .show()
+            }catch (e : Exception){
+                e.printStackTrace()
             }
+
 
         }
 //        MyApplication.prefs!!.nextDate = ""

@@ -36,8 +36,8 @@ import com.downloader.*
 import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
 import com.getyoteam.budamind.R
-import com.getyoteam.budamind.interfaces.ApiUtils
 import com.getyoteam.budamind.interfaces.API
+import com.getyoteam.budamind.interfaces.ApiUtils
 import com.getyoteam.budamind.playback.MusicNotificationManager
 import com.getyoteam.budamind.playback.MusicService
 import com.getyoteam.budamind.playback.PlaybackInfoListener
@@ -392,9 +392,15 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         )
         mIsBound = true
 
-        val startNotStickyIntent = Intent(this, MusicService::class.java)
+        try {
+            val startNotStickyIntent = Intent(this, MusicService::class.java)
 //        startService(startNotStickyIntent)
-        Util.startForegroundService(this,startNotStickyIntent)
+            Util.startForegroundService(this, startNotStickyIntent)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -565,11 +571,16 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         if (momentModel != null) {
-            title = momentModel!!.getTitle()
-            subTitle = momentModel!!.getSubtitle()
-            audioPath = momentModel!!.getAudio()
-            imageUrl = momentModel!!.getImage()
-            modelName = "momentModel"
+            try {
+                title = momentModel!!.getTitle()
+                subTitle = momentModel!!.getSubtitle()
+                audioPath = momentModel!!.getAudio()
+                imageUrl = momentModel!!.getImage()
+                modelName = "momentModel"
+            }catch (e :Exception){
+                e.printStackTrace()
+            }
+
         }
 
         if (intent.extras!!.containsKey("downloadModel")) {

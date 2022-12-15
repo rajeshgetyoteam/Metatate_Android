@@ -188,7 +188,7 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
 
         call.enqueue(object : Callback<CommanResponseModel> {
             override fun onFailure(call: Call<CommanResponseModel>, t: Throwable) {
-
+                Log.d("referalId", t.toString())
             }
 
             override fun onResponse(
@@ -199,8 +199,11 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
 
                     MyApplication.prefs!!.referalId = ""
 
-                    Log.d("myTag", response.body()!!.getStatus().toString())
+                    val response = response.body()!!
+                    Log.d("referalId", response.getStatus().toString())
 
+                }else{
+                    Log.d("referalId", response.body().toString())
                 }
             }
         })
@@ -315,8 +318,11 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
         }
         getCountDetail()
 
-        if (!MyApplication.prefs!!.referalId.isNullOrBlank()) {
+        if (MyApplication.prefs!!.referalId.isNotBlank()) {
             callRefferealAPI(MyApplication.prefs!!.referalId)
+        }else{
+            Log.d("referalId","ReferalId : "+ MyApplication.prefs!!.referalId)
+            Log.d("referalId","USERID : " +MyApplication.prefs!!.userId)
         }
 
         val data = MyApplication.prefs!!.taskResponce
@@ -736,21 +742,26 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
                             if (meditationStateModelArrayList.size > 0)
                                 meditationStateModelTemp = meditationStateModelArrayList.get(0)
 
-                            if (meditationStateModel!!.getMinuteMeditated() != meditationStateModelTemp.getMinuteMeditated()) {
-                                if (meditationStateModelTemp.getMinuteMeditated() != null) {
-                                    setMeditationState(
-                                        meditationStateModelTemp.getMinuteMeditated()!!,
-                                        meditationStateModelTemp.getCurrentStreak()!!,
-                                        meditationStateModelTemp.getLongestStreak()!!,
-                                        meditationStateModelTemp.getTotalSessions()!!,
-                                        meditationStateModelTemp.getDailyMinutes()!!
-                                    )
+                            try {
+                                if (meditationStateModel!!.getMinuteMeditated() != meditationStateModelTemp.getMinuteMeditated()) {
+                                    if (meditationStateModelTemp.getMinuteMeditated() != null) {
+                                        setMeditationState(
+                                            meditationStateModelTemp.getMinuteMeditated()!!,
+                                            meditationStateModelTemp.getCurrentStreak()!!,
+                                            meditationStateModelTemp.getLongestStreak()!!,
+                                            meditationStateModelTemp.getTotalSessions()!!,
+                                            meditationStateModelTemp.getDailyMinutes()!!
+                                        )
+                                    } else {
+                                        db.meditationStateDao().insertAll(meditationStateModel!!)
+                                    }
                                 } else {
                                     db.meditationStateDao().insertAll(meditationStateModel!!)
                                 }
-                            } else {
-                                db.meditationStateDao().insertAll(meditationStateModel!!)
+                            }catch (e :Exception){
+                                e.printStackTrace()
                             }
+
 
                             checkDateOfMeditation()
 

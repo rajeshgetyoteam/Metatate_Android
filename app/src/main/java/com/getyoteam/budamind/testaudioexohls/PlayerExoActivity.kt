@@ -130,11 +130,35 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
         chapterModel = gson.fromJson(jsonChapter, ChapterListModel::class.java)
         courseModel = gson.fromJson(jsonCourse, CourseListModel::class.java)
         meditationStateModel = gson.fromJson(jsonMeditation, MeditationStateModel::class.java)
-        headerTitle = courseModel!!.getCourseName()
-        headerSubTitle = chapterModel!!.getChapterName()
-        audioPath = chapterModel!!.getAudioUrl()
-        fileId = chapterModel!!.getChapterId()!!
-        audioPath = chapterModel!!.getAudioUrl()
+        try {
+            headerTitle = courseModel!!.getCourseName()
+        } catch (e: Exception) {
+
+        }
+        try {
+            headerSubTitle = chapterModel!!.getChapterName()
+        } catch (e: Exception) {
+
+        }
+        try {
+            audioPath = chapterModel!!.getAudioUrl()
+        } catch (e: Exception) {
+
+        }
+
+        try {
+            fileId = chapterModel!!.getChapterId()!!
+        } catch (e: Exception) {
+
+        }
+        try {
+            audioPath = chapterModel!!.getAudioUrl()
+        } catch (e: Exception) {
+
+        }
+
+
+
         modelName = "chapterModel"
 
         isRewarded = chapterModel!!.rewarded!!
@@ -966,12 +990,25 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
 //        intentService = Intent(this, AudioPlayerService::class.java)
 //        bindService(intent, connection, Context.BIND_AUTO_CREATE)
 //        return Util.startForegroundService(this, intent)
-        return if (Util.SDK_INT >= 26) {
-            bindService(intent, connection!!, Context.BIND_AUTO_CREATE)
-            Util.startForegroundService(this,intent)
-        } else {
-            bindService(intent, connection!!, Context.BIND_AUTO_CREATE)
-            context.startService(intent)
+        try {
+            return if (Util.SDK_INT >= 26) {
+
+                bindService(intent, connection!!, Context.BIND_AUTO_CREATE)
+                Util.startForegroundService(this,intent)
+            } else {
+
+                try {
+
+                }catch (e :Exception){
+                    e.printStackTrace()
+                }
+                bindService(intent, connection!!, Context.BIND_AUTO_CREATE)
+                context.startService(intent)
+            }
+
+        }catch (e :Exception){
+            e.printStackTrace()
+            return null
         }
     }
 
