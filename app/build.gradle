@@ -72,7 +72,6 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.8.4'
     implementation 'com.google.android.exoplayer:extension-mediasession:2.8.4'
     implementation 'com.google.android.exoplayer:exoplayer-core:2.8.4'
-
     implementation 'com.google.android.exoplayer:exoplayer:2.17.1'
     implementation 'com.google.android.exoplayer:extension-mediasession:2.17.1'
     implementation 'com.google.android.exoplayer:exoplayer-core:2.17.1'
@@ -88,7 +87,6 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
     implementation 'com.github.vivchar:ViewPagerIndicator:1.1.0'
-
 
     // required for all Android apps
     implementation 'io.branch.sdk.android:library:3.+'

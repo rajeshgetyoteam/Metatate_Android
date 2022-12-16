@@ -498,15 +498,12 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
 
     private fun getSleepDetail() {
 //        swipeToRefresh.isRefreshing = true
-
         val call = ApiUtils.getAPIService().getHomeDetail(authToken!!, userId)
-
         call.enqueue(object : Callback<HomeResponse> {
             override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
                 if (isAdded) {
                     if (swipeToRefresh != null)
                         swipeToRefresh.isRefreshing = false
-
                     Toast.makeText(
                         requireActivity(),
                         getString(R.string.str_something_went_wrong),
@@ -593,13 +590,11 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
     }
 
     private fun getTaskData(homeResponse: TaskResponse) {
-        val tData: ArrayList<TaskListModel> = ArrayList()
 
+        val tData: ArrayList<TaskListModel> = ArrayList()
         val cList = homeResponse.getHome()!!.getCourseList()
         val mList = homeResponse.getHome()!!.getMomentList()
         val sList = homeResponse.getHome()!!.getSoundList()
-
-
 
         for (i in 0 until mList!!.size) {
             if (mList[i].getRewarded() == false) {
@@ -610,7 +605,6 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
                 break
             }
         }
-
 
         for (i in 0 until sList!!.size) {
             if (sList[i].rewarded == false) {
@@ -646,7 +640,6 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
             }
         }
 
-
         Handler().postDelayed({
             val gson = Gson()
             val taskData = gson.toJson(tData)
@@ -657,7 +650,6 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
             setData()
 
         }, 400)
-
 
     }
 
@@ -678,7 +670,6 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
         } else {
             rvTasks.visibility = View.GONE
         }
-
 
     }
 
@@ -788,7 +779,6 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
         })
     }
 
-
     private fun signOut() {
         val intent = Intent(requireActivity(), SignInActivity::class.java)
         startActivity(intent)
@@ -830,86 +820,6 @@ class HomeFragment : Fragment(), CourseHomeAdapter.OnCourseHomeAdapterInteractio
                 }
             })
     }
-
-//    private fun getProfileDetail() {
-//        swipeToRefresh.isRefreshing = true
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl(getString(R.string.base_url))
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//        val mindFulNessAPI = retrofit.create(ClarityAPI::class.java)
-//        val call = mindFulNessAPI.getProfileDetail(authToken!!, userId)
-//
-//        call.enqueue(object : Callback<Profile> {
-//            override fun onFailure(call: Call<Profile>, t: Throwable) {
-//                if (swipeToRefresh != null)
-//                    swipeToRefresh.isRefreshing = false
-//                Toast.makeText(
-//                    requireActivity(),
-//                    getString(R.string.str_something_went_wrong),
-//                    Toast.LENGTH_SHORT
-//                )
-//                    .show()
-//            }
-//
-//            override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
-//                if (response.code() == 200) {
-//                    if (swipeToRefresh != null) {
-//                        swipeToRefresh.isRefreshing = false
-//                        profile = response.body()!!
-//                        if (profile.getStatus().equals(getString(R.string.str_success))) {
-//
-//                            meditationStateModel!!.setUserId(userId.toInt())
-//                            meditationStateModel!!.setCurrentStreak(profile.getCurrentStreak())
-//                            meditationStateModel!!.setLongestStreak(profile.getLongestStreak())
-//                            meditationStateModel!!.setMinuteMeditated(profile.getMinuteMeditate())
-//                            meditationStateModel!!.setTotalSessions(profile.getTotalSessions())
-//
-//                            MyApplication.prefs!!.profilePic = profile.getProfilePic()!!
-//                            MyApplication.prefs!!.first_name = profile.getFirstName()!!
-//                            MyApplication.prefs!!.last_name = profile.getLastName()!!
-//                            val meditationStateModelArrayList = db.meditationStateDao().getAll()
-//                            var meditationStateModelTemp = MeditationStateModel()
-//                            if (meditationStateModelArrayList.size > 0)
-//                                meditationStateModelTemp = meditationStateModelArrayList.get(0)
-//
-//                            if (meditationStateModel!!.getMinuteMeditated() != meditationStateModelTemp.getMinuteMeditated()) {
-//                                if (meditationStateModelTemp.getMinuteMeditated() != null) {
-//                                    setMeditationState(
-//                                        meditationStateModelTemp.getMinuteMeditated()!!,
-//                                        meditationStateModelTemp.getCurrentStreak()!!,
-//                                        meditationStateModelTemp.getLongestStreak()!!,
-//                                        meditationStateModelTemp.getTotalSessions()!!,
-//                                        meditationStateModelTemp.getDailyMinutes()!!
-//                                    )
-//                                } else {
-//                                    db.meditationStateDao().insertAll(meditationStateModel!!)
-//                                }
-//                            } else {
-//                                db.meditationStateDao().insertAll(meditationStateModel!!)
-//                            }
-//                            checkDateOfMeditation()
-//
-//                            loadData()
-//
-//                        } else if (profile.getStatus().equals(
-//                                getString(R.string.str_invalid_token),
-//                                ignoreCase = true
-//                            )
-//                        ) {
-//                            signOut()
-//                        } else {
-//                            Toast.makeText(
-//                                requireActivity(),
-//                                getString(R.string.str_something_went_wrong),
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        }
-//                    }
-//                }
-//            }
-//        })
-//    }
 
     private fun setMeditationState(
         min: Float,

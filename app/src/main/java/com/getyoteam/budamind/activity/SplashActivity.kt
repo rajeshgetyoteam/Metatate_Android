@@ -73,11 +73,16 @@ class SplashActivity : Activity() {
 
         }
 
+        if (TimeSpentService.isRunning){
+            Log.d("okhh", "Running")
+        }else{
+            val mIntent = Intent(this, TimeSpentService::class.java)
+            mIntent.putExtra("mFilePath", "")
+            TimeSpentService.enqueueWork(this, mIntent)
+            Log.d("okhh", "Start Services")
+        }
 
-        val mIntent = Intent(this, TimeSpentService::class.java)
-        mIntent.putExtra("mFilePath", "")
-        TimeSpentService.enqueueWork(this, mIntent)
-        Log.d("TimeSpentService", "Start Services")
+
 
         runOnUiThread {
             val path = "android.resource://" + packageName + "/" + R.raw.new_splash

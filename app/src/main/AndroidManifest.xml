@@ -225,7 +225,7 @@
 
         <activity
             android:name="com.getyoteam.budamind.activity.SplashActivity"
-            android:launchMode="singleTask"
+
             android:screenOrientation="portrait"
             android:theme="@style/Splash.FullScreen"
             android:exported="true">

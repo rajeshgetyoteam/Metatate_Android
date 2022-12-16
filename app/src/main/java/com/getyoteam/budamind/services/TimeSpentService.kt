@@ -23,7 +23,7 @@ class TimeSpentService : JobIntentService() {
                 if (MyApplication.prefs!!.appInBacground){
                     time += 1
                     MyApplication.prefs!!.totTimeSpent = time
-                    Log.d("okh", "tot time : $time")
+                    Log.d("okhh", "tot time : $time")
                 }
 
 //                val jsonObj = JSONObject()
@@ -96,6 +96,7 @@ class TimeSpentService : JobIntentService() {
             enqueueWork(context!!, TimeSpentService::class.java, t, intent!!)
 
         }
+
 
     }
 
