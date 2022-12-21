@@ -10,8 +10,8 @@ android {
         applicationId "com.getyoteam.metatate"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 12
-        versionName "2.2"
+        versionCode 13
+        versionName "2.3"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
@@ -50,6 +50,7 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.facebook.android:facebook-android-sdk:5.8.0'
+
     // Room components
 //    implementation "android.arch.persistence.room:runtime:$roomVersion"
 //    kapt "android.arch.persistence.room:compiler:$roomVersion"
@@ -107,4 +108,5 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.1"
 //    implementation 'androidx.work:work-runtime-ktx:2.7.1'
 }
+
 apply plugin: 'com.google.gms.google-services'

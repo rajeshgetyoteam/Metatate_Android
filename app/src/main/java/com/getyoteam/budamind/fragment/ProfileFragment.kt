@@ -713,6 +713,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         MyApplication.prefs!!.last_name = ""
         MyApplication.prefs!!.taskResponce = ""
         MyApplication.prefs!!.wallateResponce = ""
+        MyApplication.prefs!!.clickaction = "HOME"
+        MyApplication.prefs!!.dailyTaskList = ""
+        MyApplication.prefs!!.myBalance = "0"
         MyApplication.prefs!!.weeklyMinute = 0f
         MyApplication.prefs!!.dailyMinute = 0f
         MyApplication.prefs!!.totalMeditateMinute = 0f

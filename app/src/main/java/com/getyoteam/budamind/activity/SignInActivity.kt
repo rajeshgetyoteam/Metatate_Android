@@ -18,6 +18,7 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.getyoteam.budamind.Model.*
 import com.getyoteam.budamind.MyApplication
+import com.getyoteam.budamind.Prefs
 import com.getyoteam.budamind.R
 import com.getyoteam.budamind.interfaces.ApiUtils
 import com.getyoteam.budamind.interfaces.API
@@ -50,6 +51,12 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         showDialog()
         tvSignIn.setOnClickListener(this)
         ivBack.setOnClickListener(this)
+
+        val prfc = Prefs(this)
+        prfc.clickaction = "HOME"
+        prfc.wallateResponce = ""
+        prfc.taskResponce = ""
+        prfc.dailyTaskList = ""
 
         callbackManager = CallbackManager.Factory.create();
         facebookLoginManagerCallBack()
@@ -468,7 +475,6 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         // Set a message for alert dialog
         builder.setMessage("Create/Import Wallet?")
 
-
         // On click listener for dialog buttons
         val dialogClickListener = DialogInterface.OnClickListener { _, which ->
             when (which) {
@@ -488,7 +494,6 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
-
 
         // Set the alert dialog positive/yes button
         builder.setPositiveButton("Import Wallet", dialogClickListener)
@@ -553,7 +558,6 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
     }
-
 
     private fun loginWithEmail(
         pPassword: String,

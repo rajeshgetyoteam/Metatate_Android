@@ -190,8 +190,7 @@ class MomentsFragment : Fragment(),
                             requireContext(),
                             commonModel.message,
                             Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        ).show()
                     }
                 } else {
                     if (swipeToRefresh != null)
@@ -280,7 +279,7 @@ class MomentsFragment : Fragment(),
                                 }
 
 
-                                for (i in 0..momentArrayList.size - 1) {
+                                for (i in 0 until momentArrayList.size) {
                                     val momentListModel = momentArrayList.get(i)
                                     db.momentDao().insertAll(momentListModel)
                                 }
@@ -350,8 +349,13 @@ class MomentsFragment : Fragment(),
         }
         momentArrayList.addAll(db.momentDao().getAll() as ArrayList<MomentListModel>)
 
-        rvMomentList.adapter =
-            MomentAdapter(momentArrayList, this@MomentsFragment, requireContext())
+        if (momentArrayList.size > 0){
+            rvMomentList.adapter =
+                MomentAdapter(momentArrayList, this@MomentsFragment, requireContext())
+
+        }else{
+            getMomentDetail()
+        }
 
     }
 

@@ -120,8 +120,7 @@ class CoursesFragment : Fragment(),
                         requireActivity(),
                         getString(R.string.str_something_went_wrong),
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
                 }
             }
 
@@ -140,7 +139,7 @@ class CoursesFragment : Fragment(),
                                     db.courseDao().deleteAll()
                                 }
 
-                                for (i in 0..coursArrayList.size - 1) {
+                                for (i in 0 until coursArrayList.size) {
                                     val courseListModel = coursArrayList.get(i)
                                     courseListModel.setIsDownloaded(false)
                                     try {
@@ -300,17 +299,13 @@ class CoursesFragment : Fragment(),
                 response: Response<responcePurchaseModel>
             ) {
                 if (response.code() == 200) {
-
                     val commonModel = response.body()
                     if (commonModel!!.status.equals(getString(R.string.str_success))) {
                         Toast.makeText(
                             requireContext(),
                             commonModel!!.message,
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                            Toast.LENGTH_SHORT).show()
                         getSleepDetail()
-
                     } else {
                         if (swipeToRefresh != null)
                             swipeToRefresh.isRefreshing = false
@@ -340,13 +335,20 @@ class CoursesFragment : Fragment(),
         if (coursArrayList.size > 0) {
             coursArrayList.clear()
         }
-        var data = db.courseDao().getAll().reversed()
+        val data = db.courseDao().getAll().reversed()
         coursArrayList.addAll( data)
+
+
+        if (coursArrayList.size > 0){
+            rvCourseList.adapter =
+                CourseAdapter(coursArrayList, this@CoursesFragment, requireContext())
+
+        }else{
+            getSleepDetail()
+        }
 
 //        MyApplication.prefs!!.firstMeditationId = coursArrayList.get(0).getCourseId()!!
 
-        rvCourseList.adapter =
-            CourseAdapter(coursArrayList, this@CoursesFragment, requireContext())
 
     }
 

@@ -54,21 +54,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-
 class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
     var connection :ServiceConnection? = null
     private var curuntDuration = 0
     private var isFirstTime: Boolean = true
-    private val TAG = "MainActivity"
-    private val animation = false
-    private var isgetRewordDone: Boolean = false
-    private var counddownTimer: CountDownTimer? = null
     private val PermissionsRequestCode = 123
     private var db: AppDatabase? = null
-    private var mUserIsSeeking = false
     private var musicService: AudioService? = null
-    private val streamUrl = "http://uk3.internet-radio.com:8021/listen.pls&t=.m3u"
-    private val READ_PHONE_STATE_REQUEST_CODE = 22
     private var anim: ObjectAnimator? = null
     private var managePermissions: ManagePermissions? = null
     private var mMyPrefManager: MyPreferenceManager? = null
@@ -81,17 +73,11 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
     private var headerTitle: String? = ""
     private var modelName: String? = null
     private var fileId: Int = 0
-    private val dragging: Boolean = false
     private var isRewarded: Boolean? = null
-    private val customerId = ""
-    private var totalMin = 0
-    private var totalDailyMin = 0
-    private var totalWeeklyMin = 0
     private var totalSession = 0
     private var longestStreak = 0
     private var currentStreak = 0
     private var isAPICallingDone = false
-    private val seekTo15000: Long = 15000
     private var filename: String? = null
     private var downloadFileModel: DownloadFileModel? = null
     private var downloadId = 0
@@ -480,7 +466,7 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
         val min = playerView.player!!.duration.toInt()
         val curntpos = playerView.player!!.currentPosition.toInt()
         curuntDuration = curntpos
-        var percentage = (min / 100) * 80
+        val percentage = (min / 100) * 80
 
         Log.e("@@@", "percentage: " + percentage)
         Log.e("@@@", "Totalmin: " + min)

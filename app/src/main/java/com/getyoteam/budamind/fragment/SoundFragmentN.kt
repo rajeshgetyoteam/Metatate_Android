@@ -185,8 +185,7 @@ class SoundFragmentN() : Fragment(),
                     requireContext(),
                     getString(R.string.str_something_went_wrong),
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
             }
 
             override fun onResponse(
@@ -389,13 +388,11 @@ class SoundFragmentN() : Fragment(),
                 if (isAdded) {
                     if (swipeToRefresh != null)
                         swipeToRefresh.isRefreshing = false
-
                     Toast.makeText(
                         activity,
                         getString(R.string.str_something_went_wrong),
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
                 }
             }
 
@@ -469,6 +466,8 @@ class SoundFragmentN() : Fragment(),
 
                 soundAdapter = SoundAdapterNew(soundArrayList, requireContext(), this)
                 rvSoundList.adapter = soundAdapter
+            }else{
+                getSoundDetail()
             }
         }catch (e : Exception){
             e.printStackTrace()
