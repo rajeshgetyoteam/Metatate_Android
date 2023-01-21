@@ -583,16 +583,22 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
 
         }
 
-        if (intent.extras!!.containsKey("downloadModel")) {
-            downloadFileModelOld = intent.extras!!.get("downloadModel") as DownloadFileModel
-            meditationStateModel =
-                intent.extras!!.get("meditationStateModel") as MeditationStateModel
-            title = downloadFileModelOld!!.getTitle()
-            subTitle = downloadFileModelOld!!.getSubTitle()
-            audioPath = downloadFileModelOld!!.getAudioFilePath()
-            imageUrl = downloadFileModelOld!!.getImageFile()
-            filename = downloadFileModelOld!!.getFileName()
+        try {
+
+            if (intent.extras!!.containsKey("downloadModel")) {
+                downloadFileModelOld = intent.extras!!.get("downloadModel") as DownloadFileModel
+                meditationStateModel =
+                    intent.extras!!.get("meditationStateModel") as MeditationStateModel
+                title = downloadFileModelOld!!.getTitle()
+                subTitle = downloadFileModelOld!!.getSubTitle()
+                audioPath = downloadFileModelOld!!.getAudioFilePath()
+                imageUrl = downloadFileModelOld!!.getImageFile()
+                filename = downloadFileModelOld!!.getFileName()
+            }
+        }catch (e :Exception){
+            e.printStackTrace()
         }
+
 
 //        if (downloadFileModelOld != null) {
 //            title = downloadFileModelOld!!.getTitle()

@@ -108,6 +108,11 @@
             android:name="com.getyoteam.budamind.activity.DownloadActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NooActionBar" />
+
+        <activity
+            android:name="com.getyoteam.budamind.activity.ProductDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NooActionBar" />
         <activity
             android:name="com.getyoteam.budamind.activity.TermsOfUseActivity"
             android:screenOrientation="portrait"

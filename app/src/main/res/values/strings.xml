@@ -205,6 +205,7 @@
     <string name="label_play">Play</string>
     <string name="label_note"><b>Note: </b>Make sure to add Ethereum Smart Chain Receive Address</string>
     <string name="str_keep_going">Keep going!</string>
+    <string name="strike_text"><strike>2299</strike></string>
 
 
 

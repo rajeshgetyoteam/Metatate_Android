@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
     compileSdkVersion 31
@@ -10,8 +11,8 @@ android {
         applicationId "com.getyoteam.metatate"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 13
-        versionName "2.3"
+        versionCode 14
+        versionName "2.4"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
@@ -84,6 +85,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-dynamic-links'
+    implementation 'com.google.firebase:firebase-perf-ktx'
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
@@ -107,6 +109,13 @@ dependencies {
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
     implementation "android.arch.lifecycle:extensions:1.1.1"
 //    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+
+//    implementation 'com.shopify.mobilebuysdk:buy3:3.2.3'
+//    implementation 'com.shopify.graphql.support:support:0.2.1'
+
+    //indicator
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -146,8 +146,13 @@ class PlayerExoActivity : AppCompatActivity(), View.OnClickListener {
 
 
         modelName = "chapterModel"
+        try {
+            isRewarded = chapterModel!!.rewarded!!
+        }catch (e :Exception){
+            e.printStackTrace()
+        }
 
-        isRewarded = chapterModel!!.rewarded!!
+
 
 
 //        if (isRewarded!!) {

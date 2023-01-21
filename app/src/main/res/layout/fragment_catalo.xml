@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/color_white">
 
     <RelativeLayout
+        android:id="@+id/layHeader"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary">
@@ -76,28 +78,57 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+
     <LinearLayout
-        android:gravity="center"
+        android:visibility="gone"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
+        android:layout_below="@+id/layHeader">
 
-            android:layout_width="@dimen/_170sdp"
-            android:layout_height="@dimen/_170sdp"
-            app:srcCompat="@drawable/yoga" />
-
-        <TextView
-            android:id="@+id/tvWelcomeClarity"
-            style="@style/TextBold"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProduct"
+            android:nestedScrollingEnabled="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Catalog Coming Soon"
-            android:textColor="@color/app_pink_color"
-            android:textSize="@dimen/_35sdp" />
+            android:orientation="vertical"
+            android:scrollbars="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/raw_product">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
 
     </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_below="@+id/layHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <ImageView
+
+                android:layout_width="@dimen/_170sdp"
+                android:layout_height="@dimen/_170sdp"
+                app:srcCompat="@drawable/yoga" />
+
+            <TextView
+                android:id="@+id/tvWelcomeClarity"
+                style="@style/TextBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Catalog Coming Soon"
+                android:textColor="@color/app_pink_color"
+                android:textSize="@dimen/_35sdp" />
+
+        </LinearLayout>
 
 </RelativeLayout>
